@@ -1,19 +1,26 @@
 .group-options {
     position: fixed;
+    width: 1px;
+    height: 1px;
     z-index: 2;
+    cursor: initial;
 
     
     .group-options-container {
         z-index: 3;
         position: relative;
-        top: 80px;
-        left: 227px;
-        width: 304px;
+        top: 20px;
+        left: 200px;
+        width: 280px;
         padding: 0 10px;
         background-color: #fff;
         border-radius: 3px;
         box-shadow: var(--ds-shadow-overlay,0 8px 16px -4px #091e4240,0 0 0 1px var(--ds-border,#091e4214));
         overflow: hidden;
+
+        p {
+            cursor: pointer;
+        }
     }
 }
 

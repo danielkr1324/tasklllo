@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { TaskList } from "../TaskList";
 import { GroupOptions } from "./GroupOptions";
+import { useDispatch } from "react-redux";
+import { loadBoard, removeGroup } from "../../store/actions/board.actions";
 
 export function GroupList({onBoardUpdate, board}) {
     const [groups, setGroups] = useState([])
-    const [isGroupOptionsShow, setIsGroupOptionsShow] = useState(false)
+    const [currGroupId, setCurrGroupId] = useState('')
+    const dispatch = useDispatch()
 
     useEffect(() => {
             const groupsCpy = JSON.parse(JSON.stringify(board.groups))
@@ -14,11 +17,22 @@ export function GroupList({onBoardUpdate, board}) {
 
     useEffect(() => { 
         onBoardUpdate({...board, groups})
-    },[groups])
+    },[groups, board])
 
-    function toggleGroupOptions() { 
-        setIsGroupOptionsShow(!isGroupOptionsShow)
+    function toggleGroupOptions(groupId) {
+		if (currGroupId === groupId) {
+			setCurrGroupId( '' )
+		} else {
+			setCurrGroupId( groupId )
+		}
+	}
+
+    function onRemoveGroup(groupId) {
+        dispatch(removeGroup(groupId, board._id))
+        toggleGroupOptions(groupId)
     }
+       
+     
 
     function handleOnDragEnd(result) {
         const { destination, source, type } = result
@@ -101,11 +115,23 @@ export function GroupList({onBoardUpdate, board}) {
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
-                                        >   <div className="group-top">
+                                        >   
+
+                                            <div className="group-top">
                                                 {group.title}
-                                                <button onClick={toggleGroupOptions} className="btn-more-options">...</button>
-                                                {isGroupOptionsShow && <GroupOptions/>}
+                                                <button
+                                                        className="btn-more-options hover-dark"
+                                                        onClick={() =>toggleGroupOptions( group.id)}
+                                                    >...</button>
+                                                {currGroupId === group.id && (
+                                                        <GroupOptions
+                                                            toggleGroupOptions={toggleGroupOptions}
+                                                            onRemoveGroup={onRemoveGroup}
+                                                            group={group}
+                                                        />
+                                                    )}
                                             </div>
+
                                             <TaskList
                                                 group={group}
                                                 board={board}

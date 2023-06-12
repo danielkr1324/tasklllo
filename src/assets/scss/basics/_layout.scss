@@ -41,3 +41,9 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
 }
+
+.hover-dark {
+    &:hover {
+        background-color:  rgba(9,30,66,.04);
+    }
+}

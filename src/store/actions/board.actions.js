@@ -81,3 +81,19 @@ export function loadBoard(boardId) {
     }
   }
 }
+
+export function removeGroup(groupId, boardId) {
+  return async dispatch => {
+    try {
+      const updatedBoard = await boardService.removeGroup(groupId, boardId)
+      const action = {
+        type: UPDATE_BOARD,
+        board: updatedBoard,
+      }
+
+      dispatch(action)
+    } catch (error) {
+      console.log('failed to remove group ', error)
+    }
+  }
+}

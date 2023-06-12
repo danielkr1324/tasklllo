@@ -1,6 +1,5 @@
 .task-preview {
     cursor: pointer;
-
     text-align: start;
     background-color: #fff;
     box-shadow: 0 1px 0 rgba(9,30,66,.251);
@@ -11,9 +10,7 @@
     white-space: normal;
     border-radius: em(10px);
 
-    &:hover {
-       background-color:  rgba(9,30,66,.04);
-    }
+    
 
     p {
         padding: em(6px) 0;

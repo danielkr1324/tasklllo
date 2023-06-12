@@ -7,11 +7,23 @@ export const boardService = {
   boardQuery,
   getById,
   save,
+  removeGroup,
 }
 
 _createBoards()
 
 window.cs = boardService
+
+async function removeGroup(groupId, boardId) {
+  try {
+    const board = await getById(boardId)
+    const updatedGroups = board.groups.filter(group => group.id !== groupId)
+    board.groups = updatedGroups
+    return save(board)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 async function getById(boardId) {
   return await storageService.get(BOARD_KEY, boardId)
