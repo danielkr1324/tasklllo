@@ -1,0 +1,127 @@
+.home-page {
+   
+    .home-header {
+        background-color: #fff;
+        top: 0;
+        margin: 0 auto;
+        max-width: em(1320px);
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: em(60px);
+        
+        a {
+            padding: em(8px) em(24px);
+            button {
+                height: 100%;
+                font-size: rem(17.6px);
+                padding: em(18px) em(24px);
+            }
+        }
+        
+        h1{
+            padding: em(16px);
+        }
+
+        
+    }
+    
+    .home-hero-container {
+        background: url(//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266e%E2%80%A6/white-wave-bg.svg) center bottom -.5px/100% 14% no-repeat scroll padding-box border-box,linear-gradient(60deg,#5243aa,#ed50b4) 0 0/auto repeat scroll padding-box border-box #5243aa;
+        background-color: #5243aa;
+        background-blend-mode: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        height: fit-content;
+        line-height: 0;
+        padding: em(100px) 0;
+
+        overflow: hidden;
+        width: 100%;
+        position: relative;
+
+            svg {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+
+        
+        .hero-content {
+            z-index: 2;
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            max-width: 1140px;
+            width: 100%;
+        }
+        
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            text-align: left;
+            h1 {
+                  
+                font-size: 3rem; 
+                  line-height: 1.25;
+                  margin-bottom: 1.2rem;
+                }
+                
+                p {
+                    font-size: rem(20.8px);
+                    line-height: 1;
+                }
+
+                button {
+                    padding: rem(11.2px) rem(16px) rem(12.8px);
+                    font-size: 16px;
+                    font-family: Charlie-Regular;
+                    border-radius: 0.3rem;
+                }
+                
+            }
+            img {
+                width: 50%;
+            }
+        }
+        .btn-signup {
+            border: none;
+            background-color: $clr-base-14;
+            color: #fff;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: $clr-base-14-hover;
+            }
+            
+            
+        }
+
+
+        .card-desc {
+            .prod-div {
+                width: em(664px);
+                padding: 16px;
+                text-align: start;
+
+                
+                h3 {
+                    font-size: 16px;
+                    margin-block-end: em(8px);
+                }
+                
+                h1 {
+                    font-size: rem(36px);
+                    margin-block-end: 8px;
+                    padding-block-end: 16px;
+                }
+            }
+        }
+
+    }  

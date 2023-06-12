@@ -1,0 +1,307 @@
+/* Breakpoint mixins */
+
+@use 'sass:map';
+
+$breakpoints: (
+  small: 40em,
+  medium: 65em,
+  large: 90em,
+  homePageHeader: em(1320px),
+  mq-home-page-sm: em(596px),
+  mq-home-page-md: em(800px),
+  mq-home-page-lg: em(1000px),
+  mq-home-page-xl: em(1200px),
+  boardIndexBreak1: em(900px),
+  boardIndexBreak2: em(750px),
+  mq-Board-index-sm: em(450px),
+  mq-Board-index-md: em(596px),
+  mq-Board-index-lg: em(825px),
+  mq-780: em(780px),
+);
+
+@mixin mq($key) {
+  $size: map.get($breakpoints, $key);
+
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin for-mobile-layout {
+  @media (max-width: calc($mobile-breakpoint + 40px)) {
+    @content;
+  }
+}
+
+@mixin for-narrow-layout {
+  @media (min-width: calc($mobile-breakpoint + 40px)) {
+    @content;
+  }
+}
+
+@mixin for-normal-layout {
+  @media (min-width: calc($narrow-breakpoint + 40px)) {
+    @content;
+  }
+}
+
+@mixin for-wide-layout {
+  @media (min-width: calc($normal-breakpoint + 40px)) {
+    @content;
+  }
+}
+
+/* Media  Mixins */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  // overflow: hidden;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: calc(($height / $width) * 100%);
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  > img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin trello-icon($content: '', $type: sm, $color: #42526e) {
+  font-family: 'trellicons';
+  color: $color;
+
+  @if $type ==sm {
+    font-size: 1rem;
+  } @else if $type ==md {
+    font-size: 1.25rem;
+  } @else if $type ==lg {
+    font-size: 1.5rem;
+  } @else if $type ==xl {
+    font-size: 2.5rem;
+  }
+
+  &::before {
+    content: $content;
+  }
+}
+
+@mixin TaskDetailsCmps($content: '') {
+  margin-bottom: $cmp-margin-bottom;
+  position: relative;
+
+  .icon {
+    @include trello-icon($content, $type: lg);
+
+    &::before {
+      position: absolute;
+      left: -36px;
+      top: 3px;
+      font-weight: 400;
+    }
+  }
+
+  .title {
+    font-size: rem(16px);
+    font-weight: 600;
+    margin-bottom: rem(18px);
+  }
+}
+
+@mixin btn-main($bgc: $clr-base-3, $color: $clr-base-5, $bgc-hover: $clr-base-3-hover) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: $bgc;
+  color: $color;
+  margin: 0;
+  padding: 6px 12px;
+  height: 32px;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  &:hover {
+    background-color: $bgc-hover;
+  }
+}
+
+@mixin label-tag-color($color) {
+  @include text-contrast($color);
+
+  background-color: lighten($color, 10%);
+
+  &.task-preview-label {
+    background-color: darken($color, 10%);
+
+    &:hover {
+      background-color: darken($color, 20%);
+    }
+  }
+
+  &.label-tag {
+    background-color: lighten($color, 10%);
+
+    &:hover {
+      background-color: $color;
+
+      &::before {
+        background-color: darken($color, 20%);
+      }
+    }
+  }
+
+  &.label-tag::before {
+    background-color: darken($color, 10%);
+  }
+
+  &.task-preview {
+    background-color: lighten($color, 10%);
+    @include text-contrast($color);
+
+    &:hover {
+      background-color: lighten($color, 10%);
+    }
+  }
+}
+
+@mixin btn() {
+  border-radius: $border-radius-3;
+  background-color: $clr-base-8;
+  height: 100%;
+  width: rem(72px);
+  margin: 0 rem(8px) 0 0;
+  cursor: pointer;
+}
+
+@mixin input() {
+  width: 100%;
+  height: rem(36px);
+  padding: rem(12px);
+  background-color: $input-bgc;
+  border: $input-border;
+  border-radius: $border-radius-3;
+  outline: none;
+
+  &:hover:not(:focus-visible) {
+    background-color: $clr-base-3-hover;
+  }
+
+  &:focus {
+    border: none;
+    box-shadow: inset 0 0 0 1px $clr-base-8;
+  }
+}
+
+@mixin sub-title() {
+  color: $clr-base-4;
+  font-size: em(12px);
+  font-weight: 600;
+  line-height: em(16px);
+  line-height: em(20px);
+  margin-top: em(16px);
+  font-family: 'Segoe UI';
+}
+
+@mixin text-contrast($n) {
+  $color-brightness: calc(round((red($n) * 299) + (green($n) * 587) + calc((blue($n) * 114) / 1000)));
+  $light-color: calc(round((red(#ffffff) * 299) + (green(#ffffff) * 587) + calc((blue(#ffffff) * 114) / 1000)));
+
+  @if abs($color-brightness) < calc(($light-color/2)) {
+    color: white;
+  } @else {
+    color: $clr-base-5;
+  }
+}
+
+@mixin btn-active() {
+  &:active {
+    background-color: $clr-base-27;
+    color: $clr-base-8;
+
+    span {
+      color: $clr-base-8;
+    }
+
+    &::before {
+      color: $clr-base-8;
+    }
+  }
+}
+
+@mixin board-members() {
+  display: flex;
+  align-items: center;
+  margin-block-start: 1px;
+
+  .member-profile-box {
+    position: relative;
+    margin-inline-end: em(4px);
+
+    .arrow {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      z-index: 19;
+      bottom: 1px;
+      right: -2px;
+    }
+
+    .member-profile {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      margin: 0 -1px 2px;
+      cursor: pointer;
+      position: relative;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+@mixin modal-background() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+
+@mixin dashboard-box($color) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  height: 150px;
+  background-color: $color;
+  border-radius: $border-radius-3;
+}
