@@ -1,14 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { TaskList } from "../TaskList";
 import { GroupOptions } from "./GroupOptions";
-import { useDispatch } from "react-redux";
-import { loadBoard, removeGroup } from "../../store/actions/board.actions";
 
-export function GroupList({onBoardUpdate, board}) {
+export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
     const [groups, setGroups] = useState([])
     const [currGroupId, setCurrGroupId] = useState('')
-    const dispatch = useDispatch()
 
     useEffect(() => {
             const groupsCpy = JSON.parse(JSON.stringify(board.groups))
@@ -17,7 +14,7 @@ export function GroupList({onBoardUpdate, board}) {
 
     useEffect(() => { 
         onBoardUpdate({...board, groups})
-    },[groups, board])
+    },[groups])
 
     function toggleGroupOptions(groupId) {
 		if (currGroupId === groupId) {
@@ -27,10 +24,18 @@ export function GroupList({onBoardUpdate, board}) {
 		}
 	}
 
-    function onRemoveGroup(groupId) {
-        dispatch(removeGroup(groupId, board._id))
-        toggleGroupOptions(groupId)
+    function removeGroup(groupId) {
+        onRemoveGroup(groupId)
+        setGroups(groups.filter(group => group.id !== groupId))
     }
+
+    // function copyGroup(group) {
+    //     let duplicatedGroup = {...group}
+    //     duplicatedGroup.id = ''
+
+        
+    // }
+    
        
      
 
@@ -126,7 +131,7 @@ export function GroupList({onBoardUpdate, board}) {
                                                 {currGroupId === group.id && (
                                                         <GroupOptions
                                                             toggleGroupOptions={toggleGroupOptions}
-                                                            onRemoveGroup={onRemoveGroup}
+                                                            removeGroup={removeGroup}
                                                             group={group}
                                                         />
                                                     )}

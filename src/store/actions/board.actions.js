@@ -86,14 +86,32 @@ export function removeGroup(groupId, boardId) {
   return async dispatch => {
     try {
       const updatedBoard = await boardService.removeGroup(groupId, boardId)
+      console.log(updatedBoard.groups.length)
+
       const action = {
         type: UPDATE_BOARD,
         board: updatedBoard,
       }
-
       dispatch(action)
+      return updatedBoard
     } catch (error) {
       console.log('failed to remove group ', error)
+    }
+  }
+}
+
+export function saveGroup(group, boardId) {
+  return async dispatch => {
+    try {
+      const updatedBoard = await boardService.saveGroup(group, boardId)
+      const action = {
+        type: UPDATE_BOARD,
+        board: updatedBoard,
+      }
+      dispatch(action)
+      return updatedBoard
+    } catch (error) {
+      console.log('failed to save group ', error)
     }
   }
 }

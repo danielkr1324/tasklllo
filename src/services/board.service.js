@@ -14,6 +14,25 @@ _createBoards()
 
 window.cs = boardService
 
+async function saveGroup(group, boardId) {
+  try {
+    const board = await getById(boardId)
+    if (group.id) {
+      const groupIdx = board.groups.findIndex(g => g.id === group.id)
+
+      if (groupIdx !== -1) {
+        board.groups.splice(groupIdx, 1, group)
+      }
+    } else {
+      group.id = utilService.makeId()
+      board.groups.push(group)
+    }
+    return save(board)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 async function removeGroup(groupId, boardId) {
   try {
     const board = await getById(boardId)

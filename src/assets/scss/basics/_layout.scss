@@ -44,6 +44,7 @@
 
 .hover-dark {
     &:hover {
+        cursor: pointer;
         background-color:  rgba(9,30,66,.04);
     }
 }
