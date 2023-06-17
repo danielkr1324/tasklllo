@@ -5,12 +5,17 @@ import {
   SET_BOARD,
   UPDATE_BOARD,
   ADD_BOARD,
+  REMOVE_GROUP,
+  SAVE_GROUP,
+  ADD_GROUP,
 } from '../reducers/board.reducer'
 
 export function loadBoards() {
   return async (dispatch, getState) => {
     try {
       const boards = await boardService.query()
+      console.log(boards)
+
       const action = {
         type: SET_BOARDS,
         boards,
@@ -28,7 +33,6 @@ export function removeBoard(boardId) {
       await boardService.remove(boardId)
       const action = { type: REMOVE_BOARD, boardId }
       dispatch(action)
-      return 'Removed!'
     } catch (error) {
       console.log('error:', error)
     }
@@ -53,13 +57,13 @@ export function addBoard(board) {
 
 export function updateBoard(board) {
   return async dispatch => {
-    await boardService.save(board)
     try {
       const action = {
         type: UPDATE_BOARD,
         board,
       }
       dispatch(action)
+      await boardService.save(board)
     } catch (error) {
       console.log('failed to update board ', error)
     }
@@ -85,15 +89,12 @@ export function loadBoard(boardId) {
 export function removeGroup(groupId, boardId) {
   return async dispatch => {
     try {
-      const updatedBoard = await boardService.removeGroup(groupId, boardId)
-      console.log(updatedBoard.groups.length)
-
       const action = {
-        type: UPDATE_BOARD,
-        board: updatedBoard,
+        type: REMOVE_GROUP,
+        groupId,
       }
       dispatch(action)
-      return updatedBoard
+      await boardService.removeGroup(groupId, boardId)
     } catch (error) {
       console.log('failed to remove group ', error)
     }
@@ -103,15 +104,30 @@ export function removeGroup(groupId, boardId) {
 export function saveGroup(group, boardId) {
   return async dispatch => {
     try {
-      const updatedBoard = await boardService.saveGroup(group, boardId)
       const action = {
-        type: UPDATE_BOARD,
-        board: updatedBoard,
+        type: SAVE_GROUP,
+        group,
       }
       dispatch(action)
-      return updatedBoard
+      await boardService.saveGroup(group, boardId)
     } catch (error) {
       console.log('failed to save group ', error)
+    }
+  }
+}
+
+export function addGroup(group, boardId) {
+  return async dispatch => {
+    const savedGroup = await boardService.saveGroup(group, boardId)
+    try {
+      const action = {
+        type: ADD_GROUP,
+        savedGroup,
+      }
+      dispatch(action)
+      return savedGroup
+    } catch (error) {
+      console.log('failed to add group ', error)
     }
   }
 }

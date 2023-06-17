@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-export function TaskPreview({ group, task, board }) {
+export function TaskPreview({task}) {
   
   return (
     <div className="task-preview hover-dark">

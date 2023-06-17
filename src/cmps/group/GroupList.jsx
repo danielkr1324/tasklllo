@@ -1,20 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { TaskList } from "../TaskList";
 import { GroupOptions } from "./GroupOptions";
 
-export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
-    const [groups, setGroups] = useState([])
+
+export function GroupList({onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup}) {
     const [currGroupId, setCurrGroupId] = useState('')
-
-    useEffect(() => {
-            const groupsCpy = JSON.parse(JSON.stringify(board.groups))
-            setGroups(groupsCpy)
-        }, [])
-
-    useEffect(() => { 
-        onBoardUpdate({...board, groups})
-    },[groups])
 
     function toggleGroupOptions(groupId) {
 		if (currGroupId === groupId) {
@@ -24,21 +15,12 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
 		}
 	}
 
-    function removeGroup(groupId) {
-        onRemoveGroup(groupId)
-        setGroups(groups.filter(group => group.id !== groupId))
+    function handleTitleChange({target}) {
+        let group = groups.find(g => g.id === target.id)
+        group.title = target.value
+        onSaveGroup(group)
     }
-
-    // function copyGroup(group) {
-    //     let duplicatedGroup = {...group}
-    //     duplicatedGroup.id = ''
-
-        
-    // }
-    
-       
      
-
     function handleOnDragEnd(result) {
         const { destination, source, type } = result
     
@@ -50,17 +32,17 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
         )
             return
     
-        const boardCopy = { ...board }
-        const newGroups = [...groups]
+            const newGroups = JSON.parse(JSON.stringify(groups))
     
         if (type === 'groups') {
             const [reorderedGroup] = newGroups.splice(source.index, 1)
             newGroups.splice(destination.index, 0, reorderedGroup)
     
-            boardCopy.groups = newGroups
+            groups = newGroups
         }
     
         if (type === 'tasks') {
+            
             const sourceGroupIndex = newGroups.findIndex(
                 (group) => group.id === source.droppableId
             )
@@ -73,6 +55,7 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
     
             const newSourceTasks = [...sourceGroup.tasks]
             const [task] = newSourceTasks.splice(source.index, 1)
+            console.log(task);
     
             const newDestinationTasks = [...destinationGroup.tasks]
             newDestinationTasks.splice(destination.index, 0, task)
@@ -83,13 +66,13 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
             newGroups[sourceGroupIndex] = sourceGroup
             newGroups[destinationGroupIndex] = destinationGroup
                 
-            boardCopy.groups = newGroups
+            groups = newGroups
         }
-        
-       
-        setGroups(boardCopy.groups)
+        onBoardUpdate(groups)
     }
 
+    
+    
     if (!groups) return <div>Loading groups</div>
 
     return (
@@ -123,7 +106,11 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
                                         >   
 
                                             <div className="group-top">
-                                                {group.title}
+                                                <input 
+                                                type="text"
+                                                id={group.id}
+                                                defaultValue={group.title} 
+                                                onChange={handleTitleChange}/>
                                                 <button
                                                         className="btn-more-options hover-dark"
                                                         onClick={() =>toggleGroupOptions( group.id)}
@@ -131,15 +118,17 @@ export function GroupList({onRemoveGroup, onBoardUpdate, board}) {
                                                 {currGroupId === group.id && (
                                                         <GroupOptions
                                                             toggleGroupOptions={toggleGroupOptions}
-                                                            removeGroup={removeGroup}
+                                                            onRemoveGroup={onRemoveGroup}
+                                                            onDuplicateGroup={onDuplicateGroup}
                                                             group={group}
                                                         />
                                                     )}
                                             </div>
 
                                             <TaskList
-                                                group={group}
-                                                board={board}
+                                                groupId={group.id}
+                                                tasks={group.tasks}
+                                                onBoardUpdate={onBoardUpdate}
                                             />
                                         </li>
                                     )}

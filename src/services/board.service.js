@@ -8,6 +8,8 @@ export const boardService = {
   getById,
   save,
   removeGroup,
+  saveGroup,
+  getEmptyGroup,
 }
 
 _createBoards()
@@ -15,22 +17,25 @@ _createBoards()
 window.cs = boardService
 
 async function saveGroup(group, boardId) {
-  try {
-    const board = await getById(boardId)
-    if (group.id) {
-      const groupIdx = board.groups.findIndex(g => g.id === group.id)
+  const board = await getById(boardId)
 
-      if (groupIdx !== -1) {
-        board.groups.splice(groupIdx, 1, group)
-      }
-    } else {
-      group.id = utilService.makeId()
-      board.groups.push(group)
+  if (!group.id) {
+    group.id = utilService.makeId()
+    if (group.tasks.length) {
+      group.tasks.forEach(task => {
+        task.id = utilService.makeId()
+      })
     }
-    return save(board)
-  } catch (err) {
-    console.log(err)
+    board.groups.push(group)
+  } else {
+    const idx = board.groups.findIndex(currGroup => currGroup.id === group.id)
+    if (idx < 0)
+      throw new Error(`Update failed, cannot find group with id: ${group.id}`)
+    board.groups.splice(idx, 1, group)
   }
+
+  save(board)
+  return group
 }
 
 async function removeGroup(groupId, boardId) {
@@ -61,6 +66,14 @@ async function save(board) {
     savedBoard = await storageService.post(BOARD_KEY, board)
   }
   return savedBoard
+}
+
+function getEmptyGroup() {
+  return {
+    id: utilService.makeId(),
+    tasks: [],
+    title: '',
+  }
 }
 
 function _createBoards() {

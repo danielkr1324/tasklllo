@@ -1,16 +1,11 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { boardService } from '../services/board.service'
 import { TaskPreview } from './TaskPreview'
 
-export function TaskList({group}) {
-    const board = useSelector((storeState) => storeState.boardModule.board)
-    const tasks = group.tasks
+export function TaskList({groupId, tasks}) {
 
     return (
         <section className='task-list'>
-             <Droppable droppableId={group.id}
+             <Droppable droppableId={groupId}
                     key="tasks"
                     type="tasks"
                 >
@@ -19,14 +14,14 @@ export function TaskList({group}) {
                         <ul className="task-list clean-list tasks"
                             {...provided.droppableProps}
                             ref={provided.innerRef}
-                        // isDraggingOver={snapshot.isDraggingOver}
+                            // isDraggingOver={snapshot.isDraggingOver}
                         >
 
                             {tasks.map((task, index) =>
 
                                 <Draggable
                                     key={task.id}
-                                    group={group.id}
+                                    group={groupId}
                                     type={task}
                                     draggableId={task.id}
                                     index={index}>
@@ -41,18 +36,16 @@ export function TaskList({group}) {
                                         >
 
                                             <TaskPreview
-                                                group={group}
                                                 task={task}
-                                                board={board}
                                             />
                                         </li>)}
-
                                 </Draggable>
                             )}
                             {provided.placeholder}
                         </ul>
                     )}
                 </Droppable>
+                <button className='hover-dark'>+ Add a card</button>
         </section>
     )
 }
