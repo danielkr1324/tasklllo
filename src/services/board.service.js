@@ -10,6 +10,7 @@ export const boardService = {
   removeGroup,
   saveGroup,
   getEmptyGroup,
+  getEmptyTask,
 }
 
 _createBoards()
@@ -73,6 +74,20 @@ function getEmptyGroup() {
     id: utilService.makeId(),
     tasks: [],
     title: '',
+  }
+}
+
+function getEmptyTask() {
+  return {
+    id: utilService.makeId(),
+    title: '',
+    isStarred: false,
+    checklists: [],
+    archivedAt: null,
+    attachments: [],
+    byMember: {},
+    labelIds: [],
+    isDone: false,
   }
 }
 

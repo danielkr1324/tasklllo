@@ -1,7 +1,13 @@
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import { TaskPreview } from './TaskPreview'
+import { useState } from 'react'
 
 export function TaskList({groupId, tasks}) {
+    const [isAddTask, setIsAddTask] = useState(false)
+
+    function toggleIsAddTask() {
+        setIsAddTask(!isAddTask)
+    }
 
     return (
         <section className='task-list'>
@@ -45,7 +51,15 @@ export function TaskList({groupId, tasks}) {
                         </ul>
                     )}
                 </Droppable>
-                <button className='hover-dark'>+ Add a card</button>
+                <section className='group-bottom'>
+
+                    {!isAddTask &&
+                        <button className='hover-dark' onClick={toggleIsAddTask}>+ Add a card</button>
+                    }
+
+                    
+
+                </section>
         </section>
     )
 }
