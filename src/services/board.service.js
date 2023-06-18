@@ -22,7 +22,7 @@ async function saveGroup(group, boardId) {
 
   if (!group.id) {
     group.id = utilService.makeId()
-    if (group.tasks.length) {
+    if (group.tasks?.length) {
       group.tasks.forEach(task => {
         task.id = utilService.makeId()
       })

@@ -1,145 +1,106 @@
-import { useState } from "react";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { TaskList } from "../TaskList";
-import { GroupOptions } from "./GroupOptions";
+import React, { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { TaskList } from '../TaskList';
+import { GroupOptions } from './GroupOptions';
 
+export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup }) {
+  const [currGroupId, setCurrGroupId] = useState();
+  
 
-export function GroupList({onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup}) {
-    const [currGroupId, setCurrGroupId] = useState('')
+  const toggleGroupOptions = (groupId) => {
+    setCurrGroupId(currGroupId === groupId ? '' : groupId);
+  };
 
-    function toggleGroupOptions(groupId) {
-		if (currGroupId === groupId) {
-			setCurrGroupId( '' )
-		} else {
-			setCurrGroupId( groupId )
-		}
-	}
-
-    function handleTitleChange({target}) {
-        let group = groups.find(g => g.id === target.id)
+  function handleTitleChange({target}) {
+      let group = groups.find(g => g.id === target.id)
+      if(group.title !== target.value) {
+        console.log(target);
         group.title = target.value
         onSaveGroup(group)
     }
-     
-    function handleOnDragEnd(result) {
-        const { destination, source, type } = result
-    
-        if (!destination) return
-    
-        if (
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
-        )
-            return
-    
-            const newGroups = JSON.parse(JSON.stringify(groups))
-    
-        if (type === 'groups') {
-            const [reorderedGroup] = newGroups.splice(source.index, 1)
-            newGroups.splice(destination.index, 0, reorderedGroup)
-    
-            groups = newGroups
-        }
-    
-        if (type === 'tasks') {
-            
-            const sourceGroupIndex = newGroups.findIndex(
-                (group) => group.id === source.droppableId
-            )
-            const destinationGroupIndex = newGroups.findIndex(
-                (group) => group.id === destination.droppableId
-            )
-    
-            const sourceGroup = { ...newGroups[sourceGroupIndex] }
-            const destinationGroup = { ...newGroups[destinationGroupIndex] }
-    
-            const newSourceTasks = [...sourceGroup.tasks]
-            const [task] = newSourceTasks.splice(source.index, 1)
-            console.log(task);
-    
-            const newDestinationTasks = [...destinationGroup.tasks]
-            newDestinationTasks.splice(destination.index, 0, task)
-    
-            sourceGroup.tasks = newSourceTasks
-            destinationGroup.tasks = newDestinationTasks
-    
-            newGroups[sourceGroupIndex] = sourceGroup
-            newGroups[destinationGroupIndex] = destinationGroup
-                
-            groups = newGroups
-        }
-        onBoardUpdate(groups)
+}
+
+  function onAddNewTask(newTask, groupId) {
+    let group = groups.find(g => g.id === groupId)
+    group.tasks.push(newTask)
+    onSaveGroup(group)
+}
+
+  const handleOnDragEnd = (result) => {
+    const { destination, source, type } = result;
+
+    if (!destination) return;
+
+    const updatedGroups = [...groups];
+
+    if (type === 'groups') {
+      const [reorderedGroup] = updatedGroups.splice(source.index, 1);
+      updatedGroups.splice(destination.index, 0, reorderedGroup);
     }
 
-    
-    
-    if (!groups) return <div>Loading groups</div>
+    if (type === 'tasks') {
+      const sourceGroupIndex = updatedGroups.findIndex((group) => group.id === source.droppableId);
+      const destinationGroupIndex = updatedGroups.findIndex((group) => group.id === destination.droppableId);
+      const sourceGroup = { ...updatedGroups[sourceGroupIndex] };
+      const destinationGroup = { ...updatedGroups[destinationGroupIndex] };
 
-    return (
-        <section className="group-list">
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable
-                    droppableId="groups"
-                    direction="horizontal"
-                    type="groups"
-                    key="groups"
-                >
-                    {(provided) => (
-                        <ul
-                            className="group-list clean-list groups"
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                        >
-                            {groups.map((group, index) => (
-                                <Draggable
-                                    key={group.id}
-                                    draggableId={group.id}
-                                    index={index}
-                                >
-                                    {(provided) => (
-                                        <li
-                                            className="group-wrapper"
-                                            key={group.id}
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                        >   
+      const [task] = sourceGroup.tasks.splice(source.index, 1);
+      destinationGroup.tasks.splice(destination.index, 0, task);
 
-                                            <div className="group-top">
-                                                <input 
-                                                type="text"
-                                                id={group.id}
-                                                defaultValue={group.title} 
-                                                onChange={handleTitleChange}/>
-                                                <button
-                                                        className="btn-more-options hover-dark"
-                                                        onClick={() =>toggleGroupOptions( group.id)}
-                                                    >...</button>
-                                                {currGroupId === group.id && (
-                                                        <GroupOptions
-                                                            toggleGroupOptions={toggleGroupOptions}
-                                                            onRemoveGroup={onRemoveGroup}
-                                                            onDuplicateGroup={onDuplicateGroup}
-                                                            group={group}
-                                                        />
-                                                    )}
-                                            </div>
+      updatedGroups[sourceGroupIndex] = sourceGroup;
+      updatedGroups[destinationGroupIndex] = destinationGroup;
+    }
 
-                                            <TaskList
-                                                groupId={group.id}
-                                                tasks={group.tasks}
-                                                onBoardUpdate={onBoardUpdate}
-                                            />
-                                        </li>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </ul>
-                    )}
-                </Droppable>
-            </DragDropContext>
-        </section>
-    )
+    onBoardUpdate(updatedGroups);
+  };
 
+  if (!groups) return <div>Loading groups</div>;
+
+  return (
+    <section className="group-list">
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="groups" direction="horizontal" type="groups" key="groups">
+          {(provided) => (
+            <ul className="group-list clean-list groups" {...provided.droppableProps} ref={provided.innerRef}>
+              {groups.map((group, index) => (
+                <Draggable key={group.id} draggableId={group.id} index={index}>
+                  {(provided) => (
+                    <li
+                      className="group-wrapper"
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <div className="group-top">
+                        <input
+                          type="text"
+                          id={group.id}
+                          defaultValue={group.title}
+                          onBlur={(event) => handleTitleChange(event, group.id)}
+                          onMouseDown={(event) => event.stopPropagation()}
+                        />
+                        <button className="btn-more-options hover-dark" onClick={() => toggleGroupOptions(group.id)}>
+                          ...
+                        </button>
+                        {currGroupId === group.id && (
+                          <GroupOptions
+                            toggleGroupOptions={toggleGroupOptions}
+                            onRemoveGroup={onRemoveGroup}
+                            onDuplicateGroup={onDuplicateGroup}
+                            group={group}
+                          />
+                        )}
+                      </div>
+                      <TaskList groupId={group.id} tasks={group.tasks} onAddNewTask={onAddNewTask} />
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </section>
+  );
 }
