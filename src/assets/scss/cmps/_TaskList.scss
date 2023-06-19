@@ -1,0 +1,10 @@
+.task-list {
+    position: relative;
+
+    .group-bottom {
+        background-color: #ebecf0;
+        position: sticky;
+        bottom: 0;
+        padding: 10px 0;
+    }
+}

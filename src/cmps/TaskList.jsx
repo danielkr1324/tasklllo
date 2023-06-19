@@ -29,8 +29,8 @@ export function TaskList({ groupId, tasks, onAddNewTask }) {
     event.preventDefault();
     toggleIsAddTask();
     if (newTask.title.trim() !== '') {
-      onAddNewTask(newTask, groupId);
-      toggleIsAddTask()
+        onAddNewTask(newTask, groupId);
+        toggleIsAddTask()
     }
   };
 

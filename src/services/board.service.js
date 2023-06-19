@@ -71,7 +71,7 @@ async function save(board) {
 
 function getEmptyGroup() {
   return {
-    id: utilService.makeId(),
+    id: '',
     tasks: [],
     title: '',
   }

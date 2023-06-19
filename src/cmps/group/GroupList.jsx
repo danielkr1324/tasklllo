@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { TaskList } from '../TaskList';
 import { GroupOptions } from './GroupOptions';
+import { boardService } from '../../services/board.service';
 
 export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup }) {
   const [currGroupId, setCurrGroupId] = useState();
+
   
+  const onAddNewGroup = () => {
+    const newGroup = boardService.getEmptyGroup()
+    onSaveGroup(newGroup)
+  }
 
   const toggleGroupOptions = (groupId) => {
     setCurrGroupId(currGroupId === groupId ? '' : groupId);
   };
 
-  function handleTitleChange({target}) {
+  const handleTitleChange = ({target}) => {
       let group = groups.find(g => g.id === target.id)
       if(group.title !== target.value) {
         console.log(target);
@@ -20,7 +26,7 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
     }
 }
 
-  function onAddNewTask(newTask, groupId) {
+  const onAddNewTask = (newTask, groupId) =>{
     let group = groups.find(g => g.id === groupId)
     group.tasks.push(newTask)
     onSaveGroup(group)
@@ -73,6 +79,8 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
                     >
                       <div className="group-top">
                         <input
+                          placeholder='Enter list title...'
+                          autoFocus = {!group.title}
                           type="text"
                           id={group.id}
                           defaultValue={group.title}
@@ -101,6 +109,10 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
           )}
         </Droppable>
       </DragDropContext>
+
+      <div onClick={onAddNewGroup} className='add-group'>
+          <span>+ Add another list</span>
+      </div>
     </section>
   );
 }

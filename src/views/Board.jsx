@@ -53,7 +53,8 @@ export function Board() {
   };
 
   const onSaveGroup = (group) => {
-    dispatch(saveGroup(group, boardId));
+    if(group.id) dispatch(saveGroup(group, boardId));
+    else dispatch(addGroup(group, boardId));
   };
 
   if (!board) {

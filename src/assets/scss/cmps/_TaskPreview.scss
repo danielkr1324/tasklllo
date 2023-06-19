@@ -1,19 +1,25 @@
 .task-preview {
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: em(10px);
     cursor: pointer;
     text-align: start;
-    background-color: #fff;
     box-shadow: 0 1px 0 rgba(9,30,66,.251);
     font-size: 14px;
-    margin: em(10px) em(4px);
-    padding: em(4px) em(8px);
-    overflow: hidden;
     white-space: normal;
-    border-radius: em(10px);
+    margin: em(1px) em(4px) em(10px);
 
+    .cover {
+        height: 32px;
+    }
     
-
-    p {
-        padding: em(6px) 0;
-        margin: 0;
+    .task-content {
+        padding: em(8px) em(8px) em(4px) em(12px);
+        overflow: hidden;
+    
+        p {
+            margin: 0 0 em(4px);
+            word-wrap: break-word;
+        }
     }
 }
