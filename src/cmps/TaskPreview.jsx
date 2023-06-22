@@ -1,14 +1,26 @@
-import React from 'react';
+import React ,{useState} from 'react';
+import { TaskEdit } from './TaskEdit';
 
-export function TaskPreview({task}) {
-  
+export function TaskPreview({task, onSaveTask, groupId}) {
+  const [isEditTask, setIsEditTask] = useState(false);
+
+  const toggleIsEditTask = () => {
+    setIsEditTask(!isEditTask);
+  }
+
   return (
-
-    <div className="task-preview hover-dark">
-     {task.style && <div className='cover' style={task.style}></div>}
-      <div className="task-content ">
-        <p className="task-title ">{task.title}</p>
+    <article className="task-preview hover-dark">
+      <div onClick={toggleIsEditTask}>
+      {task.style && <div className='cover' style={task.style}></div>}
+        <div className="task-content ">
+          <p className="task-title ">{task.title}</p>
+        </div>
       </div>
-    </div>
+
+      {isEditTask && <TaskEdit 
+        task={task}
+        onSaveTask={onSaveTask} 
+        groupId={groupId} />}
+    </article>
   );
 }

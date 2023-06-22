@@ -9,7 +9,7 @@
         cursor: pointer;
         text-align: start;
         margin: em(6px);
-        background-color: #ebecf0;
+        background-color: $clr-base-3;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -24,7 +24,7 @@
 
         .group-top {
             z-index: 2;
-            background-color: #ebecf0;
+            background-color: $clr-base-3;
             position: sticky;
             top: 0;
             display: flex;
@@ -60,6 +60,29 @@
             border: none;
             border-radius: 4px;
             font-size: 25px;
+        }
+    }
+
+    .add-group {
+        margin: 5px;
+        background-color: #ffffff3d;
+        cursor: pointer;
+        border-radius: 12px;
+        width: em(272px);
+        min-height: em(48px);
+        display: flex;        
+        align-items: center;
+        transition: 0.2s;
+
+        span {
+            font-size: 14px;
+            display: block;
+            padding: 8px;
+            color: #fff;
+        }
+
+        &:hover {
+            background-color: #ffffff1c;
         }
     }
 }

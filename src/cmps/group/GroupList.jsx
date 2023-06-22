@@ -20,15 +20,16 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
   const handleTitleChange = ({target}) => {
       let group = groups.find(g => g.id === target.id)
       if(group.title !== target.value) {
-        console.log(target);
         group.title = target.value
         onSaveGroup(group)
     }
 }
 
-  const onAddNewTask = (newTask, groupId) =>{
-    let group = groups.find(g => g.id === groupId)
-    group.tasks.push(newTask)
+  const onSaveTask = (task, groupId) =>{
+    const group = groups.find(g => g.id === groupId)
+    const taskIdx = group.tasks.findIndex(t => t.id === task.id)
+    if(taskIdx !== -1) group.tasks.splice(taskIdx, 1, task)
+    else group.tasks.push(task)
     onSaveGroup(group)
 }
 
@@ -56,7 +57,6 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
       updatedGroups[sourceGroupIndex] = sourceGroup;
       updatedGroups[destinationGroupIndex] = destinationGroup;
     }
-
     onBoardUpdate(updatedGroups);
   };
 
@@ -77,7 +77,7 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div className="group-top">
+                      <div className="group-top" >
                         <input
                           placeholder='Enter list title...'
                           autoFocus = {!group.title}
@@ -99,7 +99,7 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
                           />
                         )}
                       </div>
-                      <TaskList groupId={group.id} tasks={group.tasks} onAddNewTask={onAddNewTask} />
+                      <TaskList groupId={group.id} tasks={group.tasks} onSaveTask={onSaveTask} />
                     </li>
                   )}
                 </Draggable>

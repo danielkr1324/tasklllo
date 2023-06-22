@@ -3,7 +3,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { TaskPreview } from './TaskPreview';
 import { boardService } from '../services/board.service';
 
-export function TaskList({ groupId, tasks, onAddNewTask }) {
+export function TaskList({ groupId, tasks, onSaveTask }) {
   const [isAddTask, setIsAddTask] = useState(false);
   const [newTask, setNewTask] = useState(boardService.getEmptyTask())
   const textareaRef = useRef(null);
@@ -29,7 +29,7 @@ export function TaskList({ groupId, tasks, onAddNewTask }) {
     event.preventDefault();
     toggleIsAddTask();
     if (newTask.title.trim() !== '') {
-        onAddNewTask(newTask, groupId);
+        onSaveTask(newTask, groupId);
         toggleIsAddTask()
     }
   };
@@ -53,7 +53,10 @@ export function TaskList({ groupId, tasks, onAddNewTask }) {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <TaskPreview task={task} />
+                    <TaskPreview 
+                      task={task}
+                      onSaveTask={onSaveTask} 
+                      groupId={groupId} />
                   </li>
                 )}
               </Draggable>
