@@ -8,6 +8,7 @@ import {
   REMOVE_GROUP,
   SAVE_GROUP,
   ADD_GROUP,
+  SAVE_TASK,
 } from '../reducers/board.reducer'
 
 export function loadBoards() {
@@ -73,7 +74,7 @@ export function updateBoard(board) {
 export function loadBoard(boardId) {
   return async dispatch => {
     try {
-      const board = await boardService.getById(boardId)
+      const board = await boardService.getBoardById(boardId)
       const action = {
         type: SET_BOARD,
         board,
@@ -118,8 +119,8 @@ export function saveGroup(group, boardId) {
 
 export function addGroup(group, boardId) {
   return async dispatch => {
-    const savedGroup = await boardService.saveGroup(group, boardId)
     try {
+      const savedGroup = await boardService.saveGroup(group, boardId)
       const action = {
         type: ADD_GROUP,
         savedGroup,

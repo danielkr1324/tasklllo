@@ -8,6 +8,7 @@ import {
   saveGroup,
 } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
+import { Outlet } from "react-router";
 
 export function Board() {
   const boardId = "b101"; // TODO: change later
@@ -71,6 +72,8 @@ export function Board() {
         onSaveGroup={onSaveGroup}
         groups={board.groups}
       />
+
+      <Outlet/>
     </section>
   );
 }

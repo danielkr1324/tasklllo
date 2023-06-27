@@ -22,6 +22,7 @@ export function TaskList({ groupId, tasks, onSaveTask }) {
 
   const editNewTask = ({ target }) => {
     let { value, name: field } = target
+    console.log(field);
     setNewTask((prevTask) => ({ ...prevTask, [field]: value }))
   };
 
@@ -55,7 +56,6 @@ export function TaskList({ groupId, tasks, onSaveTask }) {
                   >
                     <TaskPreview 
                       task={task}
-                      onSaveTask={onSaveTask} 
                       groupId={groupId} />
                   </li>
                 )}

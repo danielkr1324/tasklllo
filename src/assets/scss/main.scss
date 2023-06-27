@@ -16,13 +16,14 @@
 // Views
 @import "views/HomePage";
 @import "views/LoginSignup";
+@import "views/Board";
 
 // Components
 @import "cmps/GroupList";
 @import "cmps/TaskPreview";
 @import "cmps/GroupOptions";
 @import "cmps/TaskList";
-@import "cmps/TaskModal";
+@import "cmps/TaskEdit";
 @import "cmps/DynamicModal";
 @import "cmps/TaskCover";
 

@@ -1,9 +1,9 @@
 .group-list {
+    width: fit-content;
     display: flex;
     align-items: start;
     justify-content: start;
     position: relative;
-
     
     .group-wrapper {
         cursor: pointer;

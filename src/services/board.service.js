@@ -5,12 +5,15 @@ const BOARD_KEY = 'boardDB'
 
 export const boardService = {
   boardQuery,
-  getById,
+  getBoardById,
   save,
   removeGroup,
   saveGroup,
   getEmptyGroup,
   getEmptyTask,
+  getTaskById,
+  getGroupById,
+  saveTask,
 }
 
 _createBoards()
@@ -18,7 +21,7 @@ _createBoards()
 window.cs = boardService
 
 async function saveGroup(group, boardId) {
-  const board = await getById(boardId)
+  const board = await getBoardById(boardId)
 
   if (!group.id) {
     group.id = utilService.makeId()
@@ -39,9 +42,19 @@ async function saveGroup(group, boardId) {
   return group
 }
 
+async function getGroupById(groupId, boardId) {
+  try {
+    const board = await getBoardById(boardId)
+    const group = board.groups.find(g => g.id === groupId)
+    return group
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 async function removeGroup(groupId, boardId) {
   try {
-    const board = await getById(boardId)
+    const board = await getBoardById(boardId)
     const updatedGroups = board.groups.filter(group => group.id !== groupId)
     board.groups = updatedGroups
     return save(board)
@@ -50,13 +63,38 @@ async function removeGroup(groupId, boardId) {
   }
 }
 
-async function getById(boardId) {
+async function getBoardById(boardId) {
   return await storageService.get(BOARD_KEY, boardId)
 }
 
 async function boardQuery(filterBy = {}) {
   const board = await storageService.query(BOARD_KEY)
   return board[0]
+}
+
+async function getTaskById(boardId, groupId, taskId) {
+  try {
+    const board = await getBoardById(boardId)
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    return task
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+async function saveTask(task, groupId, boardId) {
+  try {
+    const board = await getBoardById(boardId)
+    const group = board.groups.find(group => group.id === groupId)
+    const taskIdx = group.tasks.findIndex(t => t.id === task.id)
+    if (taskIdx !== -1) group.tasks.splice(taskIdx, 1, task)
+    else group.tasks.push(task)
+    saveGroup(group, boardId)
+    return task
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 async function save(board) {

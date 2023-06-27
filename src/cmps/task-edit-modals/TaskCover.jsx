@@ -1,4 +1,5 @@
-export function TaskCover({task, onSaveTask, groupId}) {
+
+export function TaskCover({task, submitTaskEdit, groupId}) {
     const coverColors = [
         '#7BC86C',
         '#F5DD29',
@@ -13,9 +14,8 @@ export function TaskCover({task, onSaveTask, groupId}) {
     ]
 
     const setTaskCover = (coverColor) => {
-        const updatedTask = JSON.parse(JSON.stringify(task))
-        updatedTask.style.backgroundColor =  coverColor
-        onSaveTask(updatedTask, groupId)
+        task['style'] = {backgroundColor: coverColor} 
+        submitTaskEdit(task)
     }
 
     return (

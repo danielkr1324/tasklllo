@@ -35,6 +35,7 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
 
   const handleOnDragEnd = (result) => {
     const { destination, source, type } = result;
+    console.log(destination, source, type);
 
     if (!destination) return;
 
