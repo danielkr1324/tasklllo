@@ -6,7 +6,7 @@ export function GroupOptions({group, toggleGroupOptions, onRemoveGroup, onDuplic
     const ref = useRef(null)
     useClickOutside(ref, toggleGroupOptions)
 
-    function duplicateGroup(group) {
+    const duplicateGroup = (group) => {
         toggleGroupOptions(group.id)
         onDuplicateGroup(group)
     }

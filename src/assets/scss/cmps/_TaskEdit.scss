@@ -1,4 +1,5 @@
 .task-edit {
+    overflow-y: scroll;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,44 +10,118 @@
     justify-content: center;
     align-items: center;
     z-index: 3;
-    
+    flex-wrap: wrap;
     
     
     .modal-content {
+        margin: 35px 0;
+        position: relative;
         overflow: hidden;
-        border-radius: 6px;
+        border-radius: 12px;
         background-color: $clr-base-2;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         width: em(768px);
+
+        button {
+            text-align: start;
+            background-color: $modal-edit;
+            border: none;
+            border-radius: 3px;
+            height: fit-content;
+            padding: em(8px) em(14px);
+            &:hover {
+                background-color: $clr-base-9; 
+            }
+        }
+
+        .btn-save {
+            background-color: $clr-base-14;
+            &:hover {
+                background-color: $clr-base-14-hover; 
+            }
+        }
+       
 
         .cover {
             height: 116px;
         }
 
         .content-wrapper {
+    
+
             padding: 20px;
+            h2 {
+                text-align: start;
+                font-size: 16px;
+                font-weight: 600;
+            }
 
             .modal-edit {
+
                 display: flex;
                 justify-content: space-between;
-            }
 
-            input {
-                width: 100%;
-            }
-
-            .task-main {
-                textarea {
-                    width: em(512px);
-                    padding: 8px;
-                    // border: 1px solid $gray-light;
-                    border-radius: 4px;
-                    margin-bottom: 10px;
-                    font-size: 14px;
+                & > * {
+                    margin-block-end: 50px;
                 }
             }
 
+            input {
+                color: $clr-base-5;
+                padding: 10px 0 ;
+                width: 100%;
+                background: none;
+                border: none;
+                font-size: rem(20px);
+                font-weight: 600;
+
+                &:focus {
+                    background-color: #fff;
+                }
+            }
+
+            .task-main {
+                .task-edit-labels {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 4px;
+                    margin: 20px 0;
+
+                    .task-edit-label {
+                        cursor: pointer;
+                        min-width: em(48px);
+                        max-width: 100%;
+                        height: em(32px);
+                        border-radius: 3px;
+                        padding: 0 6px;
+
+                        &:hover {
+                            opacity: 0.9;
+                        }
+                    }
+                }
+
+                textarea {
+                    width: em(512px);
+                    padding: 10px 0;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    border-radius: 4px;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+
+                    &:focus {
+                        background-color: #fff;
+                    }
+                }
+                
+            }
+
             .modal-sidebar {
+                display: flex;
+                flex-direction: column;
+
                 button {
                     text-align: start;
                     background-color: $clr8;

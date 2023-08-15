@@ -1,5 +1,5 @@
 
-export function TaskCover({task, submitTaskEdit, groupId}) {
+export function TaskCoverModal({task, submitTaskEdit}) {
     const coverColors = [
         '#7BC86C',
         '#F5DD29',
@@ -13,30 +13,35 @@ export function TaskCover({task, submitTaskEdit, groupId}) {
         '#172B4D'
     ]
 
-    const setTaskCover = (coverColor) => {
+    const setTaskCoverModal = (coverColor) => {
         task['style'] = {backgroundColor: coverColor} 
         submitTaskEdit(task)
     }
 
+    const removeCover = () => {
+        delete task.style
+        submitTaskEdit(task)
+    }
+
     return (
-        <div className="dynamic-modal task-cover">
-            <div className="dynamic-modal-title">
-                <p>Cover</p>
-            </div>
+        <div  className=" task-cover">
+            <h2 className="dynamic-modal-title">Cover</h2>
             <div className="color-container">
                 <h3>colors</h3>
                 <ul className="color-pallette clean-list">
                     {coverColors.map(coverColor => (
                         <li key={coverColor} className={coverColor}>
                             <button
-                                onClick={()=> setTaskCover(coverColor)}
+                                onClick={()=> setTaskCoverModal(coverColor)}
                                 className="btn-color"
                                 style={{background: coverColor}}>
                             </button>
                         </li>
                     ))}
-
                 </ul>
+                {task.style && 
+                    <button onClick={removeCover}>Remove cover</button>
+                }
             </div>
         </div>
     )

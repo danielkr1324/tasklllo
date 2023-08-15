@@ -9,10 +9,14 @@ export const boardService = {
   save,
   removeGroup,
   saveGroup,
-  getEmptyGroup,
-  getEmptyTask,
   getTaskById,
   getGroupById,
+  getEmptyGroup,
+  getEmptyTask,
+  getEmptyChecklist,
+  getEmptyTodo,
+  getEmptyLabel,
+  getBoardLabels,
   saveTask,
 }
 
@@ -115,6 +119,11 @@ function getEmptyGroup() {
   }
 }
 
+async function getBoardLabels(boardId) {
+  const board = await getBoardById(boardId)
+  return board.labels
+}
+
 function getEmptyTask() {
   return {
     id: utilService.makeId(),
@@ -129,10 +138,52 @@ function getEmptyTask() {
   }
 }
 
+function getEmptyChecklist() {
+  return {
+    id: utilService.makeId(),
+    title: '',
+    todos: [],
+  }
+}
+
+function getEmptyTodo() {
+  return {
+    id: utilService.makeId(),
+    isDone: false,
+    title: '',
+  }
+}
+
+function getEmptyLabel() {
+  return {
+    id: utilService.makeId(),
+    title: '',
+    color: '',
+  }
+}
+
 function _createBoards() {
   let board = utilService.loadFromStorage(BOARD_KEY)
 
   if (!board || !board.length) {
+    const labels = []
+    const labelColors = [
+      '#4bce97',
+      '#e2b203',
+      '#faa53d',
+      '#f87462',
+      '#9f8fef',
+      '#579dff',
+    ]
+
+    for (let i = 0; i < labelColors.length; i++) {
+      labels.push({
+        id: utilService.makeId(),
+        title: '',
+        color: labelColors[i],
+      })
+    }
+
     board = [
       {
         _id: 'b101',
@@ -151,33 +202,7 @@ function _createBoards() {
             'https://images.unsplash.com/photo-1672676515299-3a378e32463e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MDE5NDJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzQ1OTM5NzI&ixlib=rb-4.0.3&q=80&w=400',
           backgroundColor: '#595959',
         },
-        labels: [
-          {
-            id: 'l101',
-            title: 'UI',
-            color: '#7bc86c',
-          },
-          {
-            id: 'l102',
-            title: 'Low priority',
-            color: '#f5dd29',
-          },
-          {
-            id: 'l103',
-            title: 'Medium priority',
-            color: '#ffaf3f',
-          },
-          {
-            id: 'l104',
-            title: 'High priority',
-            color: '#ef7564',
-          },
-          {
-            id: 'l105',
-            title: 'Bug',
-            color: '#cd8de5',
-          },
-        ],
+        labels,
         members: [
           {
             _id: 'u101',
@@ -210,7 +235,7 @@ function _createBoards() {
                 id: 'c101',
                 title: 'Basic CRUDL',
                 archivedAt: null,
-                labelIds: ['l104'],
+                labelIds: [],
                 dueDate: 1674837381,
                 byMember: {
                   _id: 'u103',
@@ -240,7 +265,7 @@ function _createBoards() {
                 title: 'Build app footer',
                 description: 'description',
                 archivedAt: null,
-                labelIds: ['l102'],
+                labelIds: [],
                 dueDate: 1674664581,
                 byMember: {
                   _id: 'u103',
@@ -261,7 +286,7 @@ function _createBoards() {
                 title: 'Build http service',
                 description: 'description',
                 archivedAt: null,
-                labelIds: ['l104'],
+                labelIds: [],
                 dueDate: 1674664581,
                 byMember: {
                   _id: 'u103',
@@ -282,7 +307,7 @@ function _createBoards() {
                 title: 'SEO',
                 description: 'We need to call the agency for bid',
                 archivedAt: null,
-                labelIds: ['l103'],
+                labelIds: [],
                 dueDate: 1674664581,
                 byMember: {
                   _id: 'u103',
@@ -308,7 +333,7 @@ function _createBoards() {
                 id: 'c105',
                 title: 'User authentication',
                 archivedAt: null,
-                labelIds: ['l103', 'l101'],
+                labelIds: [],
                 dueDate: 1674491781,
                 byMember: {
                   _id: 'u103',
@@ -328,7 +353,7 @@ function _createBoards() {
                 id: 'c106',
                 title: 'Create services',
                 archivedAt: null,
-                labelIds: ['l102'],
+                labelIds: [],
                 dueDate: 1674578181,
                 byMember: {
                   _id: 'u103',
@@ -368,7 +393,7 @@ function _createBoards() {
                 title: 'Add npm modules',
                 description: "Don't forget to use Roni's files",
                 archivedAt: null,
-                labelIds: ['l104'],
+                labelIds: [],
                 dueDate: 1674578181,
                 byMember: {
                   _id: 'u103',
@@ -385,7 +410,7 @@ function _createBoards() {
                 id: 'c109',
                 title: 'REST API',
                 archivedAt: null,
-                labelIds: ['l103'],
+                labelIds: [],
                 dueDate: 1674578181,
                 byMember: {
                   _id: 'u103',
@@ -402,7 +427,7 @@ function _createBoards() {
                 id: 'c110',
                 title: 'Build server.js',
                 archivedAt: null,
-                labelIds: ['l102'],
+                labelIds: [],
                 dueDate: 1674578181,
                 byMember: {
                   _id: 'u103',
@@ -425,7 +450,7 @@ function _createBoards() {
                 id: 'c111',
                 title: 'Support sockets',
                 archivedAt: null,
-                labelIds: ['l103', 'l105'],
+                labelIds: [],
                 dueDate: 1674664581,
                 byMember: {
                   _id: 'u103',
@@ -444,7 +469,7 @@ function _createBoards() {
                   'Use the same header as we used in the "Boxing" project',
                 title: 'Build app header',
                 archivedAt: null,
-                labelIds: ['l104'],
+                labelIds: [],
                 dueDate: 1674664581,
                 byMember: {
                   _id: 'u103',
@@ -470,7 +495,7 @@ function _createBoards() {
                 id: 'c113',
                 title: 'Database implementation',
                 archivedAt: null,
-                labelIds: ['l105'],
+                labelIds: [],
                 dueDate: 1674837381,
                 byMember: {
                   _id: 'u103',
@@ -487,7 +512,7 @@ function _createBoards() {
                 title: 'PWA',
                 description: 'Sent to another opinion to Lili',
                 archivedAt: null,
-                labelIds: ['l101', 'l104'],
+                labelIds: [],
                 dueDate: 1675010181,
                 byMember: {
                   _id: 'u103',
@@ -510,7 +535,7 @@ function _createBoards() {
                 id: 'c115',
                 title: 'Login system',
                 archivedAt: null,
-                labelIds: ['l101', 'l103'],
+                labelIds: [],
                 dueDate: 1674146181,
                 byMember: {
                   _id: 'u103',
@@ -530,7 +555,7 @@ function _createBoards() {
                 id: 'c116',
                 title: 'Add node.js modules',
                 archivedAt: null,
-                labelIds: ['l101', 'l104'],
+                labelIds: [],
                 dueDate: 1675010181,
                 byMember: {
                   _id: 'u103',
@@ -575,7 +600,7 @@ function _createBoards() {
                 id: 'c117',
                 title: 'SASS archtecture',
                 archivedAt: null,
-                labelIds: ['l101', 'l104'],
+                labelIds: [],
                 dueDate: 1675010181,
                 byMember: {
                   _id: 'u103',

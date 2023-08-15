@@ -50,3 +50,13 @@
         background-color:  rgba(9,30,66,.04);
     }
 }
+
+.btn-save {
+    border-radius: 3px;
+    border: none;
+    height: fit-content;
+    padding: em(8px) em(14px);
+    color: #fff;
+    background-color: $clr-base-14;
+
+}

@@ -3,7 +3,7 @@ import { Route, HashRouter as Router, Routes, Switch } from 'react-router-dom'
 import './assets/scss/main.scss'
 import { HomePage } from './views/HomePage'
 import { Board } from './views/Board'
-import { TaskEdit } from './cmps/TaskEdit'
+import { TaskEdit } from './cmps//task/TaskEdit'
 
 function App() {
   return (

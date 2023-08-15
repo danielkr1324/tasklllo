@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { TaskList } from '../TaskList';
+import { TaskList } from '../task/TaskList';
 import { GroupOptions } from './GroupOptions';
 import { boardService } from '../../services/board.service';
 
-export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup }) {
+export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup, labels }) {
   const [currGroupId, setCurrGroupId] = useState();
 
   
@@ -35,7 +35,6 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
 
   const handleOnDragEnd = (result) => {
     const { destination, source, type } = result;
-    console.log(destination, source, type);
 
     if (!destination) return;
 
@@ -100,7 +99,11 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
                           />
                         )}
                       </div>
-                      <TaskList groupId={group.id} tasks={group.tasks} onSaveTask={onSaveTask} />
+                      <TaskList
+                        groupId={group.id}
+                        tasks={group.tasks} 
+                        onSaveTask={onSaveTask}
+                        labels={labels} />
                     </li>
                   )}
                 </Draggable>

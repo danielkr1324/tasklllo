@@ -5,5 +5,12 @@
   object-fit: fill;
   background-size: cover;
   background-repeat: no-repeat;
-//   overflow: hidden;
+  overflow: hidden;
+
+  .board-main-content {
+    overflow-x: scroll;
+    height: 95vh;
+  }
+
+  
 }

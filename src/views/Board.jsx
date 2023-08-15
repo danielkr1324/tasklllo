@@ -19,7 +19,7 @@ export function Board() {
     loadNewBoard();
   }, [boardId]);
 
-  async function loadNewBoard() {
+  const loadNewBoard = async () => {
     try {
       dispatch(loadBoard(boardId));
     } catch (err) {
@@ -65,13 +65,16 @@ export function Board() {
   return (
     <section className="board">
       <h1>{board.title}</h1>
-      <GroupList
-        onRemoveGroup={onRemoveGroup}
-        onBoardUpdate={onBoardUpdate}
-        onDuplicateGroup={onDuplicateGroup}
-        onSaveGroup={onSaveGroup}
-        groups={board.groups}
-      />
+      <main className="board-main-content">
+        <GroupList
+          onRemoveGroup={onRemoveGroup}
+          onBoardUpdate={onBoardUpdate}
+          onDuplicateGroup={onDuplicateGroup}
+          onSaveGroup={onSaveGroup}
+          groups={board.groups}
+          labels={board.labels}
+        />
+      </main>
 
       <Outlet/>
     </section>

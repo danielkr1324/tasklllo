@@ -1,0 +1,45 @@
+.label-modal {
+    .label-select {
+        padding: 4px 0 8px 0;
+        .label {
+
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            margin-block-end: 4px;
+            .label-checkbox {
+                width: 15px;
+                border: none;
+                outline: none;
+            }
+
+            &:hover {
+                opacity: 0.9;
+            }
+
+            .label-preview, .label-title-edit {
+                display: block;
+                text-overflow: ellipsis;
+                border-radius: 3px;
+                height: 32px;
+                width: 204px;
+            }
+
+
+            .label-edit-container {
+                display: flex;
+                .label-title-edit {
+                    font-weight: 400;
+                    text-align: center;
+                    font-size: 16px;
+                    margin-inline-start: em(21px);
+                }
+
+                button {
+                    padding: 6px 7px;
+                }
+            }
+
+        }
+    }
+}

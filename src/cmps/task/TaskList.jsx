@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { TaskPreview } from './TaskPreview';
-import { boardService } from '../services/board.service';
+import { boardService } from '../../services/board.service';
 
-export function TaskList({ groupId, tasks, onSaveTask }) {
+export function TaskList({ groupId, tasks, onSaveTask, labels }) {
   const [isAddTask, setIsAddTask] = useState(false);
   const [newTask, setNewTask] = useState(boardService.getEmptyTask())
   const textareaRef = useRef(null);
@@ -22,7 +22,6 @@ export function TaskList({ groupId, tasks, onSaveTask }) {
 
   const editNewTask = ({ target }) => {
     let { value, name: field } = target
-    console.log(field);
     setNewTask((prevTask) => ({ ...prevTask, [field]: value }))
   };
 
@@ -56,7 +55,8 @@ export function TaskList({ groupId, tasks, onSaveTask }) {
                   >
                     <TaskPreview 
                       task={task}
-                      groupId={groupId} />
+                      groupId={groupId}
+                      labels={labels} />
                   </li>
                 )}
               </Draggable>
@@ -82,7 +82,7 @@ export function TaskList({ groupId, tasks, onSaveTask }) {
                     ref={textareaRef}
                     >
                 </textarea>
-              <button type="submit">Add card</button>
+              <button className='btn-save' type="submit">Add card</button>
               <button type="button" onClick={toggleIsAddTask}>
                 Cancel
               </button>

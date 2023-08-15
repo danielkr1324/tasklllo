@@ -1,5 +1,5 @@
 .home-page {
-   
+    overflow-y: scroll;
     .home-header {
         background-color: #fff;
         top: 0;
@@ -23,8 +23,6 @@
         h1{
             padding: em(16px);
         }
-
-        
     }
     
     .home-hero-container {
@@ -39,7 +37,6 @@
         line-height: 0;
         padding: em(100px) 0;
 
-        overflow: hidden;
         width: 100%;
         position: relative;
 
