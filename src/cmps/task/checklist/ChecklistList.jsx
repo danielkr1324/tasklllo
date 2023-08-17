@@ -16,9 +16,12 @@ export function ChecklistList({ checklist, updateChecklist, removeChecklist }) {
 
   return (
     <article className="checklist-list">
+
       <div className="checklist-top">
         <div className="checklist-title">
+          
           <input
+            className="text-input"
             name="title"
             onChange={handleChange}
             onFocus={() => setIsTitleFocused(true)}

@@ -20,6 +20,11 @@ export function TaskList({ groupId, tasks, onSaveTask, labels }) {
     setNewTask(boardService.getEmptyTask());
   };
 
+  const cancelNewTodo = () => {
+    setIsAddTask(!isAddTask);
+    setNewTask(prevTask => ({...prevTask, title: '' }));
+  }
+
   const editNewTask = ({ target }) => {
     let { value, name: field } = target
     setNewTask((prevTask) => ({ ...prevTask, [field]: value }))
@@ -37,6 +42,7 @@ export function TaskList({ groupId, tasks, onSaveTask, labels }) {
 
   return (
     <section className="task-list">
+
       <Droppable droppableId={groupId} type="tasks" key="tasks">
         {(provided, snapshot) => (
           <ul
@@ -56,7 +62,8 @@ export function TaskList({ groupId, tasks, onSaveTask, labels }) {
                     <TaskPreview 
                       task={task}
                       groupId={groupId}
-                      labels={labels} />
+                      labels={labels} 
+                      onSaveTask={onSaveTask}/>
                   </li>
                 )}
               </Draggable>
@@ -67,8 +74,8 @@ export function TaskList({ groupId, tasks, onSaveTask, labels }) {
       </Droppable>
       <section  className="group-bottom">
         {!isAddTask ? (
-          <button className="hover-dark" onClick={toggleIsAddTask}>
-            + Add a card
+          <button className="btn-add-task hover-dark" onClick={toggleIsAddTask}>
+            <i className="fa-solid fa-plus"></i> Add a card
           </button>
         ) : (
           <div className="task-compose">
@@ -82,10 +89,13 @@ export function TaskList({ groupId, tasks, onSaveTask, labels }) {
                     ref={textareaRef}
                     >
                 </textarea>
-              <button className='btn-save' type="submit">Add card</button>
-              <button type="button" onClick={toggleIsAddTask}>
-                Cancel
-              </button>
+
+                <div className='set-changes'>
+                  <button className='btn-save' type="submit">Add card</button>
+                  <button className='btn-cancel' type="button" onClick={cancelNewTodo}>
+                    <i className="fa-solid fa-x"></i>
+                  </button>
+                </div>
             </form>
           </div>
         )}

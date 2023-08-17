@@ -6,6 +6,36 @@ export const utilService = {
   saveToStorage,
   animateCSS,
   getRandomColor,
+  dueDateTimeFormat,
+  dueDateFormat,
+}
+
+function dueDateFormat(dueDate) {
+  let strDate = ''
+  strDate += `${new Date(dueDate).toLocaleString('en-US', { day: 'numeric' })} `
+  strDate += `${new Date(dueDate).toLocaleString('en-US', { month: 'short' })}`
+  return strDate
+}
+
+function dueDateTimeFormat(dueDate) {
+  const currYear = new Date().getFullYear()
+  const dueYear = new Date(dueDate).getFullYear()
+  let strDate = ''
+  strDate += `${new Date(dueDate).toLocaleString('en-US', { day: 'numeric' })} `
+  strDate += `${new Date(dueDate).toLocaleString('en-US', {
+    month: 'short',
+  })} at `
+  if (dueYear !== currYear) {
+    strDate += `${dueYear} `
+  }
+  strDate += `${new Date(dueDate)
+    .toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    })
+    .toLocaleUpperCase()}`
+  return strDate
 }
 
 function makeId(length = 5) {

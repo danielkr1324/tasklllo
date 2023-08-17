@@ -25,7 +25,7 @@ export function TaskCoverModal({task, submitTaskEdit}) {
 
     return (
         <div  className=" task-cover">
-            <h2 className="dynamic-modal-title">Cover</h2>
+            <h3 className="dynamic-modal-title">Cover</h3>
             <div className="color-container">
                 <h3>colors</h3>
                 <ul className="color-pallette clean-list">

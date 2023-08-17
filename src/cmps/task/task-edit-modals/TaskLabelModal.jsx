@@ -31,13 +31,13 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
             updateLabelIds.push(id)
             updateTask = { ...task, labelIds: updateLabelIds }
         }
-        submitTaskEdit(updateTask)
+        await submitTaskEdit(updateTask)
     }
 
     
     return (
         <div className="label-modal">
-            <h2 className="dynamic-modal-title">Labels</h2>
+            <h3 className="dynamic-modal-title">Labels</h3>
             <ul className="label-select clean-list">
                 {labels.map(label => (
                     <li key={label.id} className="label">
@@ -53,7 +53,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                             <label htmlFor={label.id} className="label-preview label" style={{ backgroundColor: `${label.color}` }}>
                                 {label.title}
                             </label>
-                            <button onClick={()=> setLabelToEdit(label)}>edit</button>
+                            <button onClick={()=> setLabelToEdit(label)}><i className="fa-solid fa-pencil"></i></button>
                         </>
                         }
                         {labelToEdit && label.id === labelToEdit.id &&
@@ -68,7 +68,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                                 id={label.id}
                                 defaultValue={label.title}
                             />
-                            <button className="btn-save " onClick={e => updateLabels(e)}>done</button>
+                            <button className="btn-save " onClick={e => updateLabels(e)}><i class="fa-solid fa-check"></i></button>
                         </div>}
 
                     </li>

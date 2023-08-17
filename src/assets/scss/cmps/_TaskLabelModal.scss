@@ -1,11 +1,12 @@
 .label-modal {
+    
     .label-select {
         padding: 4px 0 8px 0;
         .label {
-
+            
             cursor: pointer;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             margin-block-end: 4px;
             .label-checkbox {
                 width: 15px;
@@ -17,12 +18,18 @@
                 opacity: 0.9;
             }
 
+            .btn-save {
+                margin-inline-start: 9px;
+            }
+            
+           
+
             .label-preview, .label-title-edit {
                 display: block;
                 text-overflow: ellipsis;
                 border-radius: 3px;
-                height: 32px;
-                width: 204px;
+                height: em(32px);
+                width: em(204px);
             }
 
 
@@ -32,12 +39,12 @@
                     font-weight: 400;
                     text-align: center;
                     font-size: 16px;
-                    margin-inline-start: em(21px);
+                    margin-inline-start: em(30px);
+                    margin-block-end: em(7px);
+                    
                 }
 
-                button {
-                    padding: 6px 7px;
-                }
+                
             }
 
         }

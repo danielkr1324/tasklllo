@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { DynamicModal } from "./DynamicModal";
 import { useParams, useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardService } from "../../services/board.service";
-import { saveGroup } from "../../store/actions/board.actions";
+import { saveGroup, updateBoard } from "../../store/actions/board.actions";
 import { ChecklistList } from "./checklist/ChecklistList";
-import { updateBoard } from "../../store/actions/board.actions";
+import { TaskDueDate } from "./checklist/TaskDueDate";
+import { DynamicModal } from "./DynamicModal";
 
 export function TaskEdit() {
   const [task, setTask] = useState({});
@@ -89,6 +89,7 @@ export function TaskEdit() {
         {task.style && <div className="cover" style={task.style}></div>}
         <div className="content-wrapper">
           <input
+            className="text-input"
             name="title"
             onChange={(e) => editTask(e)}
             onBlur={() => submitTaskEdit(task)}
@@ -97,15 +98,26 @@ export function TaskEdit() {
           />
           <main className="modal-edit">
             <div className="task-main">
-              {taskLabels.length > 0 &&
-                <ul className='task-edit-labels clean-list'>
-                  {taskLabels.map(label => (
-                    <li onClick={() => setSideBarModalType('TaskLabelModal')} key={label.id} className='task-edit-label' style={{ backgroundColor: `${label.color}` }}>
-                      <p >{label.title}</p>
-                    </li>
-                  ))}
-                </ul>}
-
+              <ul className='task-edit-actions clean-list'>
+                {taskLabels.length > 0 &&
+                  <div className="">
+                    <h3>Labels</h3>
+                    <div className="label-edit-container">
+                      {taskLabels.map(label => (
+                        <li onClick={() => setSideBarModalType('TaskLabelModal')} key={label.id} className='task-edit-label' style={{ backgroundColor: `${label.color}` }}>
+                          <p>{label.title}</p>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
+                }
+                {task.dueDate &&
+                  <TaskDueDate
+                    task={task}
+                    submitTaskEdit={submitTaskEdit}
+                    setSideBarModalType={setSideBarModalType}
+                  />}
+              </ul>
               <div className="task-description">
                 <h2>Description</h2>
                 <textarea
@@ -116,28 +128,32 @@ export function TaskEdit() {
                   placeholder="Add a more detailed description..."
                 />
               </div>
-
               {renderChecklists()}
             </div>
             <div className="modal-sidebar">
-              <button 
+              <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskCoverModal")}
               >
-                Cover
+                <i className="fa-regular fa-image"></i>Cover
               </button>
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskChecklistModal")}
               >
-                Checklist
+                <i className="fa-regular fa-square-check"></i>Checklist
               </button>
-
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskLabelModal")}
               >
-                Labels
+                <i className="fa-solid fa-tag"></i>Labels
+              </button>
+              <button
+                className="btn-edit"
+                onClick={() => setSideBarModalType("TaskDateModal")}
+              >
+                <i className="fa-solid fa-tag"></i>Dates
               </button>
             </div>
           </main>
