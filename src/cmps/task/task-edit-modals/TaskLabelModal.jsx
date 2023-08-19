@@ -2,6 +2,7 @@ import { useState } from "react"
 
 export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate }) {
     const [labelToEdit, setLabelToEdit] = useState({})
+    const [labelsToRender, setLabelsToRender] = useState(labels)
 
     const editLabel = ({ target }) => {
         const { value, name: field } = target;
@@ -34,12 +35,29 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
         await submitTaskEdit(updateTask)
     }
 
+    function handleChange({ target }) {
+        const regex = new RegExp(target.value, 'i')
+        const filteredLabels = labels.filter((label) => regex.test(label.title))
+        setLabelsToRender(filteredLabels)
+    }
+
     
     return (
         <div className="label-modal">
             <h3 className="dynamic-modal-title">Labels</h3>
+            <input
+                type="text"
+                className='label-search'
+                name="txt"
+                id="txt"
+                placeholder="Search labels..."
+                onChange={handleChange}
+                autoFocus
+                autoComplete="off"
+            />
             <ul className="label-select clean-list">
-                {labels.map(label => (
+                <h3>Labels</h3>
+                {labelsToRender.map(label => (
                     <li key={label.id} className="label">
                         {labelToEdit && label.id !== labelToEdit.id  && 
                         <>

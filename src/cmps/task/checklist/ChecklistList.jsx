@@ -15,11 +15,11 @@ export function ChecklistList({ checklist, updateChecklist, removeChecklist }) {
   };
 
   return (
-    <article className="checklist-list">
+    <article className="checklist-list full ">
 
-      <div className="checklist-top">
+      <div className="checklist-top ">
         <div className="checklist-title">
-          
+          <i class="fa-regular fa-square-check"></i>
           <input
             className="text-input"
             name="title"

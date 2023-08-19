@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { boardService } from "../../services/board.service";
 import { saveGroup, updateBoard } from "../../store/actions/board.actions";
 import { ChecklistList } from "./checklist/ChecklistList";
@@ -15,6 +15,7 @@ export function TaskEdit() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     setTaskToEdit();
   }, [taskId]);
@@ -87,20 +88,23 @@ export function TaskEdit() {
     <div onClick={(e) => onCloseTaskModal(e)} className="task-edit">
       <div onClick={(e) => e.stopPropagation()} className="modal-content">
         {task.style && <div className="cover" style={task.style}></div>}
-        <div className="content-wrapper">
-          <input
-            className="text-input"
-            name="title"
-            onChange={(e) => editTask(e)}
-            onBlur={() => submitTaskEdit(task)}
-            type="text"
-            defaultValue={task.title}
-          />
-          <main className="modal-edit">
-            <div className="task-main">
-              <ul className='task-edit-actions clean-list'>
+        <div className="content-wrapper ">
+          <div className="title-in-task main-container">
+          <i className="fa-regular fa-newspaper"></i>
+            <input
+              className="text-input"
+              name="title"
+              onChange={(e) => editTask(e)}
+              onBlur={() => submitTaskEdit(task)}
+              type="text"
+              defaultValue={task.title}
+              />
+          </div>
+          <main className="modal-edit ">
+            <div className="task-main main-container">
+              <ul className='task-edit-actions clean-list '>
                 {taskLabels.length > 0 &&
-                  <div className="">
+                  <div>
                     <h3>Labels</h3>
                     <div className="label-edit-container">
                       {taskLabels.map(label => (
@@ -118,8 +122,11 @@ export function TaskEdit() {
                     setSideBarModalType={setSideBarModalType}
                   />}
               </ul>
-              <div className="task-description">
-                <h2>Description</h2>
+              <div className="task-description full">
+                <div className="title-in-task">
+                  <i title='Description' className="fa-solid fa-align-left"></i>   
+                  <h2>Description</h2>
+                </div>
                 <textarea
                   name="description"
                   onChange={(e) => editTask(e)}
@@ -137,23 +144,26 @@ export function TaskEdit() {
               >
                 <i className="fa-regular fa-image"></i>Cover
               </button>
+
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskChecklistModal")}
               >
                 <i className="fa-regular fa-square-check"></i>Checklist
               </button>
+
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskLabelModal")}
               >
                 <i className="fa-solid fa-tag"></i>Labels
               </button>
+
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskDateModal")}
               >
-                <i className="fa-solid fa-tag"></i>Dates
+                <i className="fa-regular fa-clock"></i>Dates
               </button>
             </div>
           </main>

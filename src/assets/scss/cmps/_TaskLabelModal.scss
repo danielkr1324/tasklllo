@@ -1,5 +1,13 @@
 .label-modal {
-    
+
+    .label-search {
+            height: 36px;
+            font-size: 16px;
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid lightgray;
+            border-radius: 3px;
+    }
     .label-select {
         padding: 4px 0 8px 0;
         .label {
@@ -22,8 +30,6 @@
                 margin-inline-start: 9px;
             }
             
-           
-
             .label-preview, .label-title-edit {
                 display: block;
                 text-overflow: ellipsis;
@@ -39,7 +45,7 @@
                     font-weight: 400;
                     text-align: center;
                     font-size: 16px;
-                    margin-inline-start: em(30px);
+                    margin-inline-start: em(24px);
                     margin-block-end: em(7px);
                     
                 }

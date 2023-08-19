@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  loadBoard,
-  updateBoard,
-  removeGroup,
-  addGroup,
-  saveGroup,
-} from "../store/actions/board.actions";
+import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
 import { Outlet } from "react-router";
+import { BoardSideMenu } from "../cmps/board/board-side-menu/BoardSideMenu";
 
 export function Board() {
-  const boardId = "b101"; // TODO: change later
+  const boardId = "b101";
   const board = useSelector((storeState) => storeState.boardModule.board);
   const dispatch = useDispatch();
 
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
   useEffect(() => {
+    console.log(1);
     loadNewBoard();
   }, [boardId]);
 
@@ -25,7 +23,30 @@ export function Board() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  const onToggleSideMenu = () => {
+    setIsSideMenuOpen(!isSideMenuOpen);
+  };
+
+  const changeBackground = async ({ background, backgroundColor, thumbnail }) => {
+    const updatedBoard = { ...board, style: { background, backgroundColor, thumbnail } };
+    try {
+      await dispatch(updateBoard(updatedBoard));
+    } catch (err) {
+      console.log('Failed to update board background', err);
+    }
+  };
+
+  const getBoardStyle = () => {
+    const boardStyle = board?.style || {};
+    if (boardStyle.background) {
+      return { background: `url("${boardStyle.background}") center center / cover` };
+    } else if (boardStyle.backgroundColor) {
+      return { backgroundColor: `${boardStyle.backgroundColor}` };
+    }
+    return { backgroundColor: `#0067a3` };
+  };
 
   const onBoardUpdate = (groups) => {
     dispatch(updateBoard({ ...board, groups }));
@@ -40,31 +61,34 @@ export function Board() {
   };
 
   const onDuplicateGroup = (group) => {
-    const groupCopy = { ...group };
-    groupCopy.id = "";
-
+    const groupCopy = { ...group, id: "" };
     if (groupCopy.tasks.length) {
-      groupCopy.tasks = groupCopy.tasks.map((task) => ({
-        ...task,
-        id: "",
-      }));
+      groupCopy.tasks = groupCopy.tasks.map((task) => ({ ...task, id: "" }));
     }
-
     dispatch(addGroup(groupCopy, boardId));
   };
 
   const onSaveGroup = (group) => {
-    if(group.id) dispatch(saveGroup(group, boardId));
-    else dispatch(addGroup(group, boardId));
+    const action = group.id ? saveGroup : addGroup;
+    dispatch(action(group, boardId));
   };
 
   if (!board) {
     return <div>Loading...</div>;
   }
 
+  const boardStyle = getBoardStyle();
+  const menuStatus = isSideMenuOpen ? 'open' : '';
+
   return (
-    <section className="board">
-      <h1>{board.title}</h1>
+    <section className="board" style={boardStyle}>
+      <div className="board-info">
+        <h1 className="btn-board board-title">{board.title}</h1>
+        <button className={`btn-board menu ${menuStatus}`} onClick={onToggleSideMenu}>...</button>
+      </div>
+      <div>
+        {isSideMenuOpen && <BoardSideMenu onToggleSideMenu={onToggleSideMenu} changeBackground={changeBackground} />}
+      </div>
       <main className="board-main-content">
         <GroupList
           onRemoveGroup={onRemoveGroup}
@@ -75,8 +99,7 @@ export function Board() {
           labels={board.labels}
         />
       </main>
-
-      <Outlet/>
+      <Outlet />
     </section>
   );
 }

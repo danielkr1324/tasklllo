@@ -75,14 +75,14 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
           <div className='task-icons'>
             {task.description && <i title='Description' className="fa-solid fa-align-left"></i>}
             {task.checklists.length > 0 && task.checklists[0].todos.length > 0 && 
-              <div title='Checklist items' className={todosStyle}> <i class="fa-regular fa-square-check"></i> 
+              <div title='Checklist items' className={todosStyle}> <i className="fa-regular fa-square-check"></i> 
               <span>{totalTodos}</span> </div>}
 
               {task.dueDate && (
 								<div title='Due date' className={getDueWarnSpan(task)}
 									onClick={(ev) => onToggleDateDone(ev, task)}>
 									<span className='task-preview-actions-icons date'>
-                  <i class="fa-regular fa-clock"></i>
+                  <i className="fa-regular fa-clock"></i>
 										{utilService.dueDateFormat(task.dueDate)}
 									</span>
 								</div>

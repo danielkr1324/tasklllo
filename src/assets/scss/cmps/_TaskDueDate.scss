@@ -68,18 +68,18 @@
         }
 
         .completed {
-            background-color: #61BD4F;
+            background-color: #1f845a;
             color: $clr6 ;
         }
 
         .overdue {
-            color: $clr6 ;
-            background-color: #EB5A46;
+            color: #ae2a19 ;
+            background-color: #f5bbb5;
         }
 
         .soon {
-            background-color: #F2D600;
-            color: red;
+            background-color: #e2b203;
+            // color: red;
         }
     }
 
