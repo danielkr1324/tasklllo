@@ -1,86 +1,79 @@
 .task-due-date-section {
     margin-block: 4px;
-
+  
     .task-due-date-container {
-
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        margin: 0 8px 0 0;
-
-
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      margin: 0 8px 0 0;
     }
-
+  
     .task-due-date-checkbox {
-            background-color: #FAFBFC;
-            border-radius: 2px;
-            box-shadow: inset 0 0 0 2px #DFE1E6;
-            flex-shrink: 0;
-            height: 16px;
-            margin: auto 4px auto 0;
-            overflow: hidden;
-            position: relative;
-            transition: all .2s ease-in-out;
-            white-space: nowrap;
-            width: 16px;
-            outline: none;
-            // margin-inline-end: 2px;
-    
-            
-            &:checked {
-                box-shadow: none;
-            }
-
-        &:active {
-            border: none;
-        }
+      background-color: #FAFBFC;
+      border-radius: 2px;
+      box-shadow: inset 0 0 0 2px #DFE1E6;
+      flex-shrink: 0;
+      height: 16px;
+      margin: auto 4px auto 0;
+      overflow: hidden;
+      position: relative;
+      transition: all .2s ease-in-out;
+      white-space: nowrap;
+      width: 16px;
+      outline: none;
+  
+      &:checked {
+        box-shadow: none;
+      }
+  
+      &:active {
+        border: none;
+      }
     }
-
+  
     .task-due-date-show {
-        padding: 6px 12px;
-        display: flex;
-        align-items: center;
-        background-color: green;
-        height: 32px;
-        border-radius: 3px;
-
-        &:hover {
-            background-color: red
-        }
-
-        .task-due-date-span {
-
-            margin-inline-end: 5px;
-        }
-
-        .btn-due-date-arrow {
-            width: 16px;
-            height: 16px;
-        }
-
-
-        .due-sticker {
-            padding: 0 4px;
-            border-radius: 2px;
-            font-size: 12px;
-            margin-inline-start: 7px;
-            line-height: 16px;
-        }
-
-        .completed {
-            background-color: #1f845a;
-            color: $clr6 ;
-        }
-
-        .overdue {
-            color: #ae2a19 ;
-            background-color: #f5bbb5;
-        }
-
-        .soon {
-            background-color: #e2b203;
-            // color: red;
-        }
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      background-color: green;
+      height: 32px;
+      border-radius: 3px;
+  
+      &:hover {
+        background-color: red;
+      }
+  
+      .task-due-date-span {
+        margin-inline-end: 5px;
+      }
+  
+      .btn-due-date-arrow {
+        width: 16px;
+        height: 16px;
+      }
+  
+      .due-sticker {
+        padding: 0 4px;
+        border-radius: 2px;
+        font-size: 12px;
+        margin-inline-start: 7px;
+        line-height: 16px;
+      }
+  
+      .completed {
+        background-color: #1f845a;
+        color: $clr6;
+      }
+  
+      .overdue {
+        color: #ae2a19;
+        background-color: #f5bbb5;
+      }
+  
+      .soon {
+        background-color: #e2b203;
+        // color: red;
+      }
     }
-
-}
+  }
+  

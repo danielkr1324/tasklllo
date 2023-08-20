@@ -4,6 +4,7 @@ import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../sto
 import { GroupList } from "../cmps/group/GroupList";
 import { Outlet } from "react-router";
 import { BoardSideMenu } from "../cmps/board/board-side-menu/BoardSideMenu";
+import Loader from '../assets/images/loader.svg'
 
 export function Board() {
   const boardId = "b101";
@@ -32,7 +33,7 @@ export function Board() {
   const changeBackground = async ({ background, backgroundColor, thumbnail }) => {
     const updatedBoard = { ...board, style: { background, backgroundColor, thumbnail } };
     try {
-      await dispatch(updateBoard(updatedBoard));
+      dispatch(updateBoard(updatedBoard));
     } catch (err) {
       console.log('Failed to update board background', err);
     }
@@ -74,7 +75,11 @@ export function Board() {
   };
 
   if (!board) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader-wrapper">
+				<img className="loader" src={Loader} alt="loader" />
+			</div>
+    )
   }
 
   const boardStyle = getBoardStyle();

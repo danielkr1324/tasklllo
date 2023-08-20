@@ -8,7 +8,6 @@ import {
   REMOVE_GROUP,
   SAVE_GROUP,
   ADD_GROUP,
-  SAVE_TASK,
 } from '../reducers/board.reducer'
 
 export function loadBoards() {

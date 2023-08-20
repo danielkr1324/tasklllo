@@ -25,7 +25,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 
 		let counter = 0
 		task.checklists.map(checklist => {
-			checklist.todos.map(todo => {
+			return checklist.todos.map(todo => {
 				if (todo.isDone) counter++
 			})
 		})

@@ -137,6 +137,7 @@ export function TaskEdit() {
               </div>
               {renderChecklists()}
             </div>
+
             <div className="modal-sidebar">
               <button
                 className="btn-edit"

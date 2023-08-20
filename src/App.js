@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, HashRouter as Router, Routes, Switch } from 'react-router-dom'
+import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './assets/scss/main.scss'
 import { HomePage } from './views/HomePage'
 import { Board } from './views/Board'

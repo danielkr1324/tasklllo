@@ -25,7 +25,10 @@
     border-radius: 12px;
     background-color: $clr-base-2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: em(768px);
+    max-width: em(768px);
+    min-width: em(345px);
+
+    
 
     button {
       text-align: start;
@@ -69,6 +72,18 @@
         display: flex;
         justify-content: space-between;
 
+        @media screen and (max-width: 745px) {
+          flex-direction: column;
+          // justify-content: flex-start;
+          width: 100%;
+
+        //  .modal-sidebar {
+        //   display: grid;
+        //   margin: 8px;
+        //   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        //  }
+      }
+
         & > * {
           margin-block-end: 50px;
         }
@@ -89,10 +104,10 @@
       }
 
       .task-main {
-        max-width: 512px;
+        // max-width: 512px;
         .task-edit-actions {
           &>* {
-              margin: 0 10px 10px 20px;
+              margin: 0 10px 10px 0;
           }
           h3 {
             font-size: 12px;
@@ -148,19 +163,32 @@
         display: flex;
         flex-direction: column;
 
+        @media screen and (max-width: 745px) {
+          display: inline-flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        
+
         .btn-edit {
           text-align: start;
           background-color: $clr8;
           color: #626f86;
           font-weight: 100;
           border: none;
-          width: em(200px);
+          min-width: em(200px);
+          // max-width: 50%;
           height: em(37px);
           margin: em(8px) 0 0;
           padding: em(8px) em(14px);
 
           &:hover {
             background-color: $clr-base-9;
+          }
+
+          @media screen and (max-width: 745px) {
+            flex-grow: 1;
           }
 
           i {

@@ -19,7 +19,7 @@ export function ChecklistList({ checklist, updateChecklist, removeChecklist }) {
 
       <div className="checklist-top ">
         <div className="checklist-title">
-          <i class="fa-regular fa-square-check"></i>
+          <i className="fa-regular fa-square-check"></i>
           <input
             className="text-input"
             name="title"
