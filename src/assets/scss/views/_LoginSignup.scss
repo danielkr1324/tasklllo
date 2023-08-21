@@ -2,71 +2,83 @@
     background-color: #F4F5F7;
     position: relative;
     height: 100vh;
-
+  
+    .not-visible {
+      display: none;
+    }
+  
+    .visible {
+      display: block;
+    }
+  
     .logo {
-        font-size: 40px;
-        padding: em(20px);
+      font-size: 40px;
+      padding: 20px; 
     }
+    
     .signup-form {
-        background-color: #fff;
-        box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+      background-color: #fff;
+      box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+      border-radius: 3px;
+      margin: 0 auto;
+      padding: 25px 40px; 
+      width: 400px; 
+      height: 330px; 
+      display: flex;
+      flex-direction: column;
+  
+      h1 {
+        font-size: 16px;
+        margin: 10px 0 25px;
+      }
+  
+      input,
+      button {
+        align-self: center;
+        width: 320px; 
+        height: 40px; 
+        padding: 8px; 
+      }
+  
+      input {
+        background-color: #FAFBFC;
+        border: 2px solid $clr-dynamic-button-highlighted;
+        border-radius: 4.8px;
+        transition: 0.3s;
+        margin-block-end: 10px;
+  
+        &:focus {
+          border-color: #4c9aff;
+          outline: none;
+        }
+      }
+  
+      button {
+        background-color: #5AAC44;
         border-radius: 3px;
-        margin: 0 auto;
-        padding: em(25px) em(40px);
-        width: em(400px);
-        height: em(330px);
-        display: flex;
-        flex-direction: column;
-
-        h1 {
-            font-size: 16px;
-            margin: 10px 0 25px;
+        border: none;
+        color: #fff;
+        font-size: 14px; 
+        font-weight: 700;
+  
+        &:hover {
+          background-color: #61bd4f;
         }
-
-        input, button {
-            align-self: center;
-            width: em(320px);
-            height: em(40px);
-            padding: em(8px);
-        }
-
-        input {
-            background-color: #FAFBFC;
-            border: 2px solid $clr-dynamic-button-highlighted;
-            border-radius: 4.8px;
-            transition: 0.3s;
-
-            &:focus {
-                border-color: #4c9aff;
-                outline: none;
-            }
-        }
-
-        button {
-            background-color: #5AAC44;
-            border-radius: 3px;
-            border: none;
-            color: #fff;
-            font-size: rem(14px);
-            font-weight: 700;
-
-            &:hover {
-                background-color: #61bd4f;
-            }
-        }
-        
+      }
     }
+  
     img {
-        max-width: 30%;
-        position: absolute;
-        bottom: 0;
+      max-width: 30%;
+      position: absolute;
+      bottom: 0;
     }
-
+  
     .left-hero {
-        left: 0;
+      left: 0;
     }
-
+  
     .right-hero {
-        right: 0;
+      right: 0;
     }
-}
+  }
+  

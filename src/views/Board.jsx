@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
-import { Outlet } from "react-router";
+import { Outlet, useParams } from "react-router";
 import { BoardSideMenu } from "../cmps/board/board-side-menu/BoardSideMenu";
 import Loader from '../assets/images/loader.svg'
 
 export function Board() {
-  const boardId = "b101";
+  const {boardId} = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
   const dispatch = useDispatch();
 
@@ -89,7 +89,23 @@ export function Board() {
     <section className="board" style={boardStyle}>
       <div className="board-info">
         <h1 className="btn-board board-title">{board.title}</h1>
-        <button className={`btn-board menu ${menuStatus}`} onClick={onToggleSideMenu}>...</button>
+
+        <div className="board-members">
+          {board.members && <ul className="board-top-menu-members clean-list">
+              {board.members.map((member, idx) => (
+                <li style={{ zIndex: idx + 5 }} key={member._id}>
+                  <img
+                    height="30"
+                    width="30"
+                    style={{ borderRadius: '50%' }}
+                    src={member.imgUrl}
+                    title={`${member.fullname} (${member.username})`}
+                  />
+                </li>
+              ))}
+            </ul> }
+          <button className={`btn-board menu ${menuStatus}`} onClick={onToggleSideMenu}><i className="fa-solid fa-ellipsis"></i></button>
+        </div>
       </div>
       <div>
         {isSideMenuOpen && <BoardSideMenu onToggleSideMenu={onToggleSideMenu} changeBackground={changeBackground} />}

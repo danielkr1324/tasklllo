@@ -10,11 +10,12 @@ import {
   ADD_GROUP,
 } from '../reducers/board.reducer'
 
-export function loadBoards() {
+export function loadBoards(loggedinUserId) {
+  console.log(loggedinUserId)
+
   return async (dispatch, getState) => {
     try {
-      const boards = await boardService.query()
-      console.log(boards)
+      const boards = await boardService.boardQuery(loggedinUserId)
 
       const action = {
         type: SET_BOARDS,

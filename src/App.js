@@ -4,6 +4,8 @@ import './assets/scss/main.scss'
 import { HomePage } from './views/HomePage'
 import { Board } from './views/Board'
 import { TaskEdit } from './cmps//task/TaskEdit'
+import { LoginSignup } from './views/LoginSignup'
+import { Workspace } from './views/Workspace'
 
 function App() {
   return (
@@ -14,6 +16,15 @@ function App() {
             <Route
               path="/"
               element={<HomePage />}
+            />
+
+            <Route
+              path="/:status"
+              element={<LoginSignup />}
+            />
+            <Route
+              element={<Workspace />}
+              path="/workspace"
             />
 
             <Route

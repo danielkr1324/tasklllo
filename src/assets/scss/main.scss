@@ -16,6 +16,7 @@
 // Views
 @import "views/HomePage";
 @import "views/LoginSignup";
+@import "views/Workspace";
 @import "views/Board";
 
 // Components
@@ -23,6 +24,8 @@
 @import "cmps/TaskPreview";
 @import "cmps/GroupOptions";
 @import "cmps/BoardSideMenu";
+@import "cmps/BoardPreview";
+@import "cmps/BoardCreate";
 @import "cmps/TaskList";
 @import "cmps/TaskEdit";
 @import "cmps/DynamicModal";

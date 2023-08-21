@@ -1,5 +1,6 @@
 import { utilService } from './util.service'
 import { storageService } from './async-storage.service'
+import { userService } from './user.service'
 
 const BOARD_KEY = 'boardDB'
 
@@ -18,11 +19,63 @@ export const boardService = {
   getEmptyLabel,
   getBoardLabels,
   saveTask,
+  getEmptyBoard,
 }
 
 _createBoards()
 
 window.cs = boardService
+
+async function getEmptyBoard() {
+  const loggedinUser = await userService.getLoggedinUser()
+
+  return {
+    title: '',
+    isStarred: false,
+    archivedAt: null,
+    createdBy: loggedinUser,
+    style: {
+      background: '',
+      thumbnail: '',
+      backgroundColor: '',
+    },
+    labels: [
+      {
+        id: 'l101',
+        title: 'UI',
+        color: '#4bce97',
+      },
+      {
+        id: 'l102',
+        title: 'Low priority',
+        color: '#e2b203',
+      },
+      {
+        id: 'l103',
+        title: 'Medium priority',
+        color: '#faa53d',
+      },
+      {
+        id: 'l104',
+        title: 'High priority',
+        color: '#f87462',
+      },
+      {
+        id: 'l105',
+        title: 'Bug',
+        color: '#9f8fef',
+      },
+      {
+        id: 'l106',
+        title: '',
+        color: '#579dff',
+      },
+    ],
+    members: [],
+    groups: [],
+    activities: [],
+  }
+}
 
 async function saveGroup(group, boardId) {
   const board = await getBoardById(boardId)
@@ -71,9 +124,14 @@ async function getBoardById(boardId) {
   return await storageService.get(BOARD_KEY, boardId)
 }
 
-async function boardQuery(filterBy = {}) {
-  const board = await storageService.query(BOARD_KEY)
-  return board[0]
+async function boardQuery(loggedinUserId, filterBy = {}) {
+  console.log(loggedinUserId)
+
+  let boards = await storageService.query(BOARD_KEY)
+  boards = boards.filter(board => board.createdBy._id === loggedinUserId)
+  console.log(boards)
+
+  return boards
 }
 
 async function getTaskById(boardId, groupId, taskId) {
