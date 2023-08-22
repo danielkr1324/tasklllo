@@ -22,12 +22,14 @@ export function BoardPreview({ board, onToggleStar }) {
 							className="preview-board-starred"
 							onClick={(event) => onToggleStar(event, board)}
 						>
+							<i className="fa-solid fa-star"></i>
 						</span>
 					) : (
 						<span
 							className="preview-board-not-starred"
 							onClick={(event) => onToggleStar(event, board)}
 						>
+							<i className="fa-regular fa-star"></i>
 						</span>
 					)}
 				</div>

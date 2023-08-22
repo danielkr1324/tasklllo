@@ -13,7 +13,6 @@ export function BoardCreate({ closeBoardComposer, refDataBtn }) {
 
   const modalRef = useRef(null);
   const [modalStyle, setModalStyle] = useState(false);
-  const [modalHeight, setModalHeight] = useState();
 
   useEffect(() => {
     loadBoardCreate()
@@ -22,67 +21,40 @@ export function BoardCreate({ closeBoardComposer, refDataBtn }) {
   async function loadBoardCreate() {
     const board = await boardService.getEmptyBoard()
     setModalStyle(true);
-    setModalHeight(modalRef.current.getBoundingClientRect().height);
     setBoardToEdit(board)
   }
 
   function getModalPos(refDataBtn) {
     const rect = refDataBtn.current.getBoundingClientRect();
-    let modalPos = {};
-
-    if (rect.y > 10) {
-      let topModal = rect.top + rect.height + 10;
-      let bottomModal = '';
-      let leftModal = rect.right + 5;
-      let rightModal = '';
-      let position = 'fixed';
-
-      if (window.innerHeight < rect.top + modalHeight) {
-        topModal = '';
-        bottomModal = 10;
-      }
-
-      if (window.innerWidth < rect.left + 304) {
-        leftModal = '';
-        rightModal = 20;
-      }
-
-      modalPos = {
-        bottom: bottomModal,
-        top: topModal,
-        left: leftModal,
-        right: rightModal,
-        position: position,
-      };
-    } else {
-      let topModal = rect.top + rect.height + 10;
-      let bottomModal = '';
-      let leftModal = rect.left;
-      let rightModal = rect.right;
-      let position = 'fixed';
-
-      if (window.innerHeight < rect.top + modalHeight) {
-        topModal = '';
-        bottomModal = 10;
-      }
-
-      if (window.innerWidth < rect.left + 304) {
-        leftModal = '';
-        rightModal = 20;
-      }
-
-      modalPos = {
-        bottom: bottomModal,
-        top: topModal,
-        left: leftModal,
-        right: rightModal,
-        position: position,
-      };
+    const modalPos = {};
+    const modalHeight = 300
+  
+    let topModal = rect.top + rect.height + 10;
+    let bottomModal = '';
+    let leftModal = rect.left;
+    let rightModal = rect.right;
+    let position = 'fixed';
+  
+    if (rect.y <= 10) {
+      topModal = rect.top + rect.height + 10;
+    } else if (window.innerHeight < rect.top + modalHeight) {
+      bottomModal = 10;
     }
-
+  
+    if (window.innerWidth < rect.left + 304) {
+      leftModal = '';
+      rightModal = 20;
+    }
+  
+    modalPos.top = topModal;
+    modalPos.bottom = bottomModal;
+    modalPos.left = leftModal;
+    modalPos.right = rightModal;
+    modalPos.position = position;
+  
     return modalPos;
   }
-
+  
   useClickOutside(modalRef, closeBoardComposer);
 
   const bgImgs = [
@@ -167,12 +139,54 @@ export function BoardCreate({ closeBoardComposer, refDataBtn }) {
           className="btn-board-composer close"
           onClick={closeBoardComposer}
         >
-          {/* Close button content */}
+          <i className="fa-solid fa-xmark"></i>
         </button>
       </div>
 
       <div className="create-board-bg-picker">
-        {/* Background pickers */}
+      <label className="create-board-label">Background</label>
+				<div className="bg-img-picker">
+					<ul className="clean-list bg-imgs-list">
+						{bgImgs.map((bgImg) => (
+							<li key={bgImg.thumbnail} className="li-bg-img">
+								<button
+									className="btn-bg bg-img"
+									title="Custom image"
+									onClick={() => setBoardBackground(undefined, bgImg.thumbnail)}
+									style={{ backgroundImage: 'url(' + bgImg.thumbnail + ')' }}
+								>
+									{backgroundImage === bgImg.thumbnail && (
+										<div className="selected-bg">
+                      <i className="fa-solid fa-check"></i>
+										</div>
+									)}
+									<span className="bg-preview-fade"></span>
+								</button>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="bg-clr-picker">
+					<ul className="clean-list bg-clrs-list">
+						{bgClrs.map((bgClr) => (
+							<li key={bgClr} className="li-bg-clr">
+								<button
+									className="btn-bg bg-img"
+									onClick={() => setBoardBackground(bgClr, undefined)}
+									style={{ backgroundColor: bgClr }}
+								>
+									{backgroundColor === bgClr && (
+										<div className="selected-bg">
+                      <i className="fa-solid fa-check"></i>
+										</div>
+									)}
+									<span className="bg-preview-fade"></span>
+								</button>
+							</li>
+						))}
+					</ul>
+				</div>
       </div>
 
       <form>

@@ -16,7 +16,7 @@ export function LoginSignup() {
   const [wrongCredentialsDiv, setWrongCredentialsDiv] = useState('');
 
   useEffect(() => {
-	redirect()
+	  redirect()
   })
 
   const redirect = async() => {
@@ -46,22 +46,18 @@ export function LoginSignup() {
     }),
     onSubmit: async (values) => {
 		try {
-		  if (status === 'signup') {
-			await dispatch(signup(values));
-		  } else if (status === 'login') {
-			const user = await dispatch(login(values));
-			if (!user) {
-			  setWrongCredentialsDiv('visible');
-			  return;
-			}
+		 if (status === 'signup') await dispatch(signup(values));
+		 else if (status === 'login') {
+        const user = await dispatch(login(values));
+        if (!user) {
+          setWrongCredentialsDiv('visible');
+          return;
+        }
 		  }
 		  navigate('/workspace');
 		} catch (err) {
-		  console.log(err, 'cannot login/signup');
-		  if (status === 'login') {
-			setWrongCredentialsDiv('visible');
+		    if (status === 'login') setWrongCredentialsDiv('visible');
 		  }
-		}
 	  }
   });
 

@@ -20,6 +20,7 @@
     z-index: 300;
 
     label.create-board-label {
+        text-align: start;
         color: #5e6c84;
         font-size: 12px;
         line-height: 16px;
@@ -96,7 +97,7 @@
     }
 
     .create-board-bg-picker {
-
+        text-align: start;
         .bg-img-picker, .bg-clr-picker {
             display: flex;
 

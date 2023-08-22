@@ -10,15 +10,14 @@ import { useNavigate } from 'react-router';
 
 export function Workspace() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const boards = useSelector(state => state.boardModule.boards);
   const [isBoardComposerOpen, setIsBoardComposerOpen] = useState(false);
-  const createBtn = useRef();
-  const refDataBtn = createBtn;
+  const createBtnRef = useRef();
 
   useEffect(() => {
     onLoadBoards();
-  }, [dispatch]);
+  }, []);
 
   const onLoadBoards = async () => {
     const user = await userService.getLoggedinUser();
@@ -33,21 +32,20 @@ export function Workspace() {
     setIsBoardComposerOpen(false);
   };
 
-  const getStarredBoards = () => {
-    return boards.filter(board => board.isStarred);
-  };
+  const getStarredBoards = () => boards.filter(board => board.isStarred);
 
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/')
-  }
+    dispatch(logout());
+    navigate('/');
+  };
 
   const onToggleStar = async (event, board) => {
     event.stopPropagation();
     event.preventDefault();
     const updatedBoard = { ...board, isStarred: !board.isStarred };
     try {
-      dispatch(updateBoard(updatedBoard));
+      await dispatch(updateBoard(updatedBoard));
+      onLoadBoards();
     } catch (err) {
       console.log('Cannot update board', err);
     }
@@ -63,7 +61,7 @@ export function Workspace() {
 
   const starredBoards = getStarredBoards();
 
-  const renderBoardList = (boardList) => (
+  const renderBoardList = boardList => (
     <ul className="board-list clean-list">
       {boardList.map(board => (
         <li key={board._id}>
@@ -72,18 +70,27 @@ export function Workspace() {
           </a>
         </li>
       ))}
+      <li
+          className="board-preview create-new-board clean-list"
+          onClick={openBoardComposer}
+          key="001"
+          ref={createBtnRef}
+        >
+          <span>Create new board</span>
+        </li>
     </ul>
   );
 
   return (
     <section className="workspace-section">
-		<button onClick={handleLogout}>Log out</button>
+      <button onClick={handleLogout}>Log out</button>
+
 
       {starredBoards.length !== 0 && (
         <div className="starred-boards">
           <div className="boards-section-header">
             <div className="boards-section-header-name">
-              <h3>Starred boards</h3>
+              <h3> <i className="fa-regular fa-user"></i> Starred boards</h3>
             </div>
           </div>
           {renderBoardList(starredBoards)}
@@ -93,27 +100,17 @@ export function Workspace() {
       <div className="my-boards">
         <div className="boards-section-header">
           <div className="boards-section-header-name">
-            <h3>Your boards</h3>
+            <h3><i className="fa-regular fa-user"></i>Your boards</h3>
           </div>
         </div>
-        {renderBoardList(boards)}
-        <li className="board-preview create-new-board" onClick={openBoardComposer} key="001" ref={createBtn}>
-          <span>Create new board</span>
-        </li>
-        {isBoardComposerOpen && (
-          <BoardCreate closeBoardComposer={closeBoardComposer} refDataBtn={refDataBtn} />
-        )}
-      </div>
 
-      <div className="recently-viewed-boards">
-        <div className="boards-section-header">
-          <div className="boards-section-header-name">
-            <h3>Recently viewed</h3>
-          </div>
-        </div>
-        {renderBoardList(boards)}
+        <div>
+          {renderBoardList(boards)}
+          {isBoardComposerOpen && <BoardCreate closeBoardComposer={closeBoardComposer} refDataBtn={createBtnRef} />}
+        </div> 
+        
       </div>
     </section>
   );
-};
+}
 

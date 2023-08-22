@@ -11,8 +11,6 @@ import {
 } from '../reducers/board.reducer'
 
 export function loadBoards(loggedinUserId) {
-  console.log(loggedinUserId)
-
   return async (dispatch, getState) => {
     try {
       const boards = await boardService.boardQuery(loggedinUserId)

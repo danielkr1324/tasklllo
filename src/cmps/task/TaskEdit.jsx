@@ -14,6 +14,7 @@ export function TaskEdit() {
   const { boardId, groupId, taskId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
 
   
   useEffect(() => {
@@ -22,6 +23,28 @@ export function TaskEdit() {
 
   const taskLabels = task.labelIds ? labels.filter(label => task.labelIds.includes(label.id)) : [];
 
+  const labelBtn = useRef()
+	const checklistBtn = useRef()
+	const dateBtn = useRef()
+	const coverBtn = useRef()
+
+  function getRefData(type) {
+		switch (type) {
+			
+			case 'TaskLabelModal':
+				return labelBtn
+
+			case 'TaskChecklistModal':
+				return checklistBtn
+
+			case 'TaskDateModal':
+				return dateBtn
+
+			case 'TaskCoverModal':
+				return coverBtn
+
+		}
+	}
 
   const setTaskToEdit = async ()=> {
     const currTask = await boardService.getTaskById(boardId, groupId, taskId);
@@ -142,6 +165,7 @@ export function TaskEdit() {
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskCoverModal")}
+                ref={coverBtn}
               >
                 <i className="fa-regular fa-image"></i>Cover
               </button>
@@ -149,6 +173,7 @@ export function TaskEdit() {
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskChecklistModal")}
+                ref={checklistBtn}
               >
                 <i className="fa-regular fa-square-check"></i>Checklist
               </button>
@@ -156,6 +181,7 @@ export function TaskEdit() {
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskLabelModal")}
+                ref={labelBtn}
               >
                 <i className="fa-solid fa-tag"></i>Labels
               </button>
@@ -163,6 +189,7 @@ export function TaskEdit() {
               <button
                 className="btn-edit"
                 onClick={() => setSideBarModalType("TaskDateModal")}
+                ref={dateBtn}
               >
                 <i className="fa-regular fa-clock"></i>Dates
               </button>
@@ -176,6 +203,7 @@ export function TaskEdit() {
               task={task}
               labels={labels}
               boardLabelsUpdate={boardLabelsUpdate}
+              refBtn={getRefData(sideBarModalType)}
             />
           )}
         </div>

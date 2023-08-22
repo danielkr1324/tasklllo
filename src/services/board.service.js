@@ -125,11 +125,8 @@ async function getBoardById(boardId) {
 }
 
 async function boardQuery(loggedinUserId, filterBy = {}) {
-  console.log(loggedinUserId)
-
   let boards = await storageService.query(BOARD_KEY)
   boards = boards.filter(board => board.createdBy._id === loggedinUserId)
-  console.log(boards)
 
   return boards
 }
