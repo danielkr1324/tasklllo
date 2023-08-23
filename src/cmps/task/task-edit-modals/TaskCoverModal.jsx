@@ -40,7 +40,7 @@ export function TaskCoverModal({task, submitTaskEdit}) {
                     ))}
                 </ul>
                 {task.style && 
-                    <button onClick={removeCover}>Remove cover</button>
+                    <button className="btn-remove" onClick={removeCover}><span> Remove cover</span></button>
                 }
             </div>
         </div>

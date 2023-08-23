@@ -14,6 +14,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
         const newLabels = labels.map(label => label.id === labelToEdit.id ? labelToEdit : label)
         await boardLabelsUpdate(newLabels)
         setLabelToEdit({})
+        setLabelsToRender(newLabels)
     }
 
     const onToggleLabel = async (ev, id) => {

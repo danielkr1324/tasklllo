@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useClickOutside } from '../../costumeHooks/useClickOutside';
 import { addBoard } from '../../store/actions/board.actions';
@@ -8,21 +8,16 @@ import { boardService } from '../../services/board.service';
 
 export function BoardCreate({ closeBoardComposer, refDataBtn }) {
   const dispatch = useDispatch();
-  const [boardToEdit, setBoardToEdit] = useState({});
+  const [boardToEdit, setBoardToEdit] = useState(boardService.getEmptyBoard());
   const navigate = useNavigate();
+  const loggedinUser = useSelector(storeState => storeState.userModule.user)
 
   const modalRef = useRef(null);
-  const [modalStyle, setModalStyle] = useState(false);
 
   useEffect(() => {
-    loadBoardCreate()
-  }, [modalStyle]);
+    setBoardToEdit(prevBoard => ({...prevBoard, createdBy: loggedinUser}))
+  }, []);
 
-  async function loadBoardCreate() {
-    const board = await boardService.getEmptyBoard()
-    setModalStyle(true);
-    setBoardToEdit(board)
-  }
 
   function getModalPos(refDataBtn) {
     const rect = refDataBtn.current.getBoundingClientRect();
@@ -118,10 +113,11 @@ export function BoardCreate({ closeBoardComposer, refDataBtn }) {
     ev.preventDefault();
     if (!boardToEdit.title) return;
     try {
-      const newBoard = await dispatch(addBoard(boardToEdit));
+      
+      const boardToAdd = await dispatch(addBoard(boardToEdit));
       closeBoardComposer();
       setBoardToEdit(boardService.getEmptyBoard());
-      navigate(`/board/${newBoard._id}`);
+      navigate(`/board/${boardToAdd._id}`);
     } catch (err) {
       console.log('Failed to save new board', err);
     }

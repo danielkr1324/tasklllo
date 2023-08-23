@@ -1,13 +1,13 @@
 .group-list {
     width: fit-content;
     display: flex;
-    align-items: start;
-    justify-content: start;
+    align-items: flex-start;
+    justify-content: flex-start;
     position: relative;
     
     .group-wrapper {
         cursor: pointer;
-        text-align: start;
+        text-align: flex-start;
         margin: em(6px);
         background-color: $clr-base-3;
         border-radius: 10px;

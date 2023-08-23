@@ -1,4 +1,4 @@
-import { utilService } from "../../../services/util.service";
+import { utilService } from "../../services/util.service";
 
 export function TaskDueDate({ task, submitTaskEdit, setSideBarModalType }) {
   const taskDueDateTime = utilService.dueDateTimeFormat(task.dueDate);

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadBoards, updateBoard } from '../store/actions/board.actions';
 import { logout } from '../store/actions/user.actions';
-import { userService } from '../services/user.service';
 import { BoardCreate } from '../cmps/board/BoardCreate';
 import { BoardPreview } from '../cmps/board/BoardPreview';
 import Loader from '../assets/images/loader.svg';
@@ -12,17 +11,14 @@ export function Workspace() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const boards = useSelector(state => state.boardModule.boards);
+  const loggedinUser = useSelector(state => state.userModule.user)
   const [isBoardComposerOpen, setIsBoardComposerOpen] = useState(false);
   const createBtnRef = useRef();
 
   useEffect(() => {
-    onLoadBoards();
-  }, []);
+    dispatch(loadBoards(loggedinUser._id));
 
-  const onLoadBoards = async () => {
-    const user = await userService.getLoggedinUser();
-    dispatch(loadBoards(user._id));
-  };
+  });
 
   const openBoardComposer = () => {
     setIsBoardComposerOpen(true);
@@ -45,7 +41,7 @@ export function Workspace() {
     const updatedBoard = { ...board, isStarred: !board.isStarred };
     try {
       await dispatch(updateBoard(updatedBoard));
-      onLoadBoards();
+      dispatch(loadBoards(loggedinUser._id));
     } catch (err) {
       console.log('Cannot update board', err);
     }

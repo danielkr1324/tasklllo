@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
 import { Outlet, useParams } from "react-router";
@@ -14,7 +15,6 @@ export function Board() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {
-    console.log(1);
     loadNewBoard();
   }, [boardId]);
 
@@ -88,9 +88,14 @@ export function Board() {
   return (
     <section className="board" style={boardStyle}>
       <div className="board-info">
-        <h1 className="btn-board board-title">{board.title}</h1>
+        <div className="info-left">
+          <h1 className="btn-board board-title">{board.title}</h1>
+          <NavLink to="/workspace">
+            <button className="btn-board">Workspace</button>
+          </NavLink>
+        </div>
 
-        <div className="board-members">
+        <div className="info-right">
           {board.members && <ul className="board-top-menu-members clean-list">
               {board.members.map((member, idx) => (
                 <li style={{ zIndex: idx + 5 }} key={member._id}>

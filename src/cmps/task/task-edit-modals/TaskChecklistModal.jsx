@@ -22,16 +22,17 @@ export function TaskChecklistModal({ task, submitTaskEdit }) {
 
   return (
     <div className="task-checklist-modal">
-      <h3 className="dynamic-modal-title">title</h3>
+      <h3 className="dynamic-modal-title">Add checklist</h3>
       <div className="checklist-add">
+        <h3>title</h3>
         <input
-          className="checklist-title-input"
+          className="checklist-title-edit"
           type="text"
           autoFocus
           onChange={handleChange}
           value={checklistTitle}
         />
-        <button onClick={(ev) => addCheckList(ev)}>Add</button>
+        <button className="btn-save" onClick={(ev) => addCheckList(ev)}>Add</button>
       </div>
     </div>
   );

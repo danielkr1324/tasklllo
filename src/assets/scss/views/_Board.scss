@@ -25,6 +25,7 @@
       padding: 5px 10px;
       color: #fff;
       font-size: 18px;
+      border-radius: 3px;
 
       &:hover {
         background-color: #A6C5E229;
@@ -32,7 +33,14 @@
 
     }
 
-    .board-members {
+    .info-left {
+      display: flex;
+      button {
+        font-size: 14px;
+      }
+    }
+
+    .info-right {
       display: flex;
       justify-content: space-between;
       align-items: center;

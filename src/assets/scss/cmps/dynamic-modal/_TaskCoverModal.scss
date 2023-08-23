@@ -1,11 +1,17 @@
 .task-cover {
+    h3 {
+        text-align: start;
+        font-size: 14px;
+        margin: 16px 0 4px;
+        font-weight: 400;
+    }
     ul {
         grid-gap: 8px;
         display: grid;
         gap: 8px;
         grid-template-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        margin: 0 -4px;
+        margin: 10px -4px;
         overflow-x: hidden;
         padding: 4px;
 
@@ -17,5 +23,12 @@
                 border-radius: 3px;
             }
         }
+    }
+
+    .btn-remove {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

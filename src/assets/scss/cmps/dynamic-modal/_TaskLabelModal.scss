@@ -10,8 +10,19 @@
     }
     .label-select {
         padding: 4px 0 8px 0;
+
+        h3 {
+            text-align: start;
+            font-size: 14px;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+
         .label {
-            
+            button {
+                margin-inline-start: 3px;  
+                width: fit-content;
+            }
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -27,7 +38,7 @@
             }
 
             .btn-save {
-                margin-inline-start: 9px;
+                // margin-inline-start: 3px;
             }
             
             .label-preview, .label-title-edit {
@@ -43,11 +54,13 @@
             .label-edit-container {
                 display: flex;
 
+                
+
                 .label-title-edit {
                     font-weight: 400;
                     text-align: center;
                     font-size: 16px;
-                    margin-inline-start: em(24px);
+                    margin-inline-start: em(22px);
                     margin-block-end: em(7px);
                     
                 }

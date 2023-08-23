@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState } from "react"
+import { useRef } from "react"
 import { useClickOutside } from "../../costumeHooks/useClickOutside"
-
 import { TaskCoverModal } from "./task-edit-modals/TaskCoverModal"
 import { TaskChecklistModal } from "./task-edit-modals/TaskChecklistModal"
 import { TaskLabelModal } from "./task-edit-modals/TaskLabelModal"
@@ -53,11 +52,6 @@ export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBar
       
         return modalPos;
       }
-      
-      
-      
-      
-      
       
     return (
         <section ref={modalRef} style={getModalPos(refBtn)} className="dynamic-modal">

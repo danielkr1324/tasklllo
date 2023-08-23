@@ -26,14 +26,12 @@ _createBoards()
 
 window.cs = boardService
 
-async function getEmptyBoard() {
-  const loggedinUser = await userService.getLoggedinUser()
-
+function getEmptyBoard() {
   return {
     title: '',
     isStarred: false,
     archivedAt: null,
-    createdBy: loggedinUser,
+    createdBy: {},
     style: {
       background: '',
       thumbnail: '',

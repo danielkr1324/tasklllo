@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { userService } from "../services/user.service";
+import { useSelector } from "react-redux";
 
 export function HomePage() {
   const navigate = useNavigate();
+  const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
     redirect();
   }, []);
 
   const redirect = async () => {
-    const loggedinUser = await userService.getLoggedinUser();
     if (loggedinUser) {
       navigate("/workspace");
     }

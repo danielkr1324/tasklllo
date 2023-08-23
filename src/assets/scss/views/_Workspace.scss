@@ -41,7 +41,7 @@
         flex-wrap: wrap;
         padding-bottom: 20px;
         align-items: center;
-        justify-content: start;
+        justify-content: flex-start;
 
         li {
             margin-bottom: 16px;
@@ -54,7 +54,7 @@
             align-items: center;
             justify-content: center;
             margin-inline-start: 9px;
-            
+
             span {
                 margin: 22px 8px;
                 color: #172b4d;

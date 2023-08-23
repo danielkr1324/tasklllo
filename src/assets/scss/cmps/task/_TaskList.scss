@@ -6,6 +6,7 @@
         position: sticky;
         bottom: 0;
         padding: 10px 0;
+        display: flex;
 
         .btn-add-task {
             background: none;
@@ -15,6 +16,7 @@
         }
 
         .task-compose {
+            width: 100%;
             textarea {
                 outline: none;
                 border: none;
