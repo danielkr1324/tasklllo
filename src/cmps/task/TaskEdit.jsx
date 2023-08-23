@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardService } from "../../services/board.service";
 import { saveGroup, updateBoard } from "../../store/actions/board.actions";
 import { ChecklistList } from "./checklist/ChecklistList";
-import { TaskDueDate } from "./checklist/TaskDueDate";
+import { TaskDueDate } from "./TaskDueDate";
 import { DynamicModal } from "./DynamicModal";
 
 export function TaskEdit() {
@@ -14,8 +14,7 @@ export function TaskEdit() {
   const { boardId, groupId, taskId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-
+  const board = useSelector(storeState => storeState.boardModule.board)
   
   useEffect(() => {
     setTaskToEdit();
@@ -89,7 +88,6 @@ export function TaskEdit() {
   }
 
   const boardLabelsUpdate = async  (labels) => {
-    const board = await boardService.getBoardById(boardId)
     setBoardLabels(labels)
     dispatch(updateBoard({ ...board, labels }));
   };
