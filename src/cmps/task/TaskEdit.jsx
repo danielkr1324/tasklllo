@@ -107,7 +107,9 @@ export function TaskEdit() {
 
   return (
     <div onClick={(e) => onCloseTaskModal(e)} className="task-edit">
+
       <div onClick={(e) => e.stopPropagation()} className="modal-content">
+        <button onClick={(e) => onCloseTaskModal(e)} className="btn-close task-edit-close"><i className="fa-solid fa-x"></i></button>
         {task.style && <div className="cover" style={task.style}></div>}
         <div className="content-wrapper ">
           <div className="title-in-task main-container">

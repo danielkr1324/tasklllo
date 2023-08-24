@@ -20,6 +20,8 @@
 @import "views/Board";
 
 // Components
+@import "cmps/WorkspaceHeader";
+@import "cmps/UserMenu";
 @import "cmps/group/GroupList";
 @import "cmps/task/TaskPreview";
 @import "cmps/group/GroupOptions";
@@ -42,7 +44,7 @@
 
 
 .main-app {
-    min-height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
 

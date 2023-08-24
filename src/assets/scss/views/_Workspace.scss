@@ -1,7 +1,7 @@
 .workspace-section {
     color: #172b4d;
-    margin: auto;
-    margin-top: 40px;
+    
+    margin: 40px auto;
     max-width: 825px;
     min-width: 288px;
     flex-grow: 1;
@@ -10,7 +10,6 @@
         display: flex;
         align-items: center;
         height: 38px;
-        margin-left: 11px;
 
         .boards-section-header-icon {
             width: 32px;

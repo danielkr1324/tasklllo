@@ -1,0 +1,130 @@
+.workspace-header {
+    height: 44px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    // background-color: #026aa7;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid hsla(218,54%,19.6%,0.16);
+
+    button {
+        border: none;
+        background-color: transparent;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        // margin: 0 10px;
+        padding: 5px;
+        font-size: 0.9rem;
+        color: #44546f;
+        border-radius: 3px;
+
+        &.nav-btn {
+            margin-inline-start: 5px;
+        }
+        &.create-btn {
+            border-radius: 3px;
+            border: none;
+            height: fit-content;
+            padding: em(8px) em(14px);
+            color: #fff;
+            background-color: $clr-base-14;
+            margin-inline-start: 10px;
+        
+            &:hover {
+                background-color: $clr-base-14-hover;
+            }
+        }
+
+        img {
+            height: 24px;
+            width: 24px;
+            line-height: 24px;
+        }
+    }
+
+    button:hover {
+    background-color: #44546f;
+    color: #fff;
+    }
+    button:active {
+        background-color: #44546f;
+    }
+    svg {
+        height: 20px;
+        width: 20px;
+        border-radius: 3px;
+        border: 0;
+        align-items: center;
+        background-color: transparent;
+        margin: 6px;
+        white-space: nowrap;
+        color: #44546f;
+        path {
+            fill: #44546f;
+        }
+    }
+
+    .logo-nav {
+        display: flex;
+        align-items: center;
+        margin-left: 4px;
+
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+
+            svg {
+                transform: rotate(180deg);
+            }
+
+            .tasklllo-logo {
+                font-size: 1.2rem;
+                font-family: Charlie-Semi-Bold;
+                letter-spacing: 0.03rem;
+                color: #44546f;
+            }
+        }
+    }
+
+
+    .left-nav {
+        display: flex;
+        align-items: center;
+        margin-right: 6px;
+
+        .search {
+            height: 32px;
+            width: 100%;
+            width: 200px;
+            padding: 0px 4px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            line-height: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            justify-content: flex-start;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+            cursor: text;
+            svg {
+                height: 16px;
+                width: 16px;
+            }
+        }
+
+        .search:active,
+        .search:focus {
+            cursor: text;
+            background-color: rgba(255, 255, 255, 0.525);
+        }
+    }
+}

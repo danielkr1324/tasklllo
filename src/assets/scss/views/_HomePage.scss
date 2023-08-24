@@ -1,31 +1,43 @@
 .home-page {
+    background-color: #fff;
+
+    .btn-signup {
+        border: none;
+        background-color: $clr-base-14;
+        color: #fff;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: $clr-base-14-hover;
+        }
+    }
     .home-header {
         background-color: #fff;
         top: 0;
         margin: 0 auto;
-        max-width: em(1320px);
-        width: 100vw;
+        max-width: 1320px;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: em(60px);
-        
+        height: 60px;
+
         a {
-            padding: em(8px) em(24px);
+            padding: 8px 24px;
             button {
                 height: 100%;
-                font-size: rem(17.6px);
-                padding: em(18px) em(24px);
+                font-size: 17.6px;
+                padding: 20px 24px;
             }
         }
-        
-        h1{
-            padding: em(16px);
+
+        h1 {
+            padding: 16px;
         }
     }
-    
+
     .home-hero-container {
-        background: url(//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266e%E2%80%A6/white-wave-bg.svg) center bottom -.5px/100% 14% no-repeat scroll padding-box border-box,linear-gradient(60deg,#5243aa,#ed50b4) 0 0/auto repeat scroll padding-box border-box #5243aa;
+        background: url(//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266e%E2%80%A6/white-wave-bg.svg) center bottom -.5px/100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, #5243aa, #ed50b4) 0 0/auto repeat scroll padding-box border-box #5243aa;
         background-color: #5243aa;
         background-blend-mode: normal;
         display: flex;
@@ -34,19 +46,19 @@
         color: #fff;
         height: fit-content;
         line-height: 0;
-        padding: em(100px) 0;
-
+        padding: 100px 0;
         width: 100%;
         position: relative;
 
-            svg {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-            }
+        svg {
 
-        
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
         .hero-content {
+            padding: 0 50px;
             z-index: 2;
             align-items: center;
             display: flex;
@@ -56,68 +68,97 @@
             max-width: 1140px;
             width: 100%;
         }
-        
+
         .hero-text {
             display: flex;
             flex-direction: column;
             width: 50%;
             text-align: left;
+
             h1 {
-                  
-                font-size: 3rem; 
-                  line-height: 1.25;
-                  margin-bottom: 1.2rem;
-                }
-                
-                p {
-                    font-size: rem(20.8px);
-                    line-height: 1;
-                }
-
-                button {
-                    padding: rem(11.2px) rem(16px) rem(12.8px);
-                    font-size: 16px;
-                    font-family: Charlie-Regular;
-                    border-radius: 0.3rem;
-                }
-                
+                font-size: 3rem;
+                line-height: 1.25;
+                margin-bottom: 1.2rem;
             }
-            img {
-                width: 50%;
+
+            p {
+                font-size: 20.8px;
+                line-height: 1;
+            }
+
+            button {
+                padding: 11.2px 16px 12.8px;
+                font-size: 16px;
+                font-family: Charlie-Regular;
+                border-radius: 0.3rem;
             }
         }
-        .btn-signup {
-            border: none;
-            background-color: $clr-base-14;
-            color: #fff;
-            transition: 0.3s;
 
-            &:hover {
-                background-color: $clr-base-14-hover;
-            }
-            
-            
+        img {
+            width: 50%;
         }
 
+        
 
         .card-desc {
             .prod-div {
-                width: em(664px);
+                max-width: 664px;
                 padding: 16px;
                 text-align: start;
 
-                
                 h3 {
                     font-size: 16px;
-                    margin-block-end: em(8px);
+                    margin-block-end: 8px;
                 }
-                
+
                 h1 {
-                    font-size: rem(36px);
+                    font-size: 36px;
                     margin-block-end: 8px;
                     padding-block-end: 16px;
                 }
             }
         }
+    }
+}
 
-    }  
+@media (max-width: 768px) {
+    .home-page .home-hero-container {
+        padding: 50px 0;
+
+        .hero-content {
+            flex-direction: column;
+
+            .hero-text {
+                width: 100%;
+                text-align: center;
+                padding: 0 20px;
+
+                h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                    margin-bottom: 1rem;
+                }
+
+                p {
+                    font-size: 18px;
+                    line-height: 1.4;
+                }
+
+                button {
+                    padding: 10px 20px;
+                    font-size: 14px;
+                }
+            }
+
+            img {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+
+        .card-desc .prod-div {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+}

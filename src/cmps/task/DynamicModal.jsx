@@ -55,6 +55,7 @@ export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBar
       
     return (
         <section ref={modalRef} style={getModalPos(refBtn)} className="dynamic-modal">
+            <button onClick={() => setSideBarModalType('')} className="btn-close"><i className="fa-solid fa-x"></i></button>
             {sideBarModalType === 'TaskCoverModal' &&
                 <TaskCoverModal 
                 task={task}

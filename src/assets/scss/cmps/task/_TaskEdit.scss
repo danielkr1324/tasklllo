@@ -50,6 +50,22 @@
       }
     }
 
+    .btn-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: none;
+      font-size: 10px;
+      color: #626f86;
+      padding: 5px;
+
+      
+
+      &:hover {
+        background: none;
+      }
+  }
+
     .cover {
       height: 116px;
     }
@@ -119,6 +135,7 @@
           }
 
           .label-edit-container {
+            text-align: center;
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
@@ -178,7 +195,6 @@
           font-weight: 100;
           border: none;
           min-width: em(200px);
-          // max-width: 50%;
           height: em(37px);
           margin: em(8px) 0 0;
           padding: em(8px) em(14px);
