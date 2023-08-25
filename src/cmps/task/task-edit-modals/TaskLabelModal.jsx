@@ -69,7 +69,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                                 checked={task?.labelIds.includes(label.id)}
                                 id={label.id}
                                 />
-                            <label htmlFor={label.id} className="label-preview label" style={{ backgroundColor: `${label.color}` }}>
+                            <label htmlFor={label.id} className="label-preview label" style={{ backgroundColor: `${label.color}`}}>
                                 {label.title}
                             </label>
                             <button onClick={()=> setLabelToEdit(label)}><i className="fa-solid fa-pencil"></i></button>

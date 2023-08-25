@@ -5,6 +5,8 @@ export function loadUsers() {
   return async dispatch => {
     try {
       const users = await userService.getUsers()
+      console.log(users)
+
       const action = {
         type: SET_USERS,
         users,

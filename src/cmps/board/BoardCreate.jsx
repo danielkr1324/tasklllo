@@ -15,7 +15,7 @@ export function BoardCreate({ closeBoardComposer, refDataBtn }) {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    setBoardToEdit(prevBoard => ({...prevBoard, createdBy: loggedinUser}))
+    setBoardToEdit(prevBoard => ({...prevBoard, createdBy: loggedinUser, members: [loggedinUser]}))
   }, []);
 
 

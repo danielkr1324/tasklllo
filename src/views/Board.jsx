@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
 import { Outlet, useParams } from "react-router";
+import { BoardMemberEdit } from "../cmps/board/BoardMemberEdit";
 import { BoardSideMenu } from "../cmps/board/board-side-menu/BoardSideMenu";
 import Loader from '../assets/images/loader.svg'
 
@@ -12,6 +13,7 @@ export function Board() {
   const dispatch = useDispatch();
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isEditMember, setIsEditMember] = useState(false)
 
   useEffect(() => {
     loadNewBoard();
@@ -24,6 +26,10 @@ export function Board() {
       console.log(err);
     }
   };
+
+  const closeMemberEdit = () => {
+    setIsEditMember(false)
+  }
 
   const onToggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
@@ -50,6 +56,10 @@ export function Board() {
 
   const onBoardUpdate = (groups) => {
     dispatch(updateBoard({ ...board, groups }));
+  };
+
+  const onMembersUpdate = (members) => {
+    dispatch(updateBoard({ ...board, members }));
   };
 
   const onRemoveGroup = async (groupId) => {
@@ -92,6 +102,7 @@ export function Board() {
         </div>
 
         <div className="info-right">
+          <button onClick={() => setIsEditMember(!isEditMember)}>share</button>
           {board.members && <ul className="board-top-menu-members clean-list">
               {board.members.map((member, idx) => (
                 <li style={{ zIndex: idx + 5 }} key={member._id}>
@@ -120,6 +131,12 @@ export function Board() {
           groups={board.groups}
           labels={board.labels}
         />
+      {isEditMember && 
+        <BoardMemberEdit
+         boardMembers={board.members}
+         closeMemberEdit={closeMemberEdit}
+         onMembersUpdate={onMembersUpdate} />
+      }
       </main>
       <Outlet />
     </section>

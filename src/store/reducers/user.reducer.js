@@ -5,7 +5,7 @@ export const SET_USERS = 'SET_USERS'
 export const REMOVE_USER = 'REMOVE_USER'
 
 const INITIAL_STATE = {
-  users: user,
+  users: [],
   user: userService.getLoggedinUser(),
 }
 

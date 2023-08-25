@@ -107,6 +107,7 @@
 
       .text-input {
         color: $clr-base-5;
+        text-overflow: ellipsis;
         padding: 10px 0;
         width: 100%;
         background: none;
@@ -161,7 +162,7 @@
         }
 
         textarea {
-          width: em(512px);
+          max-width: em(512px);
           padding: 10px 0;
           background: none;
           border: none;

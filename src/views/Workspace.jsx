@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadBoards, updateBoard } from '../store/actions/board.actions';
+import { loadUsers } from '../store/actions/user.actions';
 import { BoardPreview } from '../cmps/board/BoardPreview';
 import Loader from '../assets/images/loader.svg';
 
@@ -11,8 +12,8 @@ export function Workspace() {
 
   useEffect(() => {
     dispatch(loadBoards(loggedinUser._id));
-
-  });
+    dispatch(loadUsers())
+  }, [loggedinUser._id]);
 
 
   const getStarredBoards = () => boards.filter(board => board.isStarred);

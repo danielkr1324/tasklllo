@@ -1,6 +1,5 @@
 import { utilService } from './util.service'
 import { storageService } from './async-storage.service'
-import { userService } from './user.service'
 
 const BOARD_KEY = 'boardDB'
 
@@ -121,10 +120,15 @@ async function getBoardById(boardId) {
 }
 
 async function boardQuery(loggedinUserId, filterBy = {}) {
-  let boards = await storageService.query(BOARD_KEY)
-  boards = boards.filter(board => board.createdBy._id === loggedinUserId)
+  const boards = await storageService.query(BOARD_KEY)
 
-  return boards
+  const filteredBoards = boards.filter(
+    board =>
+      board.createdBy._id === loggedinUserId ||
+      board.members.some(member => member._id === loggedinUserId)
+  )
+
+  return filteredBoards
 }
 
 async function getTaskById(boardId, groupId, taskId) {

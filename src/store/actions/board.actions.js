@@ -14,6 +14,7 @@ export function loadBoards(loggedinUserId) {
   return async (dispatch, getState) => {
     try {
       const boards = await boardService.boardQuery(loggedinUserId)
+      console.log(boards)
 
       const action = {
         type: SET_BOARDS,
