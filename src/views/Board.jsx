@@ -102,7 +102,6 @@ export function Board() {
         </div>
 
         <div className="info-right">
-          <button onClick={() => setIsEditMember(!isEditMember)}>share</button>
           {board.members && <ul className="board-top-menu-members clean-list">
               {board.members.map((member, idx) => (
                 <li style={{ zIndex: idx + 5 }} key={member._id}>
@@ -116,6 +115,8 @@ export function Board() {
                 </li>
               ))}
             </ul> }
+            
+          <button className="btn-share" onClick={() => setIsEditMember(!isEditMember)}><i className="fa-regular fa-user"></i>Share</button>
           <button className={`btn-board menu ${menuStatus}`} onClick={onToggleSideMenu}><i className="fa-solid fa-ellipsis"></i></button>
         </div>
       </div>

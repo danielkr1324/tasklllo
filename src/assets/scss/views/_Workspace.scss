@@ -41,10 +41,11 @@
         padding-bottom: 20px;
         align-items: center;
         justify-content: flex-start;
+        gap: 25px;
 
         li {
             margin-bottom: 16px;
-
+            width: 160px;
         }
 
         .create-new-board {

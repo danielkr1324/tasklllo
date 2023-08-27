@@ -187,7 +187,7 @@ function getEmptyTask() {
     checklists: [],
     archivedAt: null,
     attachments: [],
-    byMember: {},
+    memberIds: [],
     labelIds: [],
     isDone: false,
   }

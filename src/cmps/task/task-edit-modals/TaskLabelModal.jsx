@@ -48,7 +48,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
             <h3 className="dynamic-modal-title">Labels</h3>
             <input
                 type="text"
-                className='label-search'
+                className='modal-search'
                 name="txt"
                 id="txt"
                 placeholder="Search labels..."
@@ -57,7 +57,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                 autoComplete="off"
             />
             <ul className="label-select clean-list">
-                <h3>Labels</h3>
+                <h3 className="modal-sub-title">Labels</h3>
                 {labelsToRender.map(label => (
                     <li key={label.id} className="label">
                         {labelToEdit && label.id !== labelToEdit.id  && 

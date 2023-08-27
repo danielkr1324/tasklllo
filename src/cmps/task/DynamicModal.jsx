@@ -4,8 +4,9 @@ import { TaskCoverModal } from "./task-edit-modals/TaskCoverModal"
 import { TaskChecklistModal } from "./task-edit-modals/TaskChecklistModal"
 import { TaskLabelModal } from "./task-edit-modals/TaskLabelModal"
 import { TaskDateModal } from "./task-edit-modals/TaskDateModal"
+import { TaskMembersModal } from "./task-edit-modals/TaskMembersModal"
 
-export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBarModalType, labels, boardLabelsUpdate, refBtn}) {
+export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBarModalType, labels, boardLabelsUpdate, refBtn, members}) {
 
     const modalRef = useRef(null)
 
@@ -56,6 +57,14 @@ export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBar
     return (
         <section ref={modalRef} style={getModalPos(refBtn)} className="dynamic-modal">
             <button onClick={() => setSideBarModalType('')} className="btn-close"><i className="fa-solid fa-x"></i></button>
+            
+            {sideBarModalType === 'TaskMembersModal' &&
+                <TaskMembersModal 
+                task={task}
+                members={members}
+                submitTaskEdit={submitTaskEdit}
+              />}
+
             {sideBarModalType === 'TaskCoverModal' &&
                 <TaskCoverModal 
                 task={task}

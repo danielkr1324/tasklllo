@@ -135,6 +135,17 @@
 
           }
 
+          .members-edit-container {
+            display: flex;
+            .task-edit-members {
+              img {
+                margin-inline-end: 5px;
+                width: 32px;
+                height: 32px;
+              }
+            }
+          }
+
           .label-edit-container {
             text-align: center;
             display: flex;
