@@ -24,7 +24,7 @@ export function TaskChecklistModal({ task, submitTaskEdit }) {
     <div className="task-checklist-modal">
       <h3 className="dynamic-modal-title">Add checklist</h3>
       <div className="checklist-add">
-        <h3>title</h3>
+        <h3 className="modal-sub-title">title</h3>
         <input
           className="checklist-title-edit"
           type="text"
