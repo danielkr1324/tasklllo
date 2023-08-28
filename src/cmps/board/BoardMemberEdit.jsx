@@ -19,6 +19,7 @@ export function BoardMemberEdit({ boardMembers, closeMemberEdit, onMembersUpdate
   }
 
   async function addBoardMember() {
+    console.log(users);
     const memberToAdd = users.find(user => user.username === username);
     if (memberToAdd) {
       const newMembers = [...boardMembers, memberToAdd];
@@ -30,7 +31,12 @@ export function BoardMemberEdit({ boardMembers, closeMemberEdit, onMembersUpdate
 
   return (
     <article className="board-member-edit">
+
       <div ref={ref} className="member-edit-modal">
+        <button onClick={closeMemberEdit} className="btn-close">
+          <i className="fa-solid fa-x"></i>
+        </button>
+
         <h1>Share board</h1>
         <div className="member-search">
           <input
@@ -41,6 +47,7 @@ export function BoardMemberEdit({ boardMembers, closeMemberEdit, onMembersUpdate
           />
           <button onClick={addBoardMember} className="btn-save">Share</button>
         </div>
+
         <ul className="current-members clean-list">
           {boardMembers.map(user => (
             <li className="member-preview" key={user._id}>

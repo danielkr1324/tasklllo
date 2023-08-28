@@ -11,6 +11,7 @@ export function Workspace() {
   const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
+    console.log(loggedinUser);
     dispatch(loadBoards(loggedinUser._id));
     dispatch(loadUsers())
   }, [loggedinUser._id]);
@@ -30,7 +31,7 @@ export function Workspace() {
     }
   };
 
-  if (!boards) {
+  if (!boards || !loggedinUser) {
     return (
       <div className="loader-wrapper">
         <img className="loader" src={Loader} alt="loader" />

@@ -1,5 +1,7 @@
 import { utilService } from './util.service'
-import { storageService } from './async-storage.service'
+// import { storageService } from './async-storage.service'
+import { httpService } from './http.service'
+import { userService } from './user.service'
 
 const BOARD_KEY = 'boardDB'
 
@@ -116,19 +118,21 @@ async function removeGroup(groupId, boardId) {
 }
 
 async function getBoardById(boardId) {
-  return await storageService.get(BOARD_KEY, boardId)
+  return await httpService.get(`board/${boardId}`)
 }
 
-async function boardQuery(loggedinUserId, filterBy = {}) {
-  const boards = await storageService.query(BOARD_KEY)
+async function boardQuery(loggedinUserId) {
+  console.log('l', loggedinUserId)
 
-  const filteredBoards = boards.filter(
-    board =>
-      board.createdBy._id === loggedinUserId ||
-      board.members.some(member => member._id === loggedinUserId)
-  )
+  // const boards = await storageService.query(BOARD_KEY)
 
-  return filteredBoards
+  // const filteredBoards = boards.filter(
+  //   board =>
+  //     board.createdBy._id === loggedinUserId ||
+  //     board.members.some(member => member._id === loggedinUserId)
+  // )
+
+  return await httpService.get('board', { loggedinUserId })
 }
 
 async function getTaskById(boardId, groupId, taskId) {
@@ -159,9 +163,12 @@ async function saveTask(task, groupId, boardId) {
 async function save(board) {
   var savedBoard
   if (board._id) {
-    savedBoard = await storageService.put(BOARD_KEY, board)
+    // savedBoard = await storageService.put(BOARD_KEY, board)
+    savedBoard = await httpService.put(`board/${board._id}`, board)
   } else {
-    savedBoard = await storageService.post(BOARD_KEY, board)
+    // savedBoard = await storageService.post(BOARD_KEY, board)
+    board.createdBy = await userService.getLoggedinUser()
+    savedBoard = await httpService.post(`board`, board)
   }
   return savedBoard
 }

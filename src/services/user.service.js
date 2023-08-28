@@ -1,5 +1,5 @@
 import { storageService } from './async-storage.service'
-import { utilService } from './util.service'
+import { httpService } from './http.service'
 
 const USER_STORAGE_KEY = 'user'
 const LOGGEDIN_USER_STORAGE_KEY = 'loggedInUser'
@@ -17,17 +17,19 @@ export const userService = {
 window.userService = userService
 
 async function getUsers() {
-  return await storageService.query(USER_STORAGE_KEY)
+  return await httpService.get(`user`)
 }
 
 async function login(credentials) {
   try {
-    const users = await storageService.query(USER_STORAGE_KEY)
-    const user = users.find(
-      u =>
-        u.username === credentials.username &&
-        u.password === credentials.password
-    )
+    // const users = await storageService.query(USER_STORAGE_KEY)
+    // const user = users.find(
+    //   u =>
+    //     u.username === credentials.username &&
+    //     u.password === credentials.password
+    // )
+    const user = await httpService.post('auth/login', credentials)
+    console.log(user)
 
     if (user) {
       return saveLocalUser(user)
@@ -53,15 +55,16 @@ async function signup(credentials) {
     credentials.imgUrl =
       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
 
-    const user = await storageService.post(USER_STORAGE_KEY, credentials)
+    const user = await httpService.post('auth/signup', credentials)
     return saveLocalUser(user)
   } catch (err) {
     console.log(err)
   }
 }
 
-function logout() {
+async function logout() {
   sessionStorage.removeItem(LOGGEDIN_USER_STORAGE_KEY)
+  return await httpService.post('auth/logout')
 }
 
 function getLoggedinUser() {
@@ -69,11 +72,11 @@ function getLoggedinUser() {
 }
 
 async function getById(userId) {
-  return await storageService.get(USER_STORAGE_KEY, userId)
+  return await httpService.get(`user/${userId}`)
 }
 
 async function remove(userId) {
-  return await storageService.remove(USER_STORAGE_KEY, userId)
+  return await httpService.delete(`user/${userId}`)
 }
 
 function saveLocalUser(user) {

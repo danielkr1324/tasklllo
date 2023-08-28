@@ -7,7 +7,7 @@ export function HomePage() {
   const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
-    redirect();
+    // redirect();
   }, []);
 
   const redirect = async () => {

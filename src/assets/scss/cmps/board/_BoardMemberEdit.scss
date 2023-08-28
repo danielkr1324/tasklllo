@@ -24,13 +24,42 @@
         max-width: em(768px);
         min-width: em(345px);
 
+        h1 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-block-end: 24px;
+        }
+
+        .btn-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: none;
+            border: none;
+            font-size: 10px;
+            color: #626f86;
+            padding: 5px;
+      
+            &:hover {
+              background: none;
+            }
+        }
+
         .member-search {
             display: flex;
             flex-wrap: wrap;
-            // justify-content: space-between;
+            margin-bottom: 16px;
+
             input {
                 width: 60%;
-
+                padding: 6px 12px ;
+                height: 40px;
+                border-radius: 3px;
+                border: 1px solid lightgray;
+                margin-inline-end: 10px;
+            }
+            button {
+                height: 40px;
             }
         }
 
@@ -40,6 +69,7 @@
                 img {
                     width: 32px;
                     height: 32px;
+                    margin-inline-end: 10px;
                 }
             }
         }

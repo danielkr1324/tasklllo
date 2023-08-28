@@ -16,7 +16,7 @@ export function LoginSignup() {
   const [wrongCredentialsDiv, setWrongCredentialsDiv] = useState('');
 
   useEffect(() => {
-	  redirect()
+	  // redirect()
   })
 
   const redirect = async() => {
