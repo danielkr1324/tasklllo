@@ -36,12 +36,27 @@
       }
     }
 
+    .task-preview-members {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .member-img {
+        display: flex;
+        justify-content: flex-end;
+          img {
+            width: 25px;
+          }
+      }
+    }
+
     .task-icons {
       display: flex;
       align-items: center;
       font-size: 13px;
       color: #626f86;
       margin-block-end: 4px;
+
+     
 
       & > * {
         margin-inline-end: 10px;

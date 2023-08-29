@@ -1,11 +1,14 @@
 import { useNavigate, useParams } from 'react-router';
 import { utilService } from '../../services/util.service';
+import { useSelector } from 'react-redux';
 
 export function TaskPreview({ task, groupId, labels, onSaveTask }) {
   const navigate = useNavigate();
   const { boardId } = useParams();
+  const { members } = useSelector(storeState => storeState.boardModule.board)
 
   const taskLabels = task.labelIds ? labels.filter(label => task.labelIds.includes(label.id)) : [];
+  const taskMembers = task.memberIds ? members.filter(member => task.memberIds.includes(member._id)) : []
 
   const editTask = () => {
     navigate(`/board/${boardId}/${groupId}/${task.id}`);
@@ -78,16 +81,25 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
               <div title='Checklist items' className={todosStyle}> <i className="fa-regular fa-square-check"></i> 
               <span>{totalTodos}</span> </div>}
 
-              {task.dueDate && (
-								<div title='Due date' className={getDueWarnSpan(task)}
-									onClick={(ev) => onToggleDateDone(ev, task)}>
-									<span className='task-preview-actions-icons date'>
-                  <i className="fa-regular fa-clock"></i>
-										{utilService.dueDateFormat(task.dueDate)}
-									</span>
-								</div>
-							)}
-            
+			{task.dueDate && (
+				<div title='Due date' className={getDueWarnSpan(task)}
+					onClick={(ev) => onToggleDateDone(ev, task)}>
+					<span className='task-preview-actions-icons date'>
+						<i className="fa-regular fa-clock"></i>
+							{utilService.dueDateFormat(task.dueDate)}
+						</span>
+				</div>
+			)}
+				
+            {taskMembers && taskMembers.length > 0 && (
+				<ul className='task-preview-members clean-list'>
+					{taskMembers.map(m => (
+						<li key={m._id} className='member-img'>
+							<img src={m.imgUrl} title={m.username} />
+						</li>
+					))}
+				</ul>
+			) }
           </div>
         </div>
       </div>
