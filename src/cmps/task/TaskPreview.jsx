@@ -65,7 +65,8 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
   return (
     <article className="task-preview hover-dark" onClick={editTask}>
       <div onClick={editTask}>
-        {task.style && <div className='cover' style={task.style}></div>}
+	  	{task.style && task.style.color && <div className="cover-color" style={task.style}></div>}
+        {task.style && !task.style.color && <div className="cover-img" style={task.style}></div>}
         <div className="task-content">
           {taskLabels.length > 0 &&
             <ul className='task-preview-labels clean-list'>
@@ -81,6 +82,8 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
               <div title='Checklist items' className={todosStyle}> <i className="fa-regular fa-square-check"></i> 
               <span>{totalTodos}</span> </div>}
 
+			{task.attachments && task.attachments.length > 0 && <i className="fa-solid fa-paperclip"></i>}
+
 			{task.dueDate && (
 				<div title='Due date' className={getDueWarnSpan(task)}
 					onClick={(ev) => onToggleDateDone(ev, task)}>
@@ -90,6 +93,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 						</span>
 				</div>
 			)}
+
 				
             {taskMembers && taskMembers.length > 0 && (
 				<ul className='task-preview-members clean-list'>

@@ -6,6 +6,7 @@ import { saveGroup, updateBoard } from "../../store/actions/board.actions";
 import { ChecklistList } from "./checklist/ChecklistList";
 import { TaskDueDate } from "./TaskDueDate";
 import { DynamicModal } from "./DynamicModal";
+import { TaskAttachmentPreview } from "./attachment/TaskAttachmentPreview";
 
 export function TaskEdit() {
   const [task, setTask] = useState({});
@@ -25,6 +26,7 @@ export function TaskEdit() {
   const dateBtn = useRef();
   const coverBtn = useRef();
   const membersBtn = useRef();
+  const attachmentBtn = useRef()
 
   const getRefData = (type) => {
     switch (type) {
@@ -38,6 +40,8 @@ export function TaskEdit() {
         return coverBtn;
       case 'TaskMembersModal':
         return membersBtn;
+      case 'TaskAttachmentModal':
+        return attachmentBtn;
       default:
         return null;
     }
@@ -115,7 +119,8 @@ export function TaskEdit() {
         <button onClick={e => onCloseTaskModal(e)} className="btn-close task-edit-close">
           <i className="fa-solid fa-x"></i>
         </button>
-        {task.style && <div className="cover" style={task.style}></div>}
+        {task.style && task.style.color && <div className="edit-cover-color" style={task.style}></div>}
+        {task.style && !task.style.color && <div className="edit-cover-img" style={task.style}></div>}
         <div className="content-wrapper">
           <div className="title-in-task main-container">
             <i className="fa-regular fa-newspaper"></i>
@@ -184,6 +189,14 @@ export function TaskEdit() {
                   placeholder="Add a more detailed description..."
                 />
               </div>
+
+              {task.attachments && task.attachments.length > 0 && (
+                <TaskAttachmentPreview
+                  task={task}
+                  submitTaskEdit={submitTaskEdit}
+                />
+              )}
+
               {renderChecklists()}
             </div>
 
@@ -226,6 +239,15 @@ export function TaskEdit() {
                 ref={dateBtn}
               >
                 <i className="fa-regular fa-clock"></i>Dates
+              </button>
+
+              
+              <button
+                className="btn-edit"
+                onClick={() => setSideBarModalType("TaskAttachmentModal")}
+                ref={attachmentBtn}
+              >
+                <i className="fa-solid fa-paperclip"></i>Attachment
               </button>
             </div>
           </main>

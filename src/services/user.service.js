@@ -29,7 +29,6 @@ async function login(credentials) {
     //     u.password === credentials.password
     // )
     const user = await httpService.post('auth/login', credentials)
-    console.log(user)
 
     if (user) {
       return saveLocalUser(user)

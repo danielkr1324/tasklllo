@@ -1,6 +1,8 @@
 .home-page {
     background-color: #fff;
+    font-family: Charlie-Regular;
 
+    
     .btn-signup {
         border: none;
         background-color: $clr-base-14;
@@ -12,6 +14,7 @@
         }
     }
     .home-header {
+        font-family: Charlie-Bold;
         background-color: #fff;
         top: 0;
         margin: 0 auto;
@@ -22,8 +25,23 @@
         justify-content: space-between;
         height: 60px;
 
+        .header-logo {
+            display: flex;
+            align-items: center;
+
+            h1 {
+                font-size: em(30px);
+            }
+
+            .logo {
+                width: 24px;
+                height: 24px;
+                margin: 0 10px;
+            }
+        }
+
         a {
-            padding: 8px 24px;
+            padding: 8px 0 8px 24px;
             button {
                 height: 100%;
                 font-size: 17.6px;
@@ -31,9 +49,6 @@
             }
         }
 
-        h1 {
-            padding: 16px;
-        }
     }
 
     .home-hero-container {
@@ -58,7 +73,6 @@
         }
 
         .hero-content {
-            padding: 0 50px;
             z-index: 2;
             align-items: center;
             display: flex;
@@ -100,22 +114,24 @@
 
         
 
-        .card-desc {
-            .prod-div {
-                max-width: 664px;
-                padding: 16px;
-                text-align: start;
+    }
+    .card-desc {
+        .prod-div {
+            max-width: 664px;
+            padding: 16px;
+            text-align: start;
 
-                h3 {
-                    font-size: 16px;
-                    margin-block-end: 8px;
-                }
+            h3 {
+                font-size: 16px;
+                margin-block-end: 8px;
+                font-weight: 500;
+            }
 
-                h1 {
-                    font-size: 36px;
-                    margin-block-end: 8px;
-                    padding-block-end: 16px;
-                }
+            .desc-header {
+                font-weight: 500;
+                font-size: 36px;
+                margin-block-end: 8px;
+                padding-block-end: 16px;
             }
         }
     }
@@ -156,9 +172,6 @@
             }
         }
 
-        .card-desc .prod-div {
-            width: 100%;
-            padding: 10px;
-        }
+        
     }
 }

@@ -5,6 +5,7 @@ import { TaskChecklistModal } from "./task-edit-modals/TaskChecklistModal"
 import { TaskLabelModal } from "./task-edit-modals/TaskLabelModal"
 import { TaskDateModal } from "./task-edit-modals/TaskDateModal"
 import { TaskMembersModal } from "./task-edit-modals/TaskMembersModal"
+import { TaskAttachmentModal } from "./task-edit-modals/TaskAttachmentModal"
 
 export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBarModalType, labels, boardLabelsUpdate, refBtn, members}) {
 
@@ -87,6 +88,12 @@ export function DynamicModal({task, submitTaskEdit, sideBarModalType, setSideBar
 
             {sideBarModalType === 'TaskDateModal' &&
                 <TaskDateModal 
+                task={task}
+                submitTaskEdit={submitTaskEdit}
+                />}
+
+            {sideBarModalType === 'TaskAttachmentModal' &&
+                <TaskAttachmentModal 
                 task={task}
                 submitTaskEdit={submitTaskEdit}
                 />}

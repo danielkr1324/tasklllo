@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import logo from '../assets/images/Tasklllo-logo.png'
 
 export function HomePage() {
   const navigate = useNavigate();
   const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
-    // redirect();
+    redirect();
   }, []);
 
   const redirect = async () => {
@@ -19,11 +20,14 @@ export function HomePage() {
   return (
     <section className="home-page">
       <header className="home-header">
-        <h1 className="app-logo">Taskllo</h1>
+        <div className="header-logo">
+          <img className='logo' src={logo} alt="" />
+          <h1 >Tasklllo</h1>
+        </div>
         <nav>
           <NavLink to="/login">Log In</NavLink>
           <NavLink to="/signup">
-            <button className="btn-signup">Get Taskllo for free</button>
+            <button className="btn-signup">Get Tasklllo for free</button>
           </NavLink>
         </nav>
       </header>
@@ -32,7 +36,7 @@ export function HomePage() {
         <section className="home-hero-container full">
           <div className="hero-content ">
             <div className="hero-text">
-              <h1>Taskllo brings all your tasks, teammates, and tools together</h1>
+              <h1>Tasklllo brings all your tasks, teammates, and tools together</h1>
               <p>Keep everything in the same place—even if your team isn't.</p>
               <NavLink to="/signup">
                 <button className="btn-signup">Sign up - It's free!</button>
@@ -48,9 +52,9 @@ export function HomePage() {
         </section>
 
         <section className="card-desc main-container">
-          <div className="prod-div">
-            <h3>TASKLLO 101</h3>
-            <h1>A productivity powerhouse</h1>
+          <div className="prod-div full">
+            <h3>TASKLLLO 101</h3>
+            <h1 className="desc-header">A productivity powerhouse</h1>
             <p>
               Simple, flexible, and powerful. All it takes are boards, lists, and
               cards to get a clear view of who’s doing what and what needs to get

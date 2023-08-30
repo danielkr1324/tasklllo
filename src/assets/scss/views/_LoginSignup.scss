@@ -2,6 +2,26 @@
     background-color: #F4F5F7;
     position: relative;
     height: 100vh;
+
+    .form-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Charlie-Bold;
+      font-size: 35px;
+      padding-top: 50px;
+
+      h1 {
+        margin-inline-start: 10px;
+      }
+
+      .logo {
+        width: 40px;
+        padding: 0;
+
+      }
+    }
+
     .not-visible {
       display: none;
     }
@@ -21,7 +41,7 @@
       border-radius: 3px;
       margin: 50px auto;
       padding: 25px 40px; 
-      width: 400px; 
+      max-width: 400px; 
       height: 330px; 
       display: flex;
       flex-direction: column;
@@ -66,18 +86,21 @@
       }
     }
   
-    img {
-      max-width: 30%;
+    .hero {
+      max-width: 25%;
       position: absolute;
       bottom: 0;
+
+      
     }
-  
     .left-hero {
       left: 0;
+
     }
   
     .right-hero {
       right: 0;
     }
+    
   }
   

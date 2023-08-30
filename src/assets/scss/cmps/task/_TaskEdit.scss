@@ -64,8 +64,16 @@
       }
   }
 
-    .cover {
+    .edit-cover-color {
       height: 116px;
+    }
+
+    .edit-cover-img {
+      height: 160px;
+      // background-size: contain;
+      background-repeat: no-repeat;
+
+      background-origin: content-box;
     }
 
     .content-wrapper {

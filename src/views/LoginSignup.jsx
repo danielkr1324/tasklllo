@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -6,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { login, signup } from '../store/actions/user.actions';
 import leftHero from '../assets/images/left-loginsignup-hero.svg';
 import rightHero from '../assets/images/right-loginsignup-hero.svg';
-import { userService } from '../services/user.service';
+import logo from '../assets/images/Tasklllo-logo.png'
 
 export function LoginSignup() {
   const params = useParams();
@@ -16,16 +17,6 @@ export function LoginSignup() {
   const [wrongCredentialsDiv, setWrongCredentialsDiv] = useState('');
 
   useEffect(() => {
-	  // redirect()
-  })
-
-  const redirect = async() => {
-	const loggedinUser = await userService.getLoggedinUser()
-	if(loggedinUser) navigate('/workspace')
-}
-
-  useEffect(() => {
-	
     setStatus(params.status);
     setWrongCredentialsDiv('not-visible');
   }, [params.status]);
@@ -69,6 +60,10 @@ export function LoginSignup() {
 
   return (
     <section className="form-container">
+      <div className='form-top'>
+        <img className='logo' src={logo} alt="" />
+        <h1>Tasklllo</h1>
+      </div>
       <form className="signup-form" onSubmit={formik.handleSubmit}>
         <h1>{formTxt}</h1>
         <div className={`wrong-credentials ${wrongCredentialsDiv}`}>
@@ -130,8 +125,8 @@ export function LoginSignup() {
           </NavLink>
         )}
       </form>
-      <img src={leftHero} alt="leftHero" className="left-hero" />
-      <img src={rightHero} alt="rightHero" className="right-hero" />
+      <img src={leftHero} alt="leftHero" className="hero left-hero" />
+      <img src={rightHero} alt="rightHero" className="hero right-hero" />
     </section>
   );
 };

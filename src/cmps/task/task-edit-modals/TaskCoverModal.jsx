@@ -14,7 +14,7 @@ export function TaskCoverModal({task, submitTaskEdit}) {
     ]
 
     const setTaskCoverModal = (coverColor) => {
-        task['style'] = {backgroundColor: coverColor} 
+        task['style'] = {background: coverColor, color: true} 
         submitTaskEdit(task)
     }
 

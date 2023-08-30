@@ -18,6 +18,7 @@ export const boardService = {
   getEmptyChecklist,
   getEmptyTodo,
   getEmptyLabel,
+  getEmptyAttachment,
   getBoardLabels,
   saveTask,
   getEmptyBoard,
@@ -213,6 +214,15 @@ function getEmptyTodo() {
     id: utilService.makeId(),
     isDone: false,
     title: '',
+  }
+}
+
+function getEmptyAttachment() {
+  return {
+    id: utilService.makeId(),
+    createdAt: Date.now(),
+    url: '',
+    title: 'Attachment Image',
   }
 }
 

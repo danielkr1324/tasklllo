@@ -34,7 +34,7 @@ export function WorkspaceHeader() {
 
 	function onLogout() {
 		dispatch(logout())
-		navigate(`/`)
+		navigate(`/login`)
 	}
 
 	return (
@@ -42,7 +42,7 @@ export function WorkspaceHeader() {
 			<div className="logo-nav">
 				
 
-				<NavLink to="/" className="header-logo">
+				<NavLink to="/workspace" className="header-logo">
 					<TaskllloSvg />
 					<h1 className="tasklllo-logo">Tasklllo</h1>
 				</NavLink>

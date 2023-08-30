@@ -9,8 +9,14 @@
   white-space: normal;
   margin: em(1px) em(4px) em(10px);
 
-  .cover {
+  .cover-color {
     height: 32px;
+  }
+
+  .cover-img {
+    height: 260px;
+    background-repeat: no-repeat;
+
   }
 
   .task-content {
@@ -51,6 +57,7 @@
 
     .task-icons {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       font-size: 13px;
       color: #626f86;
