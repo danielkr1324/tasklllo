@@ -1,0 +1,78 @@
+.task-attachment-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-inline-start: 20px;
+    cursor: pointer;
+
+
+    &:hover {
+        background-color: rgba(9,30,66,.04);
+    }
+
+    .task-attachment-preview-img-container {
+        // width: 150px;
+        margin-inline-end: 20px;
+        border-radius: 3px;
+
+        .task-attachment-preview-img {
+            width: 112px;
+            height: 80px;
+            background-size: contain;
+            border-radius: 3px;
+        }
+    }
+
+    .attachment-details {
+
+        .attachment-name {
+            font-weight: 600;
+            margin-block-end: -4px
+        }
+
+        .attachment-remove {
+            text-decoration: underline;
+
+            &:hover {
+                // color: $t-txt1;
+            }
+        }
+
+        .attachment-detail-p {
+            margin: 0;
+            margin-block-end: -5px;
+            font-size: 14px;
+        }
+
+        .make-attachment-cover {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .make-attachment-cover-icon-container {
+                padding-top: 6px;
+                margin-inline-end: 3px;
+
+            }
+
+            .make-attachment-cover-icon {
+                width: 80%;
+                height: 80%;
+
+            }
+
+            .make-attachment-cover-p {
+                text-decoration: underline;
+                // color: $t-txt2;
+
+                &:hover {
+                    // color: $t-txt1;
+                }
+            }
+        }
+
+
+    }
+
+
+}
