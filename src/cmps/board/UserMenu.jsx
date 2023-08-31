@@ -12,7 +12,7 @@ export function UserMenu({ user, onLogout, closeUserMenu }) {
 			<div className="user-menu-header">
 				<h2>Account</h2>
 				<button className="btn-user-menu close" onClick={closeUserMenu}>
-					x
+				<i className="fa-solid fa-x"></i>
 				</button>
 			</div>
 

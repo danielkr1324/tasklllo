@@ -14,7 +14,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
     navigate(`/board/${boardId}/${groupId}/${task.id}`);
   };
 
-  let totalTodos
+  	let totalTodos
 	let todosStyle
 	getTotalTodos()
 
@@ -29,7 +29,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 		let counter = 0
 		task.checklists.map(checklist => {
 			return checklist.todos.map(todo => {
-				if (todo.isDone) counter++
+				if (todo.isDone) return counter++
 			})
 		})
 
@@ -43,13 +43,13 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 		}
 	}
 
-  function onToggleDateDone(ev) {
-		ev.stopPropagation()
-		task.isDone = !task.isDone
-		onSaveTask(task, groupId)
+	function onToggleDateDone(ev) {
+			ev.stopPropagation()
+			task.isDone = !task.isDone
+			onSaveTask(task, groupId)
 	}
 
-  function getDueWarnSpan(task) {
+  	function getDueWarnSpan(task) {
 		if (task?.isDone) return 'done'
 
 		const taskDueDate = new Date(task.dueDate)
@@ -97,7 +97,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 				
             {taskMembers && taskMembers.length > 0 && (
 				<ul className='task-preview-members clean-list'>
-					{taskMembers.map(m => (
+					{taskMembers.map((m) => (
 						<li key={m._id} className='member-img'>
 							<img src={m.imgUrl} title={m.username} />
 						</li>

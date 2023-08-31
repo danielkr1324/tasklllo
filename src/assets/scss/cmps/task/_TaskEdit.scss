@@ -1,5 +1,11 @@
 .task-edit {
 
+  ::-webkit-scrollbar {
+    position: fixed;
+    height: 12px;
+    width: 0px;
+  }
+
   i {
     font-size: em(20px);
     margin-inline-end: em(10px);

@@ -21,15 +21,15 @@ export function TaskAttachmentModal({ task,  submitTaskEdit }) {
     }
 
     return <section className='task-attachment'>
-        <div className='task-attachment-dynamic-add-container' >
-            <div className='task-attachment-dynamic-add' >
+         <h3 className="dynamic-modal-title">Attach</h3>
+            <div className='task-attachment-add' >
+                <h3 className='modal-sub-title'>Attach a file from your computer </h3>
                 <input type="file" id="myfile" accept="image/*" onChange={onUploadImg} className="task-attachment-dynamic-modal-input" />
-                <label htmlFor='myfile' className='task-attachment-dynamic-p'>Choose a file </label>
+                <label htmlFor='myfile' className='btn-edit'>Choose a file </label>
             </div>
-        </div>
+        <span className='attachment-file-name'>{fileName}</span>
         <button className='btn-save' onClick={onAttachLink}>
             Insert
         </button>
-        <span className='task-attachment-dynamic-file-name'>{fileName}</span>
     </section>
 }

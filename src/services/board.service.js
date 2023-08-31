@@ -3,7 +3,7 @@ import { utilService } from './util.service'
 import { httpService } from './http.service'
 import { userService } from './user.service'
 
-const BOARD_KEY = 'boardDB'
+// const BOARD_KEY = 'boardDB'
 
 export const boardService = {
   boardQuery,
@@ -123,8 +123,6 @@ async function getBoardById(boardId) {
 }
 
 async function boardQuery(loggedinUserId) {
-  console.log('l', loggedinUserId)
-
   // const boards = await storageService.query(BOARD_KEY)
 
   // const filteredBoards = boards.filter(
@@ -168,7 +166,7 @@ async function save(board) {
     savedBoard = await httpService.put(`board/${board._id}`, board)
   } else {
     // savedBoard = await storageService.post(BOARD_KEY, board)
-    board.createdBy = await userService.getLoggedinUser()
+    board.createdBy = userService.getLoggedinUser()
     savedBoard = await httpService.post(`board`, board)
   }
   return savedBoard

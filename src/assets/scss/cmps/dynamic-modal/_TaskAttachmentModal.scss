@@ -1,0 +1,29 @@
+.task-attachment {
+    .task-attachment-add {
+        .task-attachment-dynamic-modal-input{
+            display: none;
+        }
+
+        label {
+            border-radius: 3px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-weight: 400;
+            padding: 6px 12px;
+            margin: 12px 0;
+            background-color: $clr8;
+            color: #626f86;
+            font-size: 14px;
+            &:hover {
+                background-color: $clr-base-9;
+              }
+        }
+    }
+
+    .attachment-file-name {
+        display: block;
+        margin-bottom: 20px;
+    }
+}
