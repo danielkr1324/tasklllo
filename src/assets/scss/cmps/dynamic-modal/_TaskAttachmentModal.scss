@@ -1,8 +1,10 @@
 .task-attachment {
     .task-attachment-add {
-        .task-attachment-dynamic-modal-input{
+        .task-attachment-file{
             display: none;
         }
+
+        .task-attachment-link {}
 
         label {
             border-radius: 3px;

@@ -28,28 +28,6 @@ h6 {
   line-height: 1;
 }
 
-::-webkit-scrollbar {
-  position: fixed;
-  height: 12px;
-  width: 12px;
-}
-
-::-webkit-scrollbar-thumb  {
-  border-radius: 4px;
-  background: $scrollbar-track;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 4px;
-  background: $scrollbar-piece;
-}
-
-::-webkit-scrollbar-button {
-  display: block;
-  height: 4px;
-  width: 4px;
-}
-
 
 p {
   margin: 0 0 1em;

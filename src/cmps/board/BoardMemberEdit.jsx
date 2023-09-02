@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useClickOutside } from "../../costumeHooks/useClickOutside";
 
-export function BoardMemberEdit({ boardMembers, closeMemberEdit, onMembersUpdate }) {
+export function BoardMemberEdit({boardAdmin, boardMembers, closeMemberEdit, onMembersUpdate }) {
   const users = useSelector(storeState => storeState.userModule.users);
   const [username, setUsername] = useState("");
   const ref = useRef();
@@ -51,8 +51,11 @@ export function BoardMemberEdit({ boardMembers, closeMemberEdit, onMembersUpdate
         <ul className="current-members clean-list">
           {boardMembers.map(user => (
             <li className="member-preview" key={user._id}>
-                <img src={user.imgUrl} alt="" />
+              <div className="member-info">
+                <img src={user.imgUrl} alt="" style={{ borderRadius: '50%' }} />
                 <p>{user.username}</p>
+              </div>
+                <label className="btn-edit">{boardAdmin._id === user._id ? 'Admin' : 'Member'}</label>
             </li>
           ))}
         </ul>

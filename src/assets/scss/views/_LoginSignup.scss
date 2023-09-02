@@ -42,7 +42,8 @@
       margin: 50px auto;
       padding: 25px 40px; 
       max-width: 400px; 
-      height: 330px; 
+      min-width: fit-content;
+      height:fit-content; 
       display: flex;
       flex-direction: column;
   
@@ -52,12 +53,38 @@
       }
   
       input,
+      .profile-img-upload,
       button {
         align-self: center;
         width: 320px; 
         height: 40px; 
         padding: 8px; 
       }
+
+      .img-upload-container {
+        align-self: center;
+        input {
+          display: none;
+        }
+        .profile-img-upload {
+          display: block;
+          background-color: $clr-base-14;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 600;
+          text-align: center;
+          color: #fff;
+          border-radius: 3px;
+          margin: 0 0 10px;
+  
+          &:hover {
+            background-color: $clr-base-14-hover;
+          }
+  
+          
+        }
+      }
+
   
       input {
         background-color: #FAFBFC;

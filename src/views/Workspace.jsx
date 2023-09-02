@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadBoards, updateBoard } from '../store/actions/board.actions';
 import { loadUsers } from '../store/actions/user.actions';
@@ -11,7 +11,6 @@ export function Workspace() {
   const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
-    console.log(loggedinUser);
     dispatch(loadBoards(loggedinUser._id));
     dispatch(loadUsers())
   }, [loggedinUser._id]);

@@ -15,11 +15,11 @@ export function TaskAttachment({ task, attachment, submitTaskEdit, onDeleteAttac
                 delete updateTask.style
 
             } else {
-                taskStyle.background = `url("${attachment.url}") center center / cover`
+                taskStyle.background = `${utilService.getRandomImgBgColor()} url("${attachment.url}") center center / contain no-repeat`
                 taskStyle.color = false
             }
         } else {
-            taskStyle = { background: `url("${attachment.url}") center center / cover` , color: false}
+            taskStyle = { background: `${utilService.getRandomImgBgColor()} url("${attachment.url}") center center / contain no-repeat` , color: false}
         }
         submitTaskEdit( updateTask)
     }
@@ -46,7 +46,7 @@ export function TaskAttachment({ task, attachment, submitTaskEdit, onDeleteAttac
                 </section>
 
                 <div className="make-attachment-cover" onClick={onToggleTaskCover} >
-                    {task.style?.background === `url("${attachment.url}") center center / cover`
+                    {task.style?.background === `url("${attachment.url}") center center / contain no-repeat`
                         ? <p className="make-attachment-cover-p">Remove cover</p>
                         : <p className="make-attachment-cover-p">Make cover</p>}
 

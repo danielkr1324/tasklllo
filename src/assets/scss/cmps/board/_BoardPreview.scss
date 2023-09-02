@@ -40,10 +40,11 @@
             padding: 8px;
 
 
-
-            .preview-board-not-starred {
-                opacity: 0;
-            }
+            // @media screen and (min-width: $narrow-breakpoint) {
+                .preview-board-not-starred {
+                    opacity: 0;
+                }
+            // }
             
 
             &:hover{

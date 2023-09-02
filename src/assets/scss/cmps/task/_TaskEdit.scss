@@ -1,9 +1,6 @@
 .task-edit {
 
   ::-webkit-scrollbar {
-    position: fixed;
-    height: 12px;
-    width: 0px;
   }
 
   i {
@@ -75,8 +72,7 @@
     }
 
     .edit-cover-img {
-      height: 160px;
-      // background-size: contain;
+      height: 170px;
       background-repeat: no-repeat;
 
       background-origin: content-box;

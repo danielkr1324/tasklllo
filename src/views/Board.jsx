@@ -14,6 +14,7 @@ export function Board() {
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isEditMember, setIsEditMember] = useState(false)
+  const [isEditTitle, setIsEditTitle] = useState(false)
 
   useEffect(() => {
     loadNewBoard();
@@ -34,6 +35,10 @@ export function Board() {
   const onToggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
   };
+
+  const onToggleTitleEdit = () => {
+    setIsEditTitle(!isEditTitle)
+  }
 
   const changeBackground = async ({ background, backgroundColor, thumbnail }) => {
     const updatedBoard = { ...board, style: { background, backgroundColor, thumbnail } };
@@ -83,6 +88,13 @@ export function Board() {
     dispatch(action(group, boardId));
   };
 
+  const handleTitleChange = ({target}) => {
+    onToggleTitleEdit()
+    const newTitle = target.value.trim()
+    if(newTitle === '' || newTitle === board.title) return
+    dispatch(updateBoard({...board, title: newTitle}))
+  }
+
   if (!board) {
     return (
       <div className="loader-wrapper">
@@ -97,9 +109,21 @@ export function Board() {
   return (
     <section className="board" style={boardStyle}>
       <div className="board-info">
-        <div className="info-left">
-          <h1 className="btn-board board-title">{board.title}</h1>
-        </div>
+      <div className="info-left">
+        {isEditTitle ? (
+          <input
+            autoFocus
+            className="board-title-edit"
+            onBlur={(event) => handleTitleChange(event)}
+            type="text"
+            defaultValue={board.title}
+          />
+        ) : (
+          <h1 className="btn-board board-title" onClick={onToggleTitleEdit}>
+            {board.title}
+          </h1>
+        )}
+      </div>
 
         <div className="info-right">
           {board.members && <ul className="board-top-menu-members clean-list">
@@ -123,6 +147,7 @@ export function Board() {
       <div>
         {isSideMenuOpen && <BoardSideMenu onToggleSideMenu={onToggleSideMenu} changeBackground={changeBackground} />}
       </div>
+
       <main className="board-main-content">
         <GroupList
           onRemoveGroup={onRemoveGroup}
@@ -131,12 +156,13 @@ export function Board() {
           onSaveGroup={onSaveGroup}
           groups={board.groups}
           labels={board.labels}
-        />
+          />
       {isEditMember && 
         <BoardMemberEdit
-         boardMembers={board.members}
-         closeMemberEdit={closeMemberEdit}
-         onMembersUpdate={onMembersUpdate} />
+        boardAdmin={board.createdBy}
+        boardMembers={board.members}
+        closeMemberEdit={closeMemberEdit}
+        onMembersUpdate={onMembersUpdate} />
       }
       </main>
       <Outlet />

@@ -37,7 +37,7 @@ export function TaskMembersModal({ task, members, submitTaskEdit }) {
         {toRender.map(member => (
           <li key={member._id} className="member-preview" onClick={() => onToggleMember(member._id)}>
             <div className='member-info'>
-                <img className='member-img' src={member.imgUrl} alt={member.imgUrl} />
+                <img className='member-img' src={member.imgUrl} alt={member.imgUrl} style={{ borderRadius: '50%' }}/>
                 <span className="member-name">{member.fullname}</span>
             </div>
             {memberIds.includes(member._id) && <span><i className="fa-solid fa-check"></i></span>}

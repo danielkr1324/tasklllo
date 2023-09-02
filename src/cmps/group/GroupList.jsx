@@ -5,33 +5,34 @@ import { GroupOptions } from './GroupOptions';
 import { boardService } from '../../services/board.service';
 
 export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpdate, onSaveGroup, labels }) {
-  const [currGroupId, setCurrGroupId] = useState();
+  const [groupIdEditTitle, setGroupIdEditTitle] = useState(null);
+  const [groupIdOpt, setGroupIdOpt] = useState(null)
 
-  
   const onAddNewGroup = () => {
-    const newGroup = boardService.getEmptyGroup()
-    onSaveGroup(newGroup)
-  }
-
-  const toggleGroupOptions = (groupId) => {
-    setCurrGroupId(currGroupId === groupId ? '' : groupId);
+    const newGroup = boardService.getEmptyGroup();
+    onSaveGroup(newGroup);
   };
 
-  const handleTitleChange = ({target}) => {
-      let group = groups.find(g => g.id === target.id)
-      if(group.title !== target.value) {
-        group.title = target.value
-        onSaveGroup(group)
-    }
-}
+ const closeGroupOpt = () => {
+  setGroupIdOpt(null)
+ }
 
-  const onSaveTask = (task, groupId) =>{
-    const group = groups.find(g => g.id === groupId)
-    const taskIdx = group.tasks.findIndex(t => t.id === task.id)
-    if(taskIdx !== -1) group.tasks.splice(taskIdx, 1, task)
-    else group.tasks.push(task)
-    onSaveGroup(group)
-}
+  const handleTitleChange = async ({ target }) => {
+    setGroupIdEditTitle(null);
+    let group = groups.find((g) => g.id === target.id);
+    if (group.title !== target.value) {
+      group.title = target.value;
+      await onSaveGroup(group);
+    }
+  };
+
+  const onSaveTask = (task, groupId) => {
+    const group = groups.find((g) => g.id === groupId);
+    const taskIdx = group.tasks.findIndex((t) => t.id === task.id);
+    if (taskIdx !== -1) group.tasks.splice(taskIdx, 1, task);
+    else group.tasks.push(task);
+    onSaveGroup(group);
+  };
 
   const handleOnDragEnd = (result) => {
     const { destination, source, type } = result;
@@ -77,33 +78,35 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div className="group-top" >
-                        <input
-                          placeholder='Enter list title...'
-                          autoFocus = {!group.title}
-                          type="text"
-                          id={group.id}
-                          defaultValue={group.title}
-                          onBlur={(event) => handleTitleChange(event, group.id)}
-                          onMouseDown={(event) => event.stopPropagation()}
-                        />
-                        <button className="btn-more-options hover-dark" onClick={() => toggleGroupOptions(group.id)}>
-                          ...
+                      <div className="group-top">
+                        {groupIdEditTitle !== group.id  && group.title? (
+                          <h2 className="group-title" onClick={() => setGroupIdEditTitle(group.id)}>
+                            {group.title}
+                          </h2>
+                        ) : (
+                          <input
+                            placeholder="Enter list title..."
+                            autoFocus
+                            type="text"
+                            id={group.id}
+                            defaultValue={group.title}
+                            onBlur={(event) => handleTitleChange(event, group.id)}
+                            onMouseDown={(event) => event.stopPropagation()}
+                          />
+                        )}
+                        <button className="btn-more-options hover-dark" onClick={() => setGroupIdOpt(group.id)}>
+                          <i className="fa-solid fa-ellipsis"></i>
                         </button>
-                        {currGroupId === group.id && (
+                        { groupIdOpt === group.id && (
                           <GroupOptions
-                            toggleGroupOptions={toggleGroupOptions}
+                            closeGroupOpt={closeGroupOpt}
                             onRemoveGroup={onRemoveGroup}
                             onDuplicateGroup={onDuplicateGroup}
                             group={group}
                           />
                         )}
                       </div>
-                      <TaskList
-                        groupId={group.id}
-                        tasks={group.tasks} 
-                        onSaveTask={onSaveTask}
-                        labels={labels} />
+                      <TaskList groupId={group.id} tasks={group.tasks} onSaveTask={onSaveTask} labels={labels} />
                     </li>
                   )}
                 </Draggable>
@@ -114,8 +117,8 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
         </Droppable>
       </DragDropContext>
 
-      <div onClick={onAddNewGroup} className='add-group'>
-          <span>+ Add another list</span>
+      <div onClick={onAddNewGroup} className="add-group">
+        <span>+ Add another list</span>
       </div>
     </section>
   );

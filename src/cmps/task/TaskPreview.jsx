@@ -99,7 +99,7 @@ export function TaskPreview({ task, groupId, labels, onSaveTask }) {
 				<ul className='task-preview-members clean-list'>
 					{taskMembers.map((m) => (
 						<li key={m._id} className='member-img'>
-							<img src={m.imgUrl} title={m.username} />
+							<img src={m.imgUrl} title={m.username} style={{ borderRadius: '50%', width:'26px', height: '26px' }}/>
 						</li>
 					))}
 				</ul>

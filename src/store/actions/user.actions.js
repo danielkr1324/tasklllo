@@ -5,7 +5,6 @@ export function loadUsers() {
   return async dispatch => {
     try {
       const users = await userService.getUsers()
-      console.log(users)
 
       const action = {
         type: SET_USERS,
@@ -34,10 +33,10 @@ export function login(credentials) {
   }
 }
 
-export function signup(credentials) {
+export function signup(credentials, imgUrl = '') {
   return async dispatch => {
     try {
-      const user = await userService.signup(credentials)
+      const user = await userService.signup(credentials, imgUrl)
 
       const action = {
         type: SET_USER,

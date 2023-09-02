@@ -51,7 +51,7 @@
             margin-bottom: 16px;
 
             input {
-                width: 60%;
+                width: 87.5%;
                 padding: 6px 12px ;
                 height: 40px;
                 border-radius: 3px;
@@ -66,11 +66,26 @@
         .current-members {
             .member-preview {
                 display: flex;
-                img {
-                    width: 32px;
-                    height: 32px;
-                    margin-inline-end: 10px;
+                justify-content: space-between;
+                margin-block-end: 10px;
+                .member-info {
+                    display: flex;
+                    img {
+                        width: 32px;
+                        height: 32px;
+                        margin-inline-end: 10px;
+                    }
                 }
+                label {
+                    text-align: start;
+                    font-size: 14px;
+                    font-weight: 600;
+                    background-color: $modal-edit;
+                    border: none;
+                    border-radius: 3px;
+                    height: fit-content;
+                    padding: em(8px) em(14px);
+                  }
             }
         }
     }

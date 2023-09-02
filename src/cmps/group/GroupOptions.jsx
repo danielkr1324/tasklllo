@@ -1,13 +1,13 @@
 import { useClickOutside } from "../../costumeHooks/useClickOutside"
 import { useRef } from "react"
 
-export function GroupOptions({group, toggleGroupOptions, onRemoveGroup, onDuplicateGroup}) {
+export function GroupOptions({group, closeGroupOpt, onRemoveGroup, onDuplicateGroup}) {
 
     const ref = useRef(null)
-    useClickOutside(ref, toggleGroupOptions)
+    useClickOutside(ref, closeGroupOpt)
 
     const duplicateGroup = (group) => {
-        toggleGroupOptions(group.id)
+        closeGroupOpt(group.id)
         onDuplicateGroup(group)
     }
     
@@ -16,7 +16,7 @@ export function GroupOptions({group, toggleGroupOptions, onRemoveGroup, onDuplic
         <div ref={ref}  className="group-options">
             <div  className="group-options-container">
                 <div  className="group-options-top">
-                    <button onClick={() => toggleGroupOptions( group.id)}>x</button>
+                    <button onClick={() => closeGroupOpt( group.id)}>x</button>
                     <p>List actions</p>
                     <hr />
                 </div>

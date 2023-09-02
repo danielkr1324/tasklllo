@@ -26,15 +26,14 @@ export function WorkspaceHeader() {
 
 	function openUserMenu() {
 		setIsUserMenuOpen(true)
-		console.log(user)
 	}
 	function closeUserMenu() {
 		setIsUserMenuOpen(false)
 	}
 
-	function onLogout() {
-		dispatch(logout())
-		navigate(`/login`)
+	async function onLogout() {
+		await dispatch(logout())
+		navigate(`/`)
 	}
 
 	return (

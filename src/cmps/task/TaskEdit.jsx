@@ -145,7 +145,7 @@ export function TaskEdit() {
                           key={m._id}
                           className="task-edit-members"
                         >
-                          <img src={m.imgUrl} alt="" />
+                          <img src={m.imgUrl} alt="" style={{ borderRadius: '50%' }} />
                         </li>
                       ))}
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { uploadService } from '../services/upload.service';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -15,6 +15,7 @@ export function LoginSignup() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(params.status);
   const [wrongCredentialsDiv, setWrongCredentialsDiv] = useState('');
+  const [imgUrl, setImgUrl] = useState('')
 
   useEffect(() => {
     setStatus(params.status);
@@ -37,7 +38,10 @@ export function LoginSignup() {
     }),
     onSubmit: async (values) => {
 		try {
-		 if (status === 'signup') await dispatch(signup(values));
+		 if (status === 'signup') {
+       
+       await dispatch(signup(values, imgUrl));
+     }
 		 else if (status === 'login') {
         const user = await dispatch(login(values));
         if (!user) {
@@ -55,6 +59,11 @@ export function LoginSignup() {
   const handleFocus = (ev) => {
     ev.target.classList.add('focus');
   };
+
+  async function onUploadProfileImg(ev) {
+    const url = await uploadService.uploadImg(ev)
+    setImgUrl(url)
+  }
 
   const formTxt = status === 'login' ? 'Log in to Tasklllo' : 'Sign up for your account';
 
@@ -81,6 +90,8 @@ export function LoginSignup() {
               value={formik.values.fullname}
               placeholder="Enter full name"
             />
+            
+
             {formik.touched.fullname && formik.errors.fullname && (
               <span className="error">{formik.errors.fullname}</span>
             )}
@@ -112,6 +123,13 @@ export function LoginSignup() {
         {formik.touched.password && formik.errors.password && (
           <span className="error">{formik.errors.password}</span>
         )}
+
+        {status === 'signup' && 
+          <div className='img-upload-container'>
+            <input type="file" id="myfile" accept="image/*" onChange={onUploadProfileImg}  />
+            <label  className='profile-img-upload' htmlFor="myfile">Upload profile image</label>
+          </div>
+        }
         <button type="submit">{formTxt}</button>
 
         <hr className="bottom-form-separator" />

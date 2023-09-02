@@ -1,4 +1,34 @@
 .board {
+
+  
+
+  @media screen and (min-width: $narrow-breakpoint) {
+    
+    ::-webkit-scrollbar {
+      position: fixed;
+      height: 12px;
+      width: 12px;
+    
+      
+    }
+    
+    ::-webkit-scrollbar-thumb  {
+      border-radius: 4px;
+      background: $scrollbar-track;
+    }
+    
+    ::-webkit-scrollbar-track {
+      border-radius: 4px;
+      background: $scrollbar-piece;
+    }
+    
+    ::-webkit-scrollbar-button {
+      display: block;
+      height: 4px;
+      width: 4px;
+    }
+  }
+
   height: calc(100vh - 44px);
   width: 100%;
   overflow-y: hidden;
@@ -42,11 +72,21 @@
       color: #fff;
       font-size: 18px;
       border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.2);
 
       &:hover {
-        background-color: #A6C5E229;
+        opacity: 0.8;
       }
-
+    }
+    
+    .board-title-edit {
+        font-weight: 700;
+        height: 36px;
+        font-size: 16px;
+        width: 100%;
+        padding: 8px 12px;
+        border: 2px solid lightgray;
+        border-radius: 3px;
     }
 
     .info-left {

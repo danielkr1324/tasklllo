@@ -42,7 +42,7 @@ async function login(credentials) {
   }
 }
 
-async function signup(credentials) {
+async function signup(credentials, imgUrl) {
   try {
     // const users = storageService.query(USER_STORAGE_KEY)
     // const userIndex = users.findIndex(u => u.username === credentials.username)
@@ -52,6 +52,7 @@ async function signup(credentials) {
     // }
 
     credentials.imgUrl =
+      imgUrl ||
       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
 
     const user = await httpService.post('auth/signup', credentials)
@@ -80,6 +81,7 @@ async function remove(userId) {
 
 function saveLocalUser(user) {
   const { _id, username, imgUrl, fullname } = user
+
   const localUser = {
     _id,
     username,
