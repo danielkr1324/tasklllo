@@ -54,12 +54,6 @@ export function WorkspaceHeader() {
 				</NavLink>
 
 				
-
-				<button className="nav-btn">
-					Starred 
-					
-				</button>
-
 				<button
 					className="create-btn"
 					onClick={openBoardComposer}

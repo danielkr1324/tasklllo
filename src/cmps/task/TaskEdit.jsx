@@ -15,6 +15,7 @@ export function TaskEdit() {
   const { boardId, groupId, taskId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loggedinUser = useSelector(storeState => storeState.userModule.user)
   const board = useSelector(storeState => storeState.boardModule.board);
 
   const taskLabels = task.labelIds ? labels.filter(label => task.labelIds.includes(label.id)) : [];
@@ -123,7 +124,7 @@ export function TaskEdit() {
         {task.style && !task.style.color && <div className="edit-cover-img" style={task.style}></div>}
         <div className="content-wrapper">
           <div className="title-in-task main-container">
-            <i className="fa-regular fa-newspaper"></i>
+            <i className="fa-regular fa-newspaper  full"></i>
             <input
               className="text-input"
               name="title"

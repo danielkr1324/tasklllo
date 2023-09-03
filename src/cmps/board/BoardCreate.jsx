@@ -7,10 +7,11 @@ import { addBoard } from '../../store/actions/board.actions';
 import { boardService } from '../../services/board.service';
 
 export function BoardCreate({ closeBoardComposer, refDataBtn }) {
-  const dispatch = useDispatch();
   const [boardToEdit, setBoardToEdit] = useState(boardService.getEmptyBoard());
-  const navigate = useNavigate();
   const loggedinUser = useSelector(storeState => storeState.userModule.user)
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const modalRef = useRef(null);
 
