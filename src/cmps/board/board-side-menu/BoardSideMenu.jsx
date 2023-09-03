@@ -4,6 +4,7 @@ import { SideMenuColors } from './SideMenuColors';
 import { SideMenuMain } from './SideMenuMain';
 import { SideMenuPhotos } from './SideMenuPhotos';
 import { useClickOutside } from '../../../costumeHooks/useClickOutside';
+import { TaskLabelModal } from '../../task/task-edit-modals/TaskLabelModal'
 
 export function BoardSideMenu({
   onToggleSideMenu,
