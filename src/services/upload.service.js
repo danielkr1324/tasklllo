@@ -19,6 +19,6 @@ async function uploadImg(ev) {
 
     return url
   } catch (err) {
-    console.error('ERROR!', err)
+    console.error('ERROR! ', err)
   }
 }

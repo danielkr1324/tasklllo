@@ -46,10 +46,7 @@ export function TaskAttachment({ task, attachment, submitTaskEdit, onDeleteAttac
                 </section>
 
                 <div className="make-attachment-cover" onClick={onToggleTaskCover} >
-                    {task.style?.background === `url("${attachment.url}") center center / contain no-repeat`
-                        ? <p className="make-attachment-cover-p">Remove cover</p>
-                        : <p className="make-attachment-cover-p">Make cover</p>}
-
+                        <p className="make-attachment-cover-p">Make cover</p>
                 </div>
             </section>
         </>

@@ -9,6 +9,7 @@ export const utilService = {
   dueDateTimeFormat,
   dueDateFormat,
   timeSince,
+  debounce,
 }
 
 function dueDateFormat(dueDate) {
@@ -129,6 +130,14 @@ function getRandomIntInclusive(min = 0, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive
+}
+
+function debounce(func, delay) {
+  let timer
+  return function (...args) {
+    clearTimeout(timer)
+    timer = setTimeout(() => func(...args), delay)
+  }
 }
 
 function getRandomImgBgColor() {

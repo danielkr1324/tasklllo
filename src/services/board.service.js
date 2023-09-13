@@ -40,27 +40,27 @@ function getEmptyBoard() {
     labels: [
       {
         id: 'l101',
-        title: 'UI',
+        title: '',
         color: '#4bce97',
       },
       {
         id: 'l102',
-        title: 'Low priority',
+        title: '',
         color: '#e2b203',
       },
       {
         id: 'l103',
-        title: 'Medium priority',
+        title: '',
         color: '#faa53d',
       },
       {
         id: 'l104',
-        title: 'High priority',
+        title: '',
         color: '#f87462',
       },
       {
         id: 'l105',
-        title: 'Bug',
+        title: '',
         color: '#9f8fef',
       },
       {

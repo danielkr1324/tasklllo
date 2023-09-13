@@ -1,5 +1,5 @@
 .board-member-edit {
-    overflow-y: scroll;
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   left: 0;
@@ -55,8 +55,13 @@
                 padding: 6px 12px ;
                 height: 40px;
                 border-radius: 3px;
+                background-color: #fafbfc;
                 border: 1px solid lightgray;
                 margin-inline-end: 10px;
+
+                &:hover {
+                    background-color: #ebecf0;
+                }
             }
             button {
                 height: 40px;

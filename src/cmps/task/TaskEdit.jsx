@@ -7,6 +7,7 @@ import { ChecklistList } from "./checklist/ChecklistList";
 import { TaskDueDate } from "./TaskDueDate";
 import { DynamicModal } from "./DynamicModal";
 import { TaskAttachmentPreview } from "./attachment/TaskAttachmentPreview";
+import Loader from '../../assets/images/loader.svg'
 
 export function TaskEdit() {
   const [task, setTask] = useState({});
@@ -15,7 +16,6 @@ export function TaskEdit() {
   const { boardId, groupId, taskId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loggedinUser = useSelector(storeState => storeState.userModule.user)
   const board = useSelector(storeState => storeState.boardModule.board);
 
   const taskLabels = task.labelIds ? labels.filter(label => task.labelIds.includes(label.id)) : [];
@@ -113,6 +113,16 @@ export function TaskEdit() {
       />
     ));
   };
+
+  if (!task.title) {
+    return (
+      <div onClick={e => onCloseTaskModal(e)} className="task-edit">
+        <div className="loader-wrapper">
+          <img className="loader" src={Loader} alt="loader" />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div onClick={e => onCloseTaskModal(e)} className="task-edit">

@@ -112,6 +112,7 @@ export function ChecklistPreview({ todos, saveTodos }) {
           <button type="submit" className="btn-save">
             Add
           </button>
+          <button onClick={() => setIsAddTodo(false)}>Cancel</button>
         </form>
       )}
     </DragDropContext>

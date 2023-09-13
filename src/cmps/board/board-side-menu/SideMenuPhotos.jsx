@@ -5,6 +5,7 @@ export function SideMenuPhotos({ changeBackground }) {
   const [photos, setPhotos] = useState(null);
   const [searchTxt, setSearchTxt] = useState('');
 
+
   useEffect(() => {
     getPhotos();
   }, []);
@@ -63,3 +64,4 @@ export function SideMenuPhotos({ changeBackground }) {
     </section>
   );
 }
+

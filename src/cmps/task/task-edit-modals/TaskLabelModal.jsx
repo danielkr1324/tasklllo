@@ -21,8 +21,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
         ev.preventDefault()
         let updateLabelIds
         let updateTask
-
-
+        
         //remove label from task
         if (task.labelIds?.includes(id)) {
             updateLabelIds = task.labelIds.filter(label => (label !== id))
@@ -87,7 +86,7 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                                 id={label.id}
                                 defaultValue={label.title}
                             />
-                            <button className="btn-save " onClick={e => updateLabels(e)}><i class="fa-solid fa-check"></i></button>
+                            <button className="btn-save " onClick={e => updateLabels(e)}><i className="fa-solid fa-check"></i></button>
                         </div>}
 
                     </li>
