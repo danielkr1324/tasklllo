@@ -78,6 +78,7 @@ export function BoardMemberEdit({ boardAdmin, boardMembers, closeMemberEdit, onM
             name="username"
             placeholder="Enter username"
             value={username}
+            autoComplete="off"
             onChange={handleInputChange} 
           />
           <button onClick={addBoardMember} className="btn-save">
