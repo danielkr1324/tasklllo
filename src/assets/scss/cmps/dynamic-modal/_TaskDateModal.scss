@@ -10,7 +10,7 @@
         font-family: 'Segoe UI';
         font-size: 14px;
         background-color: transparent;
-        color: #172b4d;
+        color: $clr-base-5;
         border: none;
         // border-radius: 0.3rem;
         display: inline-block;
@@ -43,7 +43,7 @@
                 font-weight: 700;
 
                 &:hover {
-                    background-color:  #EBECF0;
+                    background-color: $clr-base-3;
                     color: #091E42;
                 }
                 &:active {
@@ -91,7 +91,7 @@
                 background-color: #f5f6f8;
                 box-shadow: none;
                 border: none;
-                color: #172b4d;
+                color: $clr-base-5;
                 width: 100%;
                 &:hover {
                     background-color:rgba(9, 30, 66, 0.08);

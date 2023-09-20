@@ -14,10 +14,14 @@ export function TaskEdit() {
   const [labels, setBoardLabels] = useState([]);
   const [sideBarModalType, setSideBarModalType] = useState("");
   const { boardId, groupId, taskId } = useParams();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   const board = useSelector(storeState => storeState.boardModule.board);
-
+  const currGroup = board.groups.find(group => group.id === groupId);
+  const currTask = currGroup.tasks.find(task => task.id === taskId)
+  const boardLabels = board.labels;
   const taskLabels = task.labelIds ? labels.filter(label => task.labelIds.includes(label.id)) : [];
   const taskMembers = task.memberIds ? board.members.filter(m => task.memberIds.includes(m._id)) : [];
 
@@ -50,11 +54,12 @@ export function TaskEdit() {
 
   useEffect(() => {
     setTaskToEdit();
+    console.log(1);
   }, [taskId]);
 
   const setTaskToEdit = async () => {
-    const currTask = await boardService.getTaskById(boardId, groupId, taskId);
-    const boardLabels = await boardService.getBoardLabels(boardId);
+    
+    
     setBoardLabels(boardLabels);
     setTask(currTask);
   };
@@ -66,10 +71,9 @@ export function TaskEdit() {
 
   const submitTaskEdit = async (currTask) => {
     setTask(currTask);
-    const group = await boardService.getGroupById(groupId, boardId);
-    const taskIdx = group.tasks.findIndex(t => t.id === currTask.id);
-    group.tasks.splice(taskIdx, 1, currTask);
-    dispatch(saveGroup(group, boardId));
+    const taskIdx = currGroup.tasks.findIndex(t => t.id === currTask.id);
+    currGroup.tasks.splice(taskIdx, 1, currTask);
+    dispatch(saveGroup(currGroup, boardId));
     if (sideBarModalType === 'TaskLabelModal' || sideBarModalType === 'TaskMembersModal') return;
     setSideBarModalType('');
   };
@@ -114,15 +118,15 @@ export function TaskEdit() {
     ));
   };
 
-  if (!task.title) {
-    return (
-      <div onClick={e => onCloseTaskModal(e)} className="task-edit">
-        <div className="loader-wrapper">
-          <img className="loader" src={Loader} alt="loader" />
-        </div>
-      </div>
-    )
-  }
+  // if (!task.title) {
+  //   return (
+  //     <div onClick={e => onCloseTaskModal(e)} className="task-edit">
+  //       <div className="loader-wrapper">
+  //         <img className="loader" src={Loader} alt="loader" />
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div onClick={e => onCloseTaskModal(e)} className="task-edit">

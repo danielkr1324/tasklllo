@@ -28,6 +28,7 @@ export function TaskChecklistModal({ task, submitTaskEdit }) {
         <input
           className="checklist-title-edit"
           type="text"
+          autoComplete="off"
           autoFocus
           onChange={handleChange}
           value={checklistTitle}

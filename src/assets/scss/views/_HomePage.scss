@@ -1,7 +1,7 @@
 .home-page {
     background-color: #fff;
     font-family: Charlie-Regular;
-
+    height: 100vh;
     overflow-x: hidden;
 
     .btn-signup {
@@ -14,67 +14,69 @@
             background-color: $clr-base-14-hover;
         }
     }
+
     nav {
         display: flex;
         align-items: center;
     }
-    
+
     .home-header {
         font-family: Charlie-Bold;
         background-color: #fff;
         top: 0;
         margin: 0 auto;
-        max-width: 1320px;
+        max-width: rem(1320px);
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 60px;
+        height: rem(60px);
 
         .header-logo {
             display: flex;
             align-items: center;
 
             h1 {
-                font-size: em(30px);
+                font-size: em(25px);
             }
 
             .logo {
-                width: 24px;
-                height: 24px;
-                margin: 0 10px;
+                width: rem(20px);
+                height: rem(20px);
+                margin: 0 rem(6px);
             }
         }
 
         a {
             width: fit-content;
-            padding: 8px 0 8px 24px;
+            padding: rem(8px) 0 rem(8px) rem(24px);
+
             button {
                 height: 100%;
-                font-size: 17.6px;
-                padding: 20px 24px;
+                font-size: em(17.6px);
+                padding: rem(20px) rem(24px);
             }
         }
-
     }
 
     .home-hero-container {
         background: url(//images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266e%E2%80%A6/white-wave-bg.svg) center bottom -.5px/100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, #5243aa, #ed50b4) 0 0/auto repeat scroll padding-box border-box #5243aa;
+
         background-color: #5243aa;
         background-blend-mode: normal;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         color: #fff;
-        height: 680px;
+        height: rem(680px);
         line-height: 0;
-        padding: 100px 0;
+        padding: rem(100px) 0;
         width: 100%;
         position: relative;
 
-        
-
         .hero-content {
+            margin: 0 rem(15px);
             z-index: 2;
             align-items: center;
             display: flex;
@@ -82,7 +84,7 @@
             height: fit-content;
             justify-content: flex-start;
             align-items: flex-start;
-            max-width: 1140px;
+            max-width: rem(1140px);
             width: 100%;
         }
 
@@ -99,13 +101,13 @@
             }
 
             p {
-                font-size: 20.8px;
+                font-size: em(20.8px);
                 line-height: 1;
             }
 
             button {
-                padding: 11.2px 16px 12.8px;
-                font-size: 16px;
+                padding: rem(11.2px) rem(16px) rem(12.8px);
+                font-size: em(16px);
                 font-family: Charlie-Regular;
                 border-radius: 0.3rem;
             }
@@ -115,118 +117,151 @@
             width: 50%;
         }
 
-        .air{
+        .air {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 90000px;
-            height: 350px;
+            width: rem(90000px);
+            height: rem(350px);
             z-index: 1;
             background: url(https://res.cloudinary.com/dsopwuwvc/image/upload/v1693580501/r1d8kgdzfcihkrrsozhc.png) repeat-x;
-            // background: red
-          }
-           .air.air1{
+        }
+
+        .air.air1 {
             animation: wave 30s linear infinite;
             opacity: 1;
             animation-delay: 0s;
             bottom: 0;
-          }
-          .air.air2{
+        }
+
+        .air.air2 {
             animation: wave2 15s linear infinite;
             z-index: 1;
             opacity: 0.5;
             animation-delay: -5s;
-            bottom: 10px;
-          }
-         .air.air3{
+            bottom: rem(10px);
+        }
+
+        .air.air3 {
             animation: wave 30s linear infinite;
             z-index: 1;
             opacity: 0.2;
             animation-delay: -2s;
-            bottom: 15px;
-          }
-           .air.air4{
+            bottom: rem(15px);
+        }
+
+        .air.air4 {
             animation: wave2 5s linear infinite;
             z-index: 1;
             opacity: 0.7;
             animation-delay: -5s;
-            bottom: 20px;
-          }
-          @keyframes wave{
-            0%{
-              background-position-x: 200px; 
-            }
-            100%{
-              background-position-x: 1600px; 
-            }
-          }
-          @keyframes wave2{
-            0%{
-              background-position-x: 200px; 
-            }
-            100%{
-              background-position-x: -1600px; 
-            }
-          }
+            bottom: rem(20px);
+        }
 
+        @keyframes wave {
+            0% {
+                background-position-x: rem(200px);
+            }
+            100% {
+                background-position-x: rem(1600px);
+            }
+        }
+
+        @keyframes wave2 {
+            0% {
+                background-position-x: rem(200px);
+            }
+            100% {
+                background-position-x: rem(-1600px);
+            }
+        }
     }
+
     .card-desc {
         .prod-div {
-            max-width: 664px;
-            padding: 16px;
+            max-width: rem(664px);
+            padding: rem(16px);
             text-align: start;
 
             h3 {
-                font-size: 16px;
-                margin-block-end: 8px;
+                font-size: em(16px);
+                margin-block-end: rem(8px);
                 font-weight: 500;
             }
 
             .desc-header {
                 font-weight: 500;
-                font-size: 36px;
-                margin-block-end: 8px;
-                padding-block-end: 16px;
+                font-size: em(36px);
+                margin-block-end: rem(8px);
+                padding-block-end: rem(16px);
+            }
+        }
+    }
+
+    @media (max-width: rem(768px)) {
+        .home-hero-container {
+            padding: rem(50px) 0;
+
+            .hero-content {
+                flex-direction: column;
+
+                .hero-text {
+                    width: 100%;
+                    text-align: center;
+                    padding: 0 rem(20px);
+
+                    h1 {
+                        font-size: 2rem;
+                        line-height: 1.2;
+                        margin-bottom: 1rem;
+                    }
+
+                    p {
+                        font-size: em(18px);
+                        line-height: 1.4;
+                    }
+
+                    button {
+                        padding: rem(10px) rem(20px);
+                        font-size: em(14px);
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    margin-top: rem(20px);
+                }
+            }
+        }
+
+        @media (max-width: rem(576px)) {
+            .home-hero-container {
+                height: auto;
+                min-height: 100vh;
+                padding: rem(30px) 0;
+
+                .hero-text {
+                    h1 {
+                        font-size: 1.5rem;
+                        margin-bottom: 0.8rem;
+                    }
+
+                    p {
+                        font-size: em(16px);
+                    }
+
+                    button {
+                        padding: rem(8px) rem(16px);
+                        font-size: em(12px);
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    margin-top: rem(20px);
+                }
             }
         }
     }
 }
 
-@media (max-width: 768px) {
-    .home-page .home-hero-container {
-        padding: 50px 0;
-
-        .hero-content {
-            flex-direction: column;
-
-            .hero-text {
-                width: 100%;
-                text-align: center;
-                padding: 0 20px;
-
-                h1 {
-                    font-size: 2rem;
-                    line-height: 1.2;
-                    margin-bottom: 1rem;
-                }
-
-                p {
-                    font-size: 18px;
-                    line-height: 1.4;
-                }
-
-                button {
-                    padding: 10px 20px;
-                    font-size: 14px;
-                }
-            }
-
-            img {
-                width: 100%;
-                margin-top: 20px;
-            }
-        }
-
-        
-    }
-}

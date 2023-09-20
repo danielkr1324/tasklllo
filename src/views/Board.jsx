@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { utilService } from "../services/util.service";
 import { useSelector, useDispatch } from "react-redux";
 import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
@@ -76,17 +77,20 @@ export function Board() {
   };
 
   const onDuplicateGroup = (group) => {
-    const groupCopy = { ...group, id: "" };
+    const groupCopy = { ...group, id: utilService.makeId() };
     if (groupCopy.tasks.length) {
-      groupCopy.tasks = groupCopy.tasks.map((task) => ({ ...task, id: "" }));
+      groupCopy.tasks = groupCopy.tasks.map((task) => ({ ...task, id: utilService.makeId() }));
     }
     dispatch(addGroup(groupCopy, boardId));
   };
 
   const onSaveGroup = (group) => {
-    const action = group.id ? saveGroup : addGroup;
+    const groupIdx = board.groups.findIndex((currGroup) => currGroup.id === group.id);
+    const action = groupIdx !== -1 ? saveGroup : addGroup;
     dispatch(action(group, boardId));
   };
+
+  
 
   const handleTitleChange = ({target}) => {
     onToggleTitleEdit()
@@ -95,7 +99,7 @@ export function Board() {
     dispatch(updateBoard({...board, title: newTitle}))
   }
 
-  if (!board) {
+  if (!board || board._id !== boardId) {
     return (
       <div className="loader-wrapper">
 				<img className="loader" src={Loader} alt="loader" />

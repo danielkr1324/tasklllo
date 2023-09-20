@@ -1,14 +1,15 @@
-import { boardService } from '../../services/board.service'
+import { boardService } from "../../services/board.service"
 import {
   REMOVE_BOARD,
   SET_BOARDS,
   SET_BOARD,
   UPDATE_BOARD,
+  UPDATE_BOARDS,
   ADD_BOARD,
   REMOVE_GROUP,
   SAVE_GROUP,
   ADD_GROUP,
-} from '../reducers/board.reducer'
+} from "../reducers/board.reducer"
 
 export function loadBoards(loggedinUserId) {
   return async dispatch => {
@@ -21,7 +22,7 @@ export function loadBoards(loggedinUserId) {
       }
       dispatch(action)
     } catch (error) {
-      console.log('error:', error)
+      console.log("error:", error)
     }
   }
 }
@@ -33,7 +34,7 @@ export function removeBoard(boardId) {
       const action = { type: REMOVE_BOARD, boardId }
       dispatch(action)
     } catch (error) {
-      console.log('error:', error)
+      console.log("error:", error)
     }
   }
 }
@@ -49,7 +50,7 @@ export function addBoard(board) {
       dispatch(action)
       return savedBoard
     } catch (error) {
-      console.log('cannot add board', error)
+      console.log("cannot add board", error)
     }
   }
 }
@@ -64,7 +65,22 @@ export function updateBoard(board) {
       dispatch(action)
       await boardService.save(board)
     } catch (error) {
-      console.log('failed to update board ', error)
+      console.log("failed to update board ", error)
+    }
+  }
+}
+
+export function updateBoards(board) {
+  return async dispatch => {
+    try {
+      const action = {
+        type: UPDATE_BOARDS,
+        board,
+      }
+      dispatch(action)
+      await boardService.save(board)
+    } catch (error) {
+      console.log("failed to update board ", error)
     }
   }
 }
@@ -80,7 +96,7 @@ export function loadBoard(boardId) {
       dispatch(action)
       return board
     } catch (error) {
-      console.log('failed to load the board ', error)
+      console.log("failed to load the board ", error)
     }
   }
 }
@@ -95,7 +111,7 @@ export function removeGroup(groupId, boardId) {
       dispatch(action)
       await boardService.removeGroup(groupId, boardId)
     } catch (error) {
-      console.log('failed to remove group ', error)
+      console.log("failed to remove group ", error)
     }
   }
 }
@@ -110,7 +126,7 @@ export function saveGroup(group, boardId) {
       dispatch(action)
       await boardService.saveGroup(group, boardId)
     } catch (error) {
-      console.log('failed to save group ', error)
+      console.log("failed to save group ", error)
     }
   }
 }
@@ -118,15 +134,14 @@ export function saveGroup(group, boardId) {
 export function addGroup(group, boardId) {
   return async dispatch => {
     try {
-      const savedGroup = await boardService.saveGroup(group, boardId)
       const action = {
         type: ADD_GROUP,
-        savedGroup,
+        group,
       }
       dispatch(action)
-      return savedGroup
+      await boardService.saveGroup(group, boardId)
     } catch (error) {
-      console.log('failed to add group ', error)
+      console.log("failed to add group ", error)
     }
   }
 }

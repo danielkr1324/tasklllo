@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadBoards, updateBoard } from '../store/actions/board.actions';
+import { loadBoards,  updateBoards } from '../store/actions/board.actions';
 import { loadUsers } from '../store/actions/user.actions';
 import { BoardPreview } from '../cmps/board/BoardPreview';
 import Loader from '../assets/images/loader.svg';
+
 
 export function Workspace() {
   const dispatch = useDispatch();
@@ -11,8 +12,12 @@ export function Workspace() {
   const loggedinUser = useSelector(state => state.userModule.user)
 
   useEffect(() => {
-    dispatch(loadBoards(loggedinUser._id));
     dispatch(loadUsers())
+  })
+  
+
+  useEffect(() => {
+    dispatch(loadBoards(loggedinUser._id))
   }, [loggedinUser._id]);
 
 
@@ -23,8 +28,7 @@ export function Workspace() {
     event.preventDefault();
     const updatedBoard = { ...board, isStarred: !board.isStarred };
     try {
-      await dispatch(updateBoard(updatedBoard));
-      dispatch(loadBoards(loggedinUser._id));
+      dispatch(updateBoards(updatedBoard));
     } catch (err) {
       console.log('Cannot update board', err);
     }

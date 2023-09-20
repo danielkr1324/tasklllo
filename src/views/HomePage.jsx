@@ -58,7 +58,7 @@ export function HomePage() {
 
           </section>
 
-        <section className="card-desc main-container">
+        {/* <section className="card-desc main-container">
           <div className="prod-div full">
             <h3>TASKLLLO 101</h3>
             <h1 className="desc-header">A productivity powerhouse</h1>
@@ -68,7 +68,7 @@ export function HomePage() {
               done. Learn more in our guide for getting started.
             </p>
           </div>
-        </section>
+        </section> */}
       </main>
     </section>
   );

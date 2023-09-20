@@ -5,7 +5,7 @@
     width: 304px;
     height: 285px;
     will-change: top, left, bottom, right;
-    color:#172b4d;
+    color:$clr-base-5;
     font-family: 'Segoe UI';
     font-size: 14px;
     line-height: 20px;
@@ -89,7 +89,7 @@
                 cursor: pointer;
                 svg {
                     path{
-                        fill: #172b4d;
+                        fill: $clr-base-5;
                     }
                 }
             }
@@ -269,7 +269,7 @@
 
         input {
             width: 100%;
-            color:#172b4d;
+            color:$clr-base-5;
             // background-color: $t-bg3;
             border: none;
             border-radius: 3px;

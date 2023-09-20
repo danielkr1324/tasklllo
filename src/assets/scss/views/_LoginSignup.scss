@@ -1,133 +1,145 @@
 .form-container {
-    background-color: #F4F5F7;
-    position: relative;
-    height: 100vh;
+  background-color: $clr-base-2;
+  position: relative;
+  height: 100vh; // Using viewport units for full height
+  
+  .form-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Charlie-Bold;
+    font-size: rem(35px);
+    padding-top: rem(25px);
 
-    .form-top {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Charlie-Bold;
-      font-size: 35px;
-      padding-top: 50px;
-
-      h1 {
-        margin-inline-start: 10px;
-      }
-
-      .logo {
-        width: 40px;
-        padding: 0;
-
-      }
+    h1 {
+      margin-inline-start: rem(10px);
     }
 
-    .not-visible {
-      display: none;
-    }
-    
-    .visible {
-      display: block;
-    }
-    
     .logo {
-      font-size: 40px;
-      padding: 20px; 
+      width: rem(40px);
+      padding: 0;
     }
-    
-    .signup-form {
-      background-color: #fff;
-      box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
-      border-radius: 3px;
-      margin: 50px auto;
-      padding: 25px 40px; 
-      max-width: 400px; 
-      min-width: fit-content;
-      height:fit-content; 
-      display: flex;
-      flex-direction: column;
-  
-      h1 {
-        font-size: 16px;
-        margin: 10px 0 25px;
+  }
+
+  .not-visible {
+    display: none;
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .logo {
+    font-size: rem(40px);
+    padding: rem(10px);
+  }
+
+  .signup-form {
+    background-color: #fff;
+    box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+    border-radius: rem(3px);
+    margin: rem(50px) auto;
+    padding: rem(25px) rem(40px);
+    max-width: rem(400px);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      font-size: rem(16px);
+      margin: rem(10px) 0 rem(25px);
+    }
+
+    input,
+    .profile-img-upload,
+    button {
+      align-self: center;
+      width: 100%;
+      max-width: rem(320px);
+      height: rem(40px);
+      padding: rem(8px);
+    }
+
+    .img-upload-container {
+      align-self: center;
+      width: 100%;
+      input {
+        display: none;
       }
-  
+
+      .profile-img-upload {
+        display: block;
+        background-color: $clr-base-14;
+        cursor: pointer;
+        font-size: rem(14px);
+        font-weight: 600;
+        text-align: center;
+        color: #fff;
+        border-radius: rem(3px);
+        margin: 0 0 rem(10px);
+      }
+    }
+
+    input {
+      background-color: #FAFBFC;
+      border: rem(2px) solid $clr-dynamic-button-highlighted;
+      border-radius: rem(4.8px);
+      transition: 0.3s;
+      margin-block-end: rem(10px);
+    }
+
+    button {
+      background-color: #5AAC44;
+      border-radius: rem(3px);
+      border: none;
+      color: #fff;
+      font-size: rem(14px);
+      font-weight: 700;
+    }
+  }
+
+  .hero {
+    max-width: 25%;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .left-hero {
+    left: 0;
+  }
+
+  .right-hero {
+    right: 0;
+  }
+
+  @media (max-width: rem(768px)) {
+    .form-top {
+      font-size: rem(25px);
+      padding-top: rem(15px);
+    }
+
+    .logo {
+      font-size: rem(30px);
+    }
+
+    .signup-form {
+      padding: rem(15px);
+      
+      h1 {
+        font-size: rem(14px);
+        margin: rem(10px) 0 rem(20px);
+      }
+      
       input,
       .profile-img-upload,
       button {
-        align-self: center;
-        width: 320px; 
-        height: 40px; 
-        padding: 8px; 
-      }
-
-      .img-upload-container {
-        align-self: center;
-        input {
-          display: none;
-        }
-        .profile-img-upload {
-          display: block;
-          background-color: $clr-base-14;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 600;
-          text-align: center;
-          color: #fff;
-          border-radius: 3px;
-          margin: 0 0 10px;
-  
-          &:hover {
-            background-color: $clr-base-14-hover;
-          }
-  
-          
-        }
-      }
-
-  
-      input {
-        background-color: #FAFBFC;
-        border: 2px solid $clr-dynamic-button-highlighted;
-        border-radius: 4.8px;
-        transition: 0.3s;
-        margin-block-end: 10px;
-  
-        &:focus {
-          border-color: #4c9aff;
-          outline: none;
-        }
-      }
-  
-      button {
-        background-color: #5AAC44;
-        border-radius: 3px;
-        border: none;
-        color: #fff;
-        font-size: 14px; 
-        font-weight: 700;
-  
-        &:hover {
-          background-color: #61bd4f;
-        }
+        width: 100%;
+        max-width: 100%;
       }
     }
-  
+
     .hero {
-      max-width: 25%;
-      position: absolute;
-      bottom: 0;
-
-      
+      display: none;
     }
-    .left-hero {
-      left: 0;
-
-    }
-  
-    .right-hero {
-      right: 0;
-    }
-    
   }
-  
+}

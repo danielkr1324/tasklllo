@@ -1,7 +1,7 @@
-import { utilService } from './util.service'
+import { utilService } from "./util.service"
 // import { storageService } from './async-storage.service'
-import { httpService } from './http.service'
-import { userService } from './user.service'
+import { httpService } from "./http.service"
+import { userService } from "./user.service"
 
 // const BOARD_KEY = 'boardDB'
 
@@ -28,45 +28,45 @@ window.cs = boardService
 
 function getEmptyBoard() {
   return {
-    title: '',
+    title: "",
     isStarred: false,
     archivedAt: null,
     createdBy: {},
     style: {
-      background: '',
-      thumbnail: '',
-      backgroundColor: '',
+      background: "",
+      thumbnail: "",
+      backgroundColor: "",
     },
     labels: [
       {
-        id: 'l101',
-        title: '',
-        color: '#4bce97',
+        id: "l101",
+        title: "",
+        color: "#4bce97",
       },
       {
-        id: 'l102',
-        title: '',
-        color: '#e2b203',
+        id: "l102",
+        title: "",
+        color: "#e2b203",
       },
       {
-        id: 'l103',
-        title: '',
-        color: '#faa53d',
+        id: "l103",
+        title: "",
+        color: "#faa53d",
       },
       {
-        id: 'l104',
-        title: '',
-        color: '#f87462',
+        id: "l104",
+        title: "",
+        color: "#f87462",
       },
       {
-        id: 'l105',
-        title: '',
-        color: '#9f8fef',
+        id: "l105",
+        title: "",
+        color: "#9f8fef",
       },
       {
-        id: 'l106',
-        title: '',
-        color: '#579dff',
+        id: "l106",
+        title: "",
+        color: "#579dff",
       },
     ],
     members: [],
@@ -77,9 +77,10 @@ function getEmptyBoard() {
 
 async function saveGroup(group, boardId) {
   const board = await getBoardById(boardId)
-
-  if (!group.id) {
-    group.id = utilService.makeId()
+  const groupIdx = board.groups.findIndex(
+    currGroup => currGroup.id === group.id
+  )
+  if (groupIdx < 0) {
     if (group.tasks?.length) {
       group.tasks.forEach(task => {
         task.id = utilService.makeId()
@@ -131,7 +132,7 @@ async function boardQuery(loggedinUserId) {
   //     board.members.some(member => member._id === loggedinUserId)
   // )
 
-  return await httpService.get('board', { loggedinUserId })
+  return await httpService.get("board", { loggedinUserId })
 }
 
 async function getTaskById(boardId, groupId, taskId) {
@@ -174,9 +175,9 @@ async function save(board) {
 
 function getEmptyGroup() {
   return {
-    id: '',
+    id: utilService.makeId(),
     tasks: [],
-    title: '',
+    title: "",
   }
 }
 
@@ -188,7 +189,7 @@ async function getBoardLabels(boardId) {
 function getEmptyTask() {
   return {
     id: utilService.makeId(),
-    title: '',
+    title: "",
     isStarred: false,
     checklists: [],
     archivedAt: null,
@@ -202,7 +203,7 @@ function getEmptyTask() {
 function getEmptyChecklist() {
   return {
     id: utilService.makeId(),
-    title: '',
+    title: "",
     todos: [],
   }
 }
@@ -211,7 +212,7 @@ function getEmptyTodo() {
   return {
     id: utilService.makeId(),
     isDone: false,
-    title: '',
+    title: "",
   }
 }
 
@@ -219,15 +220,15 @@ function getEmptyAttachment() {
   return {
     id: utilService.makeId(),
     createdAt: Date.now(),
-    url: '',
-    title: 'Attachment Image',
+    url: "",
+    title: "Attachment Image",
   }
 }
 
 function getEmptyLabel() {
   return {
     id: utilService.makeId(),
-    title: '',
-    color: '',
+    title: "",
+    color: "",
   }
 }

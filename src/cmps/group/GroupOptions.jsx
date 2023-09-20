@@ -11,6 +11,7 @@ export function GroupOptions({group, closeGroupOpt, onRemoveGroup, onDuplicateGr
         onDuplicateGroup(group)
     }
     
+    
     return (
 
         <div ref={ref}  className="group-options">

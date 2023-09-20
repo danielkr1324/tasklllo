@@ -1,33 +1,32 @@
 .workspace-section {
-    color: #172b4d;
-    
-    margin: 40px auto;
-    max-width: 825px;
-    min-width: 288px;
+    color: $clr-base-5;
+    margin: rem(40px) auto;
+    max-width: rem(825px);
+    min-width: rem(288px);
     flex-grow: 1;
 
     .boards-section-header {
         display: flex;
         align-items: center;
-        height: 38px;
+        height: rem(38px);
 
         .boards-section-header-icon {
-            width: 32px;
-            height: 32px;
+            width: rem(32px);
+            height: rem(32px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            color: #172b4d;
+            font-size: rem(26px);
+            color: $clr-base-5;
         }
 
         .boards-section-header-name {
-            padding-left: 10px;
+            padding-left: rem(10px);
 
             h3 {
-                font-size: 16px;
+                font-size: rem(16px);
                 font-weight: 700;
-                line-height: 24px;
+                line-height: rem(24px);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -38,14 +37,14 @@
     .board-list {
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: 20px;
+        padding-bottom: rem(20px);
         align-items: center;
         justify-content: flex-start;
-        gap: 25px;
+        gap: rem(25px);
 
         li {
-            margin-bottom: 16px;
-            width: 160px;
+            margin-bottom: rem(16px);
+            width: rem(160px);
         }
 
         .create-new-board {
@@ -53,14 +52,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-inline-start: 9px;
+            margin-inline-start: rem(9px);
 
             span {
-                margin: 22px 8px;
-                color: #172b4d;
-                line-height: 20px;
+                margin: rem(22px) rem(8px);
+                color: $clr-base-5;
+                line-height: rem(20px);
                 font-weight: 400;
-                font-size: 14px;
+                font-size: rem(14px);
             }
 
             &:hover {

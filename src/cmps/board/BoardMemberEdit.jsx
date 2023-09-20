@@ -4,7 +4,6 @@ import { useClickOutside } from "../../costumeHooks/useClickOutside";
 import { UserDropdown } from "./UserDropdown";
 import { utilService } from "../../services/util.service";
 
-// Custom debounce function
 
 
 export function BoardMemberEdit({ boardAdmin, boardMembers, closeMemberEdit, onMembersUpdate }) {
@@ -16,11 +15,10 @@ export function BoardMemberEdit({ boardAdmin, boardMembers, closeMemberEdit, onM
   const ref = useRef();
 
   useClickOutside(ref, () => {
-    setIsUserDropdownOpen(false); // Close the dropdown when clicking outside
     closeMemberEdit();
+    setIsUserDropdownOpen(false); 
   });
 
-  // Debounce the handleChange function with a 300ms delay
   const debouncedHandleChange = utilService.debounce((inputUsername) => {
     if (inputUsername) {
       const regex = new RegExp(inputUsername, "i");

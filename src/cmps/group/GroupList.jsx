@@ -8,6 +8,7 @@ export function GroupList({ onRemoveGroup, onDuplicateGroup, groups, onBoardUpda
   const [groupIdEditTitle, setGroupIdEditTitle] = useState(null);
   const [groupIdOpt, setGroupIdOpt] = useState(null)
 
+
   const onAddNewGroup = () => {
     const newGroup = boardService.getEmptyGroup();
     onSaveGroup(newGroup);

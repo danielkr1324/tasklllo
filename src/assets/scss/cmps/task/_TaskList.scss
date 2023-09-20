@@ -2,7 +2,7 @@
     position: relative;
     
     .group-bottom {
-        background-color: #ebecf0;
+        background-color: $clr-base-3;
         position: sticky;
         bottom: 0;
         padding: 10px 0;
@@ -11,7 +11,7 @@
         .btn-add-task {
             background: none;
             margin-inline-start: 6px;
-            color: #44546f;
+            color: $clr-base-4;
             font-size: 14px;
         }
 
@@ -30,7 +30,7 @@
                 .btn-cancel {
                     font-size: 16px;
                     background: none;
-                    color: #44546f;
+                    color: $clr-base-4;
                     border: none;
                 }
 

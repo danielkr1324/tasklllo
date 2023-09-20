@@ -10,7 +10,7 @@
     flex-direction: column;
     padding:0 10px 10px 10px;
 
-    color: #172b4d;
+    color: $clr-base-5;
     // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
     line-height: 20px;
@@ -64,7 +64,7 @@
                 cursor: pointer;
                 svg {
                     path{
-                        fill: #172b4d;
+                        fill: $clr-base-5;
                     }
                 }
             }
@@ -100,7 +100,7 @@
             padding-left: 18px;
             display: flex;
             align-items: center;
-            color: #172b4d;
+            color: $clr-base-5;
             line-height: 20px;
             font-weight: 400;
             font-size: 14px;
