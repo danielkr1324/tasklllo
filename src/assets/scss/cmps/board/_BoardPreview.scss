@@ -43,6 +43,12 @@
             // @media screen and (min-width: $narrow-breakpoint) {
                 .preview-board-not-starred {
                     opacity: 0;
+                    align-self: flex-end;
+                    font-size: em(12px);
+
+                    @media screen and (max-width: 780px) {
+                        opacity: 1;
+                    }
                 }
             // }
             

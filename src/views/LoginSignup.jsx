@@ -16,11 +16,26 @@ export function LoginSignup() {
   const [status, setStatus] = useState(params.status);
   const [wrongCredentialsDiv, setWrongCredentialsDiv] = useState('');
   const [imgUrl, setImgUrl] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
+
+  
   useEffect(() => {
     setStatus(params.status);
     setWrongCredentialsDiv('not-visible');
   }, [params.status]);
+
+  const guestLogin = async () => {
+    const guestCred = {
+      fullname: 'guestavo',
+      username: 'guestavo',
+      password: 'guestavo'
+    }
+    setIsLoading(true)
+    await dispatch(login(guestCred))
+    setIsLoading(false)
+    navigate('/workspace');
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -37,22 +52,27 @@ export function LoginSignup() {
         .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
     }),
     onSubmit: async (values) => {
-		try {
-		 if (status === 'signup') {
-       
-       await dispatch(signup(values, imgUrl));
-     }
-		 else if (status === 'login') {
-        const user = await dispatch(login(values));
-        if (!user) {
-          setWrongCredentialsDiv('visible');
-          return;
+      try {
+        if (status === 'signup') {
+          setIsLoading(true)
+          await dispatch(signup(values, imgUrl));
+          setIsLoading(false)
         }
-		  }
-		  navigate('/workspace');
-		} catch (err) {
-		    if (status === 'login') setWrongCredentialsDiv('visible');
-		  }
+        else if (status === 'login') {
+          
+          setIsLoading(true)
+            const user = await dispatch(login(values));
+            if (!user) {
+              setIsLoading(false)
+              setWrongCredentialsDiv('visible');
+              return;
+            }
+          }
+
+          navigate('/workspace');
+      } catch (err) {
+          if (status === 'login') setWrongCredentialsDiv('visible');
+      }
 	  }
   });
 
@@ -61,11 +81,15 @@ export function LoginSignup() {
   };
 
   async function onUploadProfileImg(ev) {
+    setIsLoading(true)
     const url = await uploadService.uploadImg(ev)
     setImgUrl(url)
+    setIsLoading(false)
   }
 
   const formTxt = status === 'login' ? 'Log in to Tasklllo' : 'Sign up for your account';
+  const imgUploadTxt = isLoading ? 'Uploading image...' : 'Upload profile image'
+  const loginTxt = isLoading ? 'Logging in...' : formTxt
 
   return (
     <section className="form-container">
@@ -124,13 +148,21 @@ export function LoginSignup() {
           <span className="error">{formik.errors.password}</span>
         )}
 
+        
+
         {status === 'signup' && 
           <div className='img-upload-container'>
             <input type="file" id="myfile" accept="image/*" onChange={onUploadProfileImg}  />
-            <label  className='profile-img-upload' htmlFor="myfile">Upload profile image</label>
+            <label  className='profile-img-upload' htmlFor="myfile">{imgUploadTxt}</label>
           </div>
         }
         <button type="submit">{formTxt}</button>
+
+        {status === 'login' && (
+          <div className='guest-login' onClick={guestLogin}>
+            <p>{isLoading ? 'Logging in...' : 'Login as guest'}</p>
+          </div>
+        )}
 
         <hr className="bottom-form-separator" />
         {status === 'login' ? (

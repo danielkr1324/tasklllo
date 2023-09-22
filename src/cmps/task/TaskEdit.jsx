@@ -73,7 +73,7 @@ export function TaskEdit() {
     setTask(currTask);
     const taskIdx = currGroup.tasks.findIndex(t => t.id === currTask.id);
     currGroup.tasks.splice(taskIdx, 1, currTask);
-    dispatch(saveGroup(currGroup, boardId));
+    dispatch(saveGroup(currGroup));
     if (sideBarModalType === 'TaskLabelModal' || sideBarModalType === 'TaskMembersModal') return;
     setSideBarModalType('');
   };

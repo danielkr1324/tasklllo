@@ -75,8 +75,7 @@ function getEmptyBoard() {
   }
 }
 
-async function saveGroup(group, boardId) {
-  const board = await getBoardById(boardId)
+async function saveGroup(group, board) {
   const groupIdx = board.groups.findIndex(
     currGroup => currGroup.id === group.id
   )
@@ -108,12 +107,12 @@ async function getGroupById(groupId, boardId) {
   }
 }
 
-async function removeGroup(groupId, boardId) {
+async function removeGroup(groupId, board) {
   try {
-    const board = await getBoardById(boardId)
     const updatedGroups = board.groups.filter(group => group.id !== groupId)
     board.groups = updatedGroups
-    return save(board)
+
+    return await save(board)
   } catch (err) {
     console.log(err)
   }

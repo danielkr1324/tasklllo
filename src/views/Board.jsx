@@ -70,7 +70,7 @@ export function Board() {
 
   const onRemoveGroup = async (groupId) => {
     try {
-      await dispatch(removeGroup(groupId, boardId));
+      await dispatch(removeGroup(groupId));
     } catch (err) {
       console.log(err);
     }
@@ -81,13 +81,13 @@ export function Board() {
     if (groupCopy.tasks.length) {
       groupCopy.tasks = groupCopy.tasks.map((task) => ({ ...task, id: utilService.makeId() }));
     }
-    dispatch(addGroup(groupCopy, boardId));
+    dispatch(addGroup(groupCopy));
   };
 
   const onSaveGroup = (group) => {
     const groupIdx = board.groups.findIndex((currGroup) => currGroup.id === group.id);
     const action = groupIdx !== -1 ? saveGroup : addGroup;
-    dispatch(action(group, boardId));
+    dispatch(action(group));
   };
 
   
@@ -139,6 +139,7 @@ export function Board() {
                     style={{ borderRadius: '50%' }}
                     src={member.imgUrl}
                     title={`${member.fullname} (${member.username})`}
+                    alt={member.username}
                   />
                 </li>
               ))}
@@ -161,13 +162,13 @@ export function Board() {
           groups={board.groups}
           labels={board.labels}
           />
-      {isEditMember && 
-        <BoardMemberEdit
-        boardAdmin={board.createdBy}
-        boardMembers={board.members}
-        closeMemberEdit={closeMemberEdit}
-        onMembersUpdate={onMembersUpdate} />
-      }
+        {isEditMember && 
+          <BoardMemberEdit
+          boardAdmin={board.createdBy}
+          boardMembers={board.members}
+          closeMemberEdit={closeMemberEdit}
+          onMembersUpdate={onMembersUpdate} />
+        }
       </main>
       <Outlet />
     </section>

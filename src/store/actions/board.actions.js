@@ -101,45 +101,48 @@ export function loadBoard(boardId) {
   }
 }
 
-export function removeGroup(groupId, boardId) {
-  return async dispatch => {
+export function removeGroup(groupId) {
+  return async (dispatch, getState) => {
     try {
+      const board = getState().boardModule.board
       const action = {
         type: REMOVE_GROUP,
         groupId,
       }
       dispatch(action)
-      await boardService.removeGroup(groupId, boardId)
+      await boardService.removeGroup(groupId, board)
     } catch (error) {
       console.log("failed to remove group ", error)
     }
   }
 }
 
-export function saveGroup(group, boardId) {
-  return async dispatch => {
+export function saveGroup(group) {
+  return async (dispatch, getState) => {
     try {
+      const board = getState().boardModule.board
       const action = {
         type: SAVE_GROUP,
         group,
       }
       dispatch(action)
-      await boardService.saveGroup(group, boardId)
+      await boardService.saveGroup(group, board)
     } catch (error) {
       console.log("failed to save group ", error)
     }
   }
 }
 
-export function addGroup(group, boardId) {
-  return async dispatch => {
+export function addGroup(group) {
+  return async (dispatch, getState) => {
     try {
+      const board = getState().boardModule.board
       const action = {
         type: ADD_GROUP,
         group,
       }
       dispatch(action)
-      await boardService.saveGroup(group, boardId)
+      await boardService.saveGroup(group, board)
     } catch (error) {
       console.log("failed to add group ", error)
     }

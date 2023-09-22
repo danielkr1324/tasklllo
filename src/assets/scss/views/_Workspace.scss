@@ -40,11 +40,30 @@
         padding-bottom: rem(20px);
         align-items: center;
         justify-content: flex-start;
-        gap: rem(25px);
+        // gap: rem(px);
 
+        
         li {
-            margin-bottom: rem(16px);
-            width: rem(160px);
+            overflow: hidden;
+            margin-block-end: rem(16px);
+            width: rem(190px);
+        }
+        
+        @media (max-width: rem(380px)) {
+            justify-content: center;
+            li {
+                span {
+                    display: block;
+                }
+                width: rem(160px);
+                .board-preview {
+                    width: 90%;
+                }
+                img {
+                    margin-bottom: rem(16px);
+
+                }
+            }
         }
 
         .create-new-board {
