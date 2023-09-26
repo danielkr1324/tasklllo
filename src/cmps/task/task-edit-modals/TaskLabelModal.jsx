@@ -52,7 +52,6 @@ export function TaskLabelModal({ task, submitTaskEdit, labels, boardLabelsUpdate
                 id="txt"
                 placeholder="Search labels..."
                 onChange={handleChange}
-                autoFocus
                 autoComplete="off"
             />
             <ul className="label-select clean-list">

@@ -47,6 +47,13 @@
             }
         }
 
+        @media (max-width: rem(360px)) {
+
+            .btn-signup {
+                display: none;
+            }
+        }
+
         a {
             width: fit-content;
             padding: rem(8px) 0 rem(8px) rem(24px);

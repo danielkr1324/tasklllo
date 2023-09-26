@@ -29,7 +29,6 @@ export function TaskMembersModal({ task, members, submitTaskEdit }) {
         id="txt"
         placeholder="Search member"
         onChange={handleChange}
-        autoFocus
         autoComplete="off"
       />
       <h3 className='modal-sub-title'>Board members</h3>
