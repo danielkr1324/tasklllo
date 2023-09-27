@@ -9,6 +9,7 @@ export const boardService = {
   boardQuery,
   getBoardById,
   save,
+  removeBoard,
   removeGroup,
   saveGroup,
   getTaskById,
@@ -170,6 +171,14 @@ async function save(board) {
     savedBoard = await httpService.post(`board`, board)
   }
   return savedBoard
+}
+
+async function removeBoard(boardId) {
+  try {
+    await httpService.delete(`board/${boardId}`)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 function getEmptyGroup() {

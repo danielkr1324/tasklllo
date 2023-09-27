@@ -30,7 +30,7 @@ export function loadBoards(loggedinUserId) {
 export function removeBoard(boardId) {
   return async dispatch => {
     try {
-      await boardService.remove(boardId)
+      await boardService.removeBoard(boardId)
       const action = { type: REMOVE_BOARD, boardId }
       dispatch(action)
     } catch (error) {

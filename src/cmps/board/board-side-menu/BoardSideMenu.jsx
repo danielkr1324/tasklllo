@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
-import { SideMenuBgOptions } from './SideMenuBgOptions';
-import { SideMenuColors } from './SideMenuColors';
+import { SideMenuBgOptions } from './side-menu-background/SideMenuBgOptions';
+import { SideMenuColors } from './side-menu-background/SideMenuColors';
 import { SideMenuMain } from './SideMenuMain';
-import { SideMenuPhotos } from './SideMenuPhotos';
+import { SideMenuPhotos } from './side-menu-background/SideMenuPhotos';
 import { useClickOutside } from '../../../costumeHooks/useClickOutside';
-import { TaskLabelModal } from '../../task/task-edit-modals/TaskLabelModal'
 
 export function BoardSideMenu({
   onToggleSideMenu,
   changeBackground,
+  isAdmin,
   onRemoveBoard,
 }) {
   const [title, setTitle] = useState('Menu');
@@ -25,6 +25,7 @@ export function BoardSideMenu({
         return (
           <SideMenuMain
             onChangeTitle={onChangeTitle}
+            isAdmin={isAdmin}
             onRemoveBoard={onRemoveBoard}
           />
         );
@@ -48,6 +49,8 @@ export function BoardSideMenu({
       case 'Photos by':
         setTitle('Change background');
         break;
+      default: 
+        return
     }
   }
 

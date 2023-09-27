@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { utilService } from "../services/util.service";
 import { useSelector, useDispatch } from "react-redux";
-import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup } from "../store/actions/board.actions";
+import { loadBoard, updateBoard, removeGroup, addGroup, saveGroup, removeBoard } from "../store/actions/board.actions";
 import { GroupList } from "../cmps/group/GroupList";
 import { Outlet, useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { BoardMemberEdit } from "../cmps/board/BoardMemberEdit";
 import { BoardSideMenu } from "../cmps/board/board-side-menu/BoardSideMenu";
 import Loader from '../assets/images/loader.svg'
@@ -11,7 +12,10 @@ import Loader from '../assets/images/loader.svg'
 export function Board() {
   const {boardId} = useParams();
   const board = useSelector((storeState) => storeState.boardModule.board);
+  const loggedinUserId = useSelector((storeState) => storeState.userModule.user._id);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAdmin = loggedinUserId === board?.createdBy?._id
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isEditMember, setIsEditMember] = useState(false)
@@ -23,11 +27,21 @@ export function Board() {
 
   const loadNewBoard = async () => {
     try {
-      dispatch(loadBoard(boardId));
+      await dispatch(loadBoard(boardId));
     } catch (err) {
       console.log(err);
     }
   };
+
+  const onRemoveBoard = async () => {
+    try {
+      await dispatch(removeBoard(boardId));
+      navigate('/workspace')
+    } catch (err) {
+      console.log(err);
+    }
+  
+  } 
 
   const closeMemberEdit = () => {
     setIsEditMember(false)
@@ -150,7 +164,7 @@ export function Board() {
         </div>
       </div>
       <div>
-        {isSideMenuOpen && <BoardSideMenu onToggleSideMenu={onToggleSideMenu} changeBackground={changeBackground} />}
+        {isSideMenuOpen && <BoardSideMenu onToggleSideMenu={onToggleSideMenu} changeBackground={changeBackground} isAdmin={isAdmin} onRemoveBoard={onRemoveBoard}   />}
       </div>
 
       <main className="board-main-content">

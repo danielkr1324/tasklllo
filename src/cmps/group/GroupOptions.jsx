@@ -17,14 +17,16 @@ export function GroupOptions({group, closeGroupOpt, onRemoveGroup, onDuplicateGr
         <div ref={ref}  className="group-options">
             <div  className="group-options-container">
                 <div  className="group-options-top">
-                    <button onClick={() => closeGroupOpt( group.id)}>x</button>
-                    <p>List actions</p>
+                    <button onClick={() => closeGroupOpt(group.id)} className="btn-close task-edit-close">
+                        <i className="fa-solid fa-x"></i>
+                    </button>
+                    <p className="group-opt-title">List actions</p>
                     <hr />
                 </div>
-            <ul className="options-select clean-list">
-                <li onClick={() => duplicateGroup(group)} className="hover-dark">Copy list...</li>
-                <li onClick={() => onRemoveGroup(group.id)} className="hover-dark">Delete list...</li>
-            </ul>
+                <ul className="options-select clean-list">
+                    <li onClick={() => duplicateGroup(group)} className="hover-dark">Copy list...</li>
+                    <li onClick={() => onRemoveGroup(group.id)} className="hover-dark">Delete list...</li>
+                </ul>
             </div>
         </div>
     )

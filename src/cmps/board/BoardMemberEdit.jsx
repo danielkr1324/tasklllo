@@ -97,9 +97,11 @@ export function BoardMemberEdit({ boardAdmin, boardMembers, closeMemberEdit, onM
                 <img src={user.imgUrl} alt="" style={{ borderRadius: "50%" }} />
                 <p>{user.username}</p>
               </div>
-              <label className="btn-edit">
-                {boardAdmin._id === user._id ? "Admin" : "Member"}
-              </label>
+              <div>
+                <label className="btn-edit">
+                  {boardAdmin._id === user._id ? "Admin" : "Member"}
+                </label>
+              </div>
             </li>
           ))}
         </ul>

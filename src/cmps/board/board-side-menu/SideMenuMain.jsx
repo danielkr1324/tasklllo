@@ -1,14 +1,21 @@
 import { useSelector } from 'react-redux'
-// import { ActivityLog } from './activity-log'
 
-export function SideMenuMain({ onChangeTitle }) {
-
+export function SideMenuMain({ onChangeTitle, isAdmin, onRemoveBoard }) {
 	return (
 		<section className="side-menu-main">
 			<button onClick={() => onChangeTitle('Change background')}>
 				Change background
 			</button>
-				<hr className="side-menu-separator" />
+			<hr className="side-menu-separator" />
+			{isAdmin && (
+				<>
+					<button onClick={onRemoveBoard}>
+						Delete this board
+					</button>
+					<hr className="side-menu-separator" />
+				</>
+			)
+			}
 		</section>
 	)
 }

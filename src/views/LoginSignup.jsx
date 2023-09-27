@@ -158,11 +158,9 @@ export function LoginSignup() {
         }
         <button type="submit">{formTxt}</button>
 
-        {status === 'login' && (
           <div className='guest-login' onClick={guestLogin}>
             <p>{isLoading ? 'Logging in...' : 'Login as guest'}</p>
           </div>
-        )}
 
         <hr className="bottom-form-separator" />
         {status === 'login' ? (

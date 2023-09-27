@@ -90,7 +90,6 @@
 
     .info-left {
       display: flex;
-
       button {
         font-size: em(14px);
       }
@@ -123,7 +122,7 @@
       }
     }
   }
-
+  
   .board-main-content {
     overflow-x: scroll;
     height: calc(91vh - #{rem(44px)});

@@ -27,12 +27,9 @@
                 opacity: 0.9;
             }
 
-            .btn-save {
-                // margin-inline-start: 3px;
-            }
-            
             .label-preview, .label-title-edit {
                 display: block;
+                overflow: hidden;
                 text-overflow: ellipsis;
                 flex-wrap: wrap;
                 border-radius: 3px;
