@@ -2,14 +2,11 @@
 You can visit the app at https://tasklllo.onrender.com/
 
 
+![Screenshot 2023-09-26 153126](https://github.com/danielkr1324/tasklllo/assets/110911936/b316ab19-3d1d-4ad1-87e2-ea2d9fc46451)
+![Screenshot 2023-09-26 153145](https://github.com/danielkr1324/tasklllo/assets/110911936/6acba59b-0cbc-40d6-ace6-f30e14405ff6)
+![Screenshot 2023-09-28 021316](https://github.com/danielkr1324/tasklllo/assets/110911936/a0ea7b18-50f4-4b81-9052-519920e77d95)
+![Screenshot 2023-09-26 153207](https://github.com/danielkr1324/tasklllo/assets/110911936/7998020d-1ed5-47f4-a4ad-fd37c6639278)
 
-![Screenshot 2023-09-26 153126](https://github.com/danielkr1324/tasklllo/assets/110911936/942c6218-c6a9-4996-830a-1088c88c9ad3)![Screenshot 2023-09-28 021102](https://github.com/danielkr1324/tasklllo/assets/110911936/7aa889f0-6648-4660-96fc-db6d36d8d4f6)
+![Screenshot 2023-09-28 021102](https://github.com/danielkr1324/tasklllo/assets/110911936/7ac0098c-5d05-4011-a9f1-57ac8faedfb9)
+![Screenshot 2023-09-28 013844](https://github.com/danielkr1324/tasklllo/assets/110911936/c26ef622-38e6-4051-88e2-d757f05136bb)![Screenshot 2023-09-28 014310](https://github.com/danielkr1324/tasklllo/assets/110911936/ebf8988c-6bce-49ad-aedd-a16fb65ee6af)
 
-![Screenshot 2023-09-26 153145](https://github.com/danielkr1324/tasklllo/assets/110911936/9082b124-9ccf-44cb-9bf7-f8bea5cbaa90)
-![Screenshot 2023-09-26 153207](https://github.com/danielkr1324/tasklllo/assets![Screenshot 2023-09-28 021316](https://github.com/danielkr1324/tasklllo/assets/110911936/21d38ac4-27dd-4335-93b4-0d4f5fcbae5e)
-/110911936/3836d639-2d20-4013-b549-5d510ce12be0)
-![Screenshot 2023-09-26 153222](https://github.com/danielkr1324/tasklllo/assets/110911936/89c63273-3214-4b9c-a9b5-f0ab7fcb44d6)
-![Screenshot 2023-09-28 014056](https://github.com/danielkr1324/tasklllo/assets/110911936/40800a7c-1e08-4e30-9442-771105faa517)
-![Screenshot 2023-09-28 014310](https://github.com/danielkr1324/tasklllo/assets/110911936/fc9fb430-e804-4390-82b9-369f4d2ba61c)
-![Screenshot 2023-09-28 013856](https://github.com/danielkr1324/tasklllo/assets/110911936/0bc8d5e4-076d-4c9c-8528-a9bfbf4f5ded)
-![Screenshot 2023-09-28 014302](https://github.com/danielkr1324/tasklllo/assets/110911936/c2cf34b1-38e7-4827-bb11-010c76d08589)
